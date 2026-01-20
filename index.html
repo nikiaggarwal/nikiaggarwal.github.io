@@ -138,47 +138,7 @@
         </div>
 
         <div class="updates" role="list" aria-label="Latest updates">
-          <a class="update-item" role="listitem" href="/promise/123" aria-label="Update: Council hearing scheduled (Transit)">
-            <div class="update-date">01/18</div>
-            <div class="update-meter" aria-hidden="true">
-              <span style="font-weight:900;">M</span>
-            </div>
-            <div class="update-content">
-              <div class="update-headline">Council hearing scheduled for bus lane expansion</div>
-              <div class="update-cat">Transit</div>
-            </div>
-            <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M9 6l6 6-6 6" />
-            </svg>
-          </a>
-
-          <a class="update-item" role="listitem" href="/promise/456" aria-label="Update: Draft bill released (Housing)">
-            <div class="update-date">01/12</div>
-            <div class="update-meter" aria-hidden="true">
-              <span style="font-weight:900;">M</span>
-            </div>
-            <div class="update-content">
-              <div class="update-headline">Draft bill released for tenant legal support funding</div>
-              <div class="update-cat">Housing</div>
-            </div>
-            <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M9 6l6 6-6 6" />
-            </svg>
-          </a>
-
-          <a class="update-item" role="listitem" href="/promise/789" aria-label="Update: Program pilot announced (Education)">
-            <div class="update-date">01/04</div>
-            <div class="update-meter" aria-hidden="true">
-              <span style="font-weight:900;">M</span>
-            </div>
-            <div class="update-content">
-              <div class="update-headline">Pilot announced for after-school paid internships</div>
-              <div class="update-cat">Education</div>
-            </div>
-            <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M9 6l6 6-6 6" />
-            </svg>
-          </a>
+          <!-- Updates will be loaded dynamically from Google Sheets -->
         </div>
       </div>
     </section>
@@ -216,64 +176,193 @@
 
   <script>
     // --------------------------
-    // Sample data (replace with real API results)
+    // GOOGLE SHEETS CONFIGURATION
+    // Replace these URLs with your published Google Sheets CSV URLs
+    // See SHEETS_SETUP.md for instructions
     // --------------------------
-    const overallStatus = {
-      status: "Alright-Alright",
-      label: "Momentum Building",
-      lastUpdated: "2026-01-18T19:45:00-05:00"
+    const SHEETS_CONFIG = {
+      promises: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=0&single=true&output=csv",
+      updates: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=1426316595&single=true&output=csv",
+      overall: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=288337905&single=true&output=csv",
+      cacheDuration: 5 * 60 * 1000 // 5 minutes
     };
 
-    const promises = [
-      {
-        id: "p1",
-        title: "Fund tenant legal support citywide",
-        category: "Housing",
-        status: "Oof",
-        statusLabel: "Budget pending",
-        oneLineSummary: "Funding discussions are active, but no final commitment yet."
-      },
-      {
-        id: "p2",
-        title: "Expand bus lanes on key corridors",
-        category: "Transit",
+    // --------------------------
+    // Fallback data (used if sheets fail to load)
+    // --------------------------
+    const FALLBACK_DATA = {
+      overallStatus: {
         status: "Alright-Alright",
-        statusLabel: "In motion",
-        oneLineSummary: "Agencies are coordinating next steps and public input."
+        label: "Momentum Building",
+        lastUpdated: "2026-01-18T19:45:00-05:00"
       },
-      {
-        id: "p3",
-        title: "Launch paid youth internships",
-        category: "Education",
-        status: "LET'S GOOO",
-        statusLabel: "Pilot live",
-        oneLineSummary: "A pilot program is running with early results expected soon."
-      },
-      {
-        id: "p4",
-        title: "Improve subway accessibility timelines",
-        category: "Transit",
-        status: "Yikes",
-        statusLabel: "Stalled",
-        oneLineSummary: "No clear plan or timeline has been published."
-      },
-      {
-        id: "p5",
-        title: "Strengthen workplace protections",
-        category: "Labor",
-        status: "Alright-Alright",
-        statusLabel: "Drafting",
-        oneLineSummary: "Policy language is taking shape with stakeholder feedback."
-      },
-      {
-        id: "p6",
-        title: "Build more deeply affordable housing",
-        category: "Housing",
-        status: "Oof",
-        statusLabel: "Negotiating",
-        oneLineSummary: "Key details depend on land, financing, and approvals."
+      promises: [
+        {
+          id: "p1",
+          title: "Fund tenant legal support citywide",
+          category: "Housing",
+          status: "Oof",
+          statusLabel: "Budget pending",
+          oneLineSummary: "Funding discussions are active, but no final commitment yet."
+        },
+        {
+          id: "p2",
+          title: "Expand bus lanes on key corridors",
+          category: "Transit",
+          status: "Alright-Alright",
+          statusLabel: "In motion",
+          oneLineSummary: "Agencies are coordinating next steps and public input."
+        },
+        {
+          id: "p3",
+          title: "Launch paid youth internships",
+          category: "Education",
+          status: "LET'S GOOO",
+          statusLabel: "Pilot live",
+          oneLineSummary: "A pilot program is running with early results expected soon."
+        },
+        {
+          id: "p4",
+          title: "Improve subway accessibility timelines",
+          category: "Transit",
+          status: "Yikes",
+          statusLabel: "Stalled",
+          oneLineSummary: "No clear plan or timeline has been published."
+        },
+        {
+          id: "p5",
+          title: "Strengthen workplace protections",
+          category: "Labor",
+          status: "Alright-Alright",
+          statusLabel: "Drafting",
+          oneLineSummary: "Policy language is taking shape with stakeholder feedback."
+        },
+        {
+          id: "p6",
+          title: "Build more deeply affordable housing",
+          category: "Housing",
+          status: "Oof",
+          statusLabel: "Negotiating",
+          oneLineSummary: "Key details depend on land, financing, and approvals."
+        }
+      ],
+      updates: [
+        {
+          date: "01/18",
+          promiseId: "123",
+          headline: "Council hearing scheduled for bus lane expansion",
+          category: "Transit"
+        },
+        {
+          date: "01/12",
+          promiseId: "456",
+          headline: "Draft bill released for tenant legal support funding",
+          category: "Housing"
+        },
+        {
+          date: "01/04",
+          promiseId: "789",
+          headline: "Pilot announced for after-school paid internships",
+          category: "Education"
+        }
+      ]
+    };
+
+    // --------------------------
+    // Data variables (will be populated from sheets or fallback)
+    // --------------------------
+    let overallStatus = FALLBACK_DATA.overallStatus;
+    let promises = FALLBACK_DATA.promises;
+    let updates = FALLBACK_DATA.updates;
+
+    // --------------------------
+    // Google Sheets CSV Parser
+    // --------------------------
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      if (lines.length < 2) return [];
+
+      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+      const rows = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || '';
+        });
+        rows.push(row);
       }
-    ];
+
+      return rows;
+    }
+
+    // --------------------------
+    // Fetch data from Google Sheets with caching
+    // --------------------------
+    async function fetchSheet(url, cacheKey) {
+      // Check cache first
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) {
+          return data;
+        }
+      }
+
+      // Fetch fresh data
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const text = await response.text();
+        const data = parseCSV(text);
+
+        // Cache the result
+        localStorage.setItem(cacheKey, JSON.stringify({
+          data,
+          timestamp: Date.now()
+        }));
+
+        return data;
+      } catch (error) {
+        console.warn(`Failed to fetch ${cacheKey}:`, error);
+        // Return cached data if available, even if expired
+        if (cached) {
+          return JSON.parse(cached).data;
+        }
+        throw error;
+      }
+    }
+
+    // --------------------------
+    // Load all data from Google Sheets
+    // --------------------------
+    async function loadData() {
+      try {
+        // Only fetch if URLs are configured
+        if (SHEETS_CONFIG.promises !== "YOUR_PROMISES_SHEET_URL_HERE") {
+          promises = await fetchSheet(SHEETS_CONFIG.promises, 'promises_cache');
+        }
+
+        if (SHEETS_CONFIG.updates !== "YOUR_UPDATES_SHEET_URL_HERE") {
+          updates = await fetchSheet(SHEETS_CONFIG.updates, 'updates_cache');
+        }
+
+        if (SHEETS_CONFIG.overall !== "YOUR_OVERALL_SHEET_URL_HERE") {
+          const overallData = await fetchSheet(SHEETS_CONFIG.overall, 'overall_cache');
+          if (overallData && overallData.length > 0) {
+            overallStatus = overallData[0];
+          }
+        }
+
+        console.log('✓ Data loaded from Google Sheets');
+      } catch (error) {
+        console.warn('Using fallback data:', error);
+      }
+
+      // Render the page with loaded data
+      renderPage();
+    }
 
     // --------------------------
     // Helpers: status -> colors/tints
@@ -300,17 +389,66 @@
     }
 
     // --------------------------
-    // Render hero timestamp + status label
+    // Render all dynamic content
     // --------------------------
-    const tsEl = document.getElementById("heroTimestamp");
-    tsEl.textContent = "Last updated: " + formatLastUpdated(overallStatus.lastUpdated);
+    function renderPage() {
+      renderHeroSection();
+      renderUpdatesSection();
+      renderPromisesSection();
+    }
 
-    const overallLabelEl = document.getElementById("overallStatusLabel");
-    overallLabelEl.textContent = overallStatus.status.toUpperCase();
+    function renderHeroSection() {
+      const tsEl = document.getElementById("heroTimestamp");
+      tsEl.textContent = "Last updated: " + formatLastUpdated(overallStatus.lastUpdated);
 
-    // Update meter a11y label
-    const meterA11y = document.getElementById("meterA11yWrap");
-    meterA11y.setAttribute("aria-label", `Status: ${overallStatus.status} - ${overallStatus.label}`);
+      const overallLabelEl = document.getElementById("overallStatusLabel");
+      overallLabelEl.textContent = overallStatus.status.toUpperCase();
+
+      // Update meter a11y label
+      const meterA11y = document.getElementById("meterA11yWrap");
+      meterA11y.setAttribute("aria-label", `Status: ${overallStatus.status} - ${overallStatus.label}`);
+
+      setMeterStatus(overallStatus.status);
+    }
+
+    function renderUpdatesSection() {
+      const updatesContainer = document.querySelector('.updates');
+      if (!updatesContainer) return;
+
+      updatesContainer.innerHTML = '';
+
+      updates.slice(0, 3).forEach(update => {
+        const a = document.createElement('a');
+        a.className = 'update-item';
+        a.setAttribute('role', 'listitem');
+        a.href = `/promise/${encodeURIComponent(update.promiseId)}`;
+        a.setAttribute('aria-label', `Update: ${update.headline} (${update.category})`);
+
+        a.innerHTML = `
+          <div class="update-date">${escapeHTML(update.date)}</div>
+          <div class="update-meter" aria-hidden="true">
+            <span style="font-weight:900;">M</span>
+          </div>
+          <div class="update-content">
+            <div class="update-headline">${escapeHTML(update.headline)}</div>
+            <div class="update-cat">${escapeHTML(update.category)}</div>
+          </div>
+          <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M9 6l6 6-6 6" />
+          </svg>
+        `;
+
+        updatesContainer.appendChild(a);
+      });
+    }
+
+    function renderPromisesSection() {
+      const grid = document.getElementById("promiseGrid");
+      if (!grid) return;
+
+      grid.innerHTML = '';
+      promises.slice(0, 6).forEach(p => grid.appendChild(makeCard(p)));
+    }
 
     // --------------------------
     // Large Meter SVG geometry (270° arc, open at bottom)
@@ -401,13 +539,9 @@
       }
     }
 
-    setMeterStatus(overallStatus.status);
-
     // --------------------------
     // Render Promise Cards
     // --------------------------
-    const grid = document.getElementById("promiseGrid");
-
     function makeCard(p){
       const s = STATUS[p.status] || STATUS["Oof"];
 
@@ -442,7 +576,10 @@
         .replaceAll("'","&#39;");
     }
 
-    promises.slice(0,6).forEach(p => grid.appendChild(makeCard(p)));
+    // --------------------------
+    // Initialize the page
+    // --------------------------
+    loadData();
 
     // --------------------------
     // Mobile menu interactions + focus management
