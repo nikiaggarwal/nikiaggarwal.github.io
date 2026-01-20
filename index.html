@@ -1,1 +1,488 @@
-<h1>Mamdani Meter</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Mamdani Meter | The Mamdani Meter</title>
+  <meta name="description" content="Tracking promises, policies, and progress at NYC City Hall" />
+  <link rel="canonical" href="https://example.com/" />
+  <meta property="og:title" content="The Mamdani Meter" />
+  <meta property="og:description" content="Tracking promises, policies, and progress at NYC City Hall" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="The Mamdani Meter home">
+        <!-- small static meter icon -->
+        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+          <path d="M4 18a10 10 0 0 1 20 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+        <span>THE MAMDANI METER</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/" aria-current="page">Home</a></li>
+          <li><a href="/promises.html">Promises</a></li>
+          <li><a href="/updates.html">What Just Happened</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-overlay" role="dialog" aria-modal="true" aria-label="Mobile menu" hidden>
+    <div class="mobile-top">
+      <div class="title">Menu</div>
+      <button class="mobile-close" type="button" aria-label="Close menu">Close</button>
+    </div>
+    <ul class="mobile-menu">
+      <li><a href="/" aria-current="page">Home</a></li>
+      <li><a href="/promises.html">Promises</a></li>
+      <li><a href="/updates.html">What Just Happened</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="h1">THE MAMDANI METER</div>
+        <p class="hero-sub">
+          Tracking promises, policies, and progress at NYC City Hall.
+        </p>
+        <div id="heroTimestamp" class="hero-time mono">Last updated: —</div>
+
+        <div class="meter-wrap">
+          <!-- Large Meter -->
+          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Alright-Alright - Momentum Building">
+            <svg id="largeMeter" width="240" height="240" viewBox="0 0 240 240" aria-hidden="true">
+              <!-- Background track (270° arc) -->
+              <path id="meterTrack" d="" fill="none" stroke="#e0e0e0" stroke-width="16" stroke-linecap="butt"/>
+
+              <!-- Active track (same arc, stroked with dasharray) -->
+              <path id="meterActive" d="" fill="none" stroke="#0033cc" stroke-width="16" stroke-linecap="butt"
+                    stroke-dasharray="0 9999"/>
+
+              <!-- Status label along arc (only current visible) -->
+              <text id="meterArcLabel" font-size="14" font-weight="600" fill="#0033cc">
+                <textPath id="meterTextPath" href="#meterTextCurve" startOffset="50%" text-anchor="middle"></textPath>
+              </text>
+
+              <!-- Hidden curve for text positioning -->
+              <path id="meterTextCurve" d="" fill="none" />
+
+              <!-- Center "photo" (placeholder) -->
+              <defs>
+                <clipPath id="photoClip">
+                  <circle cx="120" cy="120" r="40"></circle>
+                </clipPath>
+              </defs>
+
+              <circle cx="120" cy="120" r="43" fill="#fff" stroke="#fff" stroke-width="3"></circle>
+              <g clip-path="url(#photoClip)">
+                <!-- Placeholder “photo” using simple shapes to avoid external assets -->
+                <rect x="80" y="80" width="80" height="80" fill="#f2f2f2"></rect>
+                <circle cx="120" cy="110" r="18" fill="#d9d9d9"></circle>
+                <rect x="92" y="132" width="56" height="30" rx="0" fill="#d9d9d9"></rect>
+              </g>
+              <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
+
+              <!-- Needle -->
+              <g id="needleGroup" transform="rotate(-135 120 120)">
+                <!-- Clock-hand style: wide base tapering to point -->
+                <path d="M120 120 L116 122 L120 44 L124 122 Z" fill="#1a1a1a"></path>
+                <!-- Tip arrow -->
+                <path d="M120 40 L114 50 L126 50 Z" fill="#1a1a1a"></path>
+                <!-- Base anchor -->
+                <circle cx="120" cy="120" r="6" fill="#1a1a1a"></circle>
+                <circle cx="120" cy="120" r="8" fill="none" stroke="#1a1a1a" stroke-width="2"></circle>
+              </g>
+            </svg>
+          </div>
+
+          <div id="overallStatusLabel" class="overall-label">ALRIGHT-ALRIGHT</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT JUST HAPPENED -->
+    <section class="what-happened">
+      <div class="container">
+        <div class="section-head">
+          <div class="h2">WHAT JUST HAPPENED</div>
+        </div>
+
+        <div class="updates" role="list" aria-label="Latest updates">
+          <a class="update-item" role="listitem" href="/promise/123" aria-label="Update: Council hearing scheduled (Transit)">
+            <div class="update-date">01/18</div>
+            <div class="update-meter" aria-hidden="true">
+              <span style="font-weight:900;">M</span>
+            </div>
+            <div class="update-content">
+              <div class="update-headline">Council hearing scheduled for bus lane expansion</div>
+              <div class="update-cat">Transit</div>
+            </div>
+            <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M9 6l6 6-6 6" />
+            </svg>
+          </a>
+
+          <a class="update-item" role="listitem" href="/promise/456" aria-label="Update: Draft bill released (Housing)">
+            <div class="update-date">01/12</div>
+            <div class="update-meter" aria-hidden="true">
+              <span style="font-weight:900;">M</span>
+            </div>
+            <div class="update-content">
+              <div class="update-headline">Draft bill released for tenant legal support funding</div>
+              <div class="update-cat">Housing</div>
+            </div>
+            <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M9 6l6 6-6 6" />
+            </svg>
+          </a>
+
+          <a class="update-item" role="listitem" href="/promise/789" aria-label="Update: Program pilot announced (Education)">
+            <div class="update-date">01/04</div>
+            <div class="update-meter" aria-hidden="true">
+              <span style="font-weight:900;">M</span>
+            </div>
+            <div class="update-content">
+              <div class="update-headline">Pilot announced for after-school paid internships</div>
+              <div class="update-cat">Education</div>
+            </div>
+            <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M9 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE PROMISES -->
+    <section class="promises">
+      <div class="container">
+        <div class="section-head">
+          <div class="h2">THE PROMISES</div>
+          <div class="promises-sub">
+            Six promises we’re watching closely right now—across housing, transit, education, and labor.
+          </div>
+        </div>
+
+        <div id="promiseGrid" class="grid" aria-label="Promises grid">
+          <!-- Cards injected by JS (keeps statuses/colors consistent) -->
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/promises.html">View All Promises</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links" aria-label="Footer links">
+        <a href="/about.html">ABOUT</a>
+        <a href="/contact.html">CONTACT</a>
+        <a href="/methodology.html">METHODOLOGY</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --------------------------
+    // Sample data (replace with real API results)
+    // --------------------------
+    const overallStatus = {
+      status: "Alright-Alright",
+      label: "Momentum Building",
+      lastUpdated: "2026-01-18T19:45:00-05:00"
+    };
+
+    const promises = [
+      {
+        id: "p1",
+        title: "Fund tenant legal support citywide",
+        category: "Housing",
+        status: "Oof",
+        statusLabel: "Budget pending",
+        oneLineSummary: "Funding discussions are active, but no final commitment yet."
+      },
+      {
+        id: "p2",
+        title: "Expand bus lanes on key corridors",
+        category: "Transit",
+        status: "Alright-Alright",
+        statusLabel: "In motion",
+        oneLineSummary: "Agencies are coordinating next steps and public input."
+      },
+      {
+        id: "p3",
+        title: "Launch paid youth internships",
+        category: "Education",
+        status: "LET'S GOOO",
+        statusLabel: "Pilot live",
+        oneLineSummary: "A pilot program is running with early results expected soon."
+      },
+      {
+        id: "p4",
+        title: "Improve subway accessibility timelines",
+        category: "Transit",
+        status: "Yikes",
+        statusLabel: "Stalled",
+        oneLineSummary: "No clear plan or timeline has been published."
+      },
+      {
+        id: "p5",
+        title: "Strengthen workplace protections",
+        category: "Labor",
+        status: "Alright-Alright",
+        statusLabel: "Drafting",
+        oneLineSummary: "Policy language is taking shape with stakeholder feedback."
+      },
+      {
+        id: "p6",
+        title: "Build more deeply affordable housing",
+        category: "Housing",
+        status: "Oof",
+        statusLabel: "Negotiating",
+        oneLineSummary: "Key details depend on land, financing, and approvals."
+      }
+    ];
+
+    // --------------------------
+    // Helpers: status -> colors/tints
+    // --------------------------
+    const STATUS = {
+      "LET'S GOOO": { color: getCSS("--status-lets"), tint: "rgba(0, 51, 204, 0.08)" },
+      "Alright-Alright": { color: getCSS("--status-alright"), tint: "rgba(0, 204, 102, 0.08)" },
+      "Oof": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)" },
+      "Yikes": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
+    };
+
+    function getCSS(varName){
+      return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    }
+
+    function formatLastUpdated(iso){
+      try{
+        const d = new Date(iso);
+        const opts = { year:"numeric", month:"long", day:"numeric", hour:"numeric", minute:"2-digit" };
+        return d.toLocaleString(undefined, opts);
+      } catch(e){
+        return iso;
+      }
+    }
+
+    // --------------------------
+    // Render hero timestamp + status label
+    // --------------------------
+    const tsEl = document.getElementById("heroTimestamp");
+    tsEl.textContent = "Last updated: " + formatLastUpdated(overallStatus.lastUpdated);
+
+    const overallLabelEl = document.getElementById("overallStatusLabel");
+    overallLabelEl.textContent = overallStatus.status.toUpperCase();
+
+    // Update meter a11y label
+    const meterA11y = document.getElementById("meterA11yWrap");
+    meterA11y.setAttribute("aria-label", `Status: ${overallStatus.status} - ${overallStatus.label}`);
+
+    // --------------------------
+    // Large Meter SVG geometry (270° arc, open at bottom)
+    // --------------------------
+    const svg = document.getElementById("largeMeter");
+    const track = document.getElementById("meterTrack");
+    const active = document.getElementById("meterActive");
+    const textCurve = document.getElementById("meterTextCurve");
+    const textPath = document.getElementById("meterTextPath");
+    const arcLabel = document.getElementById("meterArcLabel");
+    const needle = document.getElementById("needleGroup");
+
+    // Arc settings
+    const cx = 120, cy = 120;
+    const r = 88;            // radius for 240x240 with 16px stroke
+    const startDeg = 225;    // left-bottom-ish
+    const endDeg = -45;      // right-bottom-ish (equivalent to 315)
+    const sweepDeg = 270;
+
+    function polarToCartesian(cx, cy, r, deg){
+      const rad = (deg - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+    }
+
+    function describeArc(cx, cy, r, startAngle, endAngle){
+      const start = polarToCartesian(cx, cy, r, endAngle);
+      const end = polarToCartesian(cx, cy, r, startAngle);
+      const largeArcFlag = (Math.abs(endAngle - startAngle) <= 180) ? "0" : "1";
+      return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+    }
+
+    const arcD = describeArc(cx, cy, r, startDeg, endDeg);
+    track.setAttribute("d", arcD);
+    active.setAttribute("d", arcD);
+
+    // A separate curve slightly outside for the label text
+    const labelArcD = describeArc(cx, cy, r + 18, startDeg, endDeg);
+    textCurve.setAttribute("d", labelArcD);
+
+    // Compute path length once it’s in DOM
+    const arcLen = active.getTotalLength();
+
+    // --------------------------
+    // Status -> needle position and active arc amount
+    // --------------------------
+    // Needle animation: from 0% (start) to a target bucket midpoint
+    // Buckets per spec:
+    // LET'S GOOO: 85-100%
+    // Alright-Alright: 60-75%
+    // Oof: 35-50%
+    // Yikes: 0-25%
+    const BUCKETS = {
+      "LET'S GOOO": { pct: 0.92, labelPct: 0.90 },
+      "Alright-Alright": { pct: 0.675, labelPct: 0.67 },
+      "Oof": { pct: 0.425, labelPct: 0.42 },
+      "Yikes": { pct: 0.12, labelPct: 0.12 }
+    };
+
+    function setMeterStatus(status){
+      const s = STATUS[status] || STATUS["Oof"];
+      const b = BUCKETS[status] || BUCKETS["Oof"];
+
+      // Active stroke color + progress
+      active.setAttribute("stroke", s.color);
+      active.setAttribute("stroke-dasharray", `${Math.max(0, Math.min(arcLen, arcLen * b.pct))} ${arcLen}`);
+
+      // Arc label (only current status visible)
+      arcLabel.setAttribute("fill", s.color);
+      textPath.textContent = status.toUpperCase();
+      textPath.setAttribute("startOffset", (b.labelPct * 100).toFixed(0) + "%");
+
+      // Needle target rotation:
+      // Our needleGroup is initially at -135° (matching ~start of arc visually).
+      // We map pct -> additional degrees across 270°.
+      const target = -135 + (sweepDeg * b.pct);
+
+      // Animate needle using Web Animations API (respects reduced motion via CSS)
+      try{
+        needle.animate(
+          [
+            { transform: "rotate(-135deg)", transformOrigin: "120px 120px" },
+            { transform: `rotate(${target}deg)`, transformOrigin: "120px 120px" }
+          ],
+          { duration: 800, easing: "cubic-bezier(0.2, 0.9, 0.2, 1)", fill: "forwards" }
+        );
+      } catch(e){
+        needle.setAttribute("transform", `rotate(${target} 120 120)`);
+      }
+    }
+
+    setMeterStatus(overallStatus.status);
+
+    // --------------------------
+    // Render Promise Cards
+    // --------------------------
+    const grid = document.getElementById("promiseGrid");
+
+    function makeCard(p){
+      const s = STATUS[p.status] || STATUS["Oof"];
+
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = `/promise/${encodeURIComponent(p.id)}`;
+      a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}. ${p.statusLabel}.`);
+
+      // Tint background
+      a.style.background = s.tint;
+
+      // Hover border color shifts to status color
+      a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
+      a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
+
+      a.innerHTML = `
+        <div class="badge" style="background:${s.color}">${p.status.toUpperCase()}</div>
+        <div class="card-title">${escapeHTML(p.title)}</div>
+        <div class="card-cat label">${escapeHTML(p.category)}</div>
+        <div class="card-status" style="color:${s.color}">${escapeHTML(p.statusLabel)}</div>
+        <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>
+      `;
+      return a;
+    }
+
+    function escapeHTML(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    promises.slice(0,6).forEach(p => grid.appendChild(makeCard(p)));
+
+    // --------------------------
+    // Mobile menu interactions + focus management
+    // --------------------------
+    const hamburger = document.querySelector(".hamburger");
+    const overlay = document.getElementById("mobileMenu");
+    const closeBtn = document.querySelector(".mobile-close");
+    let lastFocus = null;
+
+    function openMenu(){
+      lastFocus = document.activeElement;
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add("open"));
+      hamburger.setAttribute("aria-expanded","true");
+      closeBtn.focus();
+      document.body.style.overflow = "hidden";
+    }
+    function closeMenu(){
+      overlay.classList.remove("open");
+      hamburger.setAttribute("aria-expanded","false");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        overlay.hidden = true;
+        if(lastFocus) lastFocus.focus();
+      }, 260);
+    }
+
+    hamburger.addEventListener("click", () => {
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      expanded ? closeMenu() : openMenu();
+    });
+    closeBtn.addEventListener("click", closeMenu);
+
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) closeMenu();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(!overlay.hidden && e.key === "Escape") closeMenu();
+    });
+  </script>
+</body>
+</html>
+

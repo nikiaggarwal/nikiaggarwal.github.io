@@ -1,1 +1,1 @@
-Niki's amazing Mamdani Meter website!
+The Mamdani Meter is a public dashboard that tracks how Zohran Mamdani’s campaign promises are translating into real policy and action at NYC City Hall. It organizes complex governing progress into clear, plain-English status updates so anyone can quickly understand what’s moving, what’s stalled, and why. The site is designed for supporters, skeptics, and the simply curious who want to follow along in good faith as a bold agenda meets the realities of governing.
