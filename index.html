@@ -113,7 +113,7 @@
               <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
 
               <!-- Needle -->
-              <g id="needleGroup" transform="rotate(-135 120 120)">
+              <g id="needleGroup" transform="rotate(270 120 120)">
                 <!-- Clock-hand style: wide base tapering to point -->
                 <path d="M120 120 L116 122 L120 44 L124 122 Z" fill="#1a1a1a"></path>
                 <!-- Tip arrow -->
@@ -368,10 +368,11 @@
     // Helpers: status -> colors/tints
     // --------------------------
     const STATUS = {
-      "LET'S GOOO": { color: getCSS("--status-lets"), tint: "rgba(0, 51, 204, 0.08)" },
-      "Alright-Alright": { color: getCSS("--status-alright"), tint: "rgba(0, 204, 102, 0.08)" },
+      "LET'S GOOO": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)" },
+      "Alright-Alright": { color: getCSS("--status-alright"), tint: "rgba(0, 51, 204, 0.08)" },
+      "Early Days": { color: getCSS("--status-early"), tint: "rgba(219, 248, 255, 0.08)" },
       "Oof": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)" },
-      "Yikes": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
+      "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
     };
 
     function getCSS(varName){
@@ -464,9 +465,9 @@
     // Arc settings
     const cx = 120, cy = 120;
     const r = 88;            // radius for 240x240 with 16px stroke
-    const startDeg = 225;    // left-bottom-ish
-    const endDeg = -45;      // right-bottom-ish (equivalent to 315)
-    const sweepDeg = 270;
+    const startDeg = 270;    // bottom-left (9 o'clock position)
+    const endDeg = 90;       // top-right (3 o'clock position)
+    const sweepDeg = 180;    // 180 degree arc from 270° to 90°
 
     function polarToCartesian(cx, cy, r, deg){
       const rad = (deg - 90) * Math.PI / 180;
@@ -494,17 +495,19 @@
     // --------------------------
     // Status -> needle position and active arc amount
     // --------------------------
-    // Needle animation: from 0% (start) to a target bucket midpoint
-    // Buckets per spec:
-    // LET'S GOOO: 85-100%
+    // Needle animation: from 0% (start at 270°) to target bucket
+    // Buckets from 270° (Nope/0%) to 90° (LET'S GOOO/100%):
+    // LET'S GOOO: 100% (at 90°)
     // Alright-Alright: 60-75%
-    // Oof: 35-50%
-    // Yikes: 0-25%
+    // Early Days: 40-55%
+    // Oof: 20-35%
+    // Nope: 0% (at 270°)
     const BUCKETS = {
-      "LET'S GOOO": { pct: 0.92, labelPct: 0.90 },
+      "LET'S GOOO": { pct: 1.0, labelPct: 0.95 },
       "Alright-Alright": { pct: 0.675, labelPct: 0.67 },
-      "Oof": { pct: 0.425, labelPct: 0.42 },
-      "Yikes": { pct: 0.12, labelPct: 0.12 }
+      "Early Days": { pct: 0.475, labelPct: 0.47 },
+      "Oof": { pct: 0.275, labelPct: 0.27 },
+      "Nope": { pct: 0.0, labelPct: 0.05 }
     };
 
     function setMeterStatus(status){
@@ -521,15 +524,16 @@
       textPath.setAttribute("startOffset", (b.labelPct * 100).toFixed(0) + "%");
 
       // Needle target rotation:
-      // Our needleGroup is initially at -135° (matching ~start of arc visually).
-      // We map pct -> additional degrees across 270°.
-      const target = -135 + (sweepDeg * b.pct);
+      // Our needleGroup starts at 270° (0% - eek position).
+      // We map pct -> rotation from 270° to 90° (180° sweep).
+      const startAngle = 270;
+      const target = startAngle + (sweepDeg * b.pct);
 
       // Animate needle using Web Animations API (respects reduced motion via CSS)
       try{
         needle.animate(
           [
-            { transform: "rotate(-135deg)", transformOrigin: "120px 120px" },
+            { transform: "rotate(270deg)", transformOrigin: "120px 120px" },
             { transform: `rotate(${target}deg)`, transformOrigin: "120px 120px" }
           ],
           { duration: 800, easing: "cubic-bezier(0.2, 0.9, 0.2, 1)", fill: "forwards" }

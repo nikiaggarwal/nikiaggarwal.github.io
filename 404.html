@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 - Page Not Found | The Mamdani Meter</title>
+  <meta name="description" content="The page you're looking for couldn't be found" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .error-page {
+      min-height: calc(100vh - 88px);
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 16px;
+    }
+
+    .error-content {
+      max-width: 700px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .error-code {
+      font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+      font-size: 160px;
+      line-height: 1;
+      font-weight: 900;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin: 0;
+      text-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+    }
+
+    .error-gauge {
+      margin: 32px auto;
+      position: relative;
+    }
+
+    .error-gauge svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .error-title {
+      font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 32px 0 16px;
+      line-height: 1.1;
+    }
+
+    .error-message {
+      font-size: 20px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
+      margin: 0 0 40px;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .error-suggestions {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .error-suggestions h2 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.7);
+      margin: 0 0 20px;
+    }
+
+    .error-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .error-links a {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-bottom: 2px solid transparent;
+      transition: all 150ms ease;
+    }
+
+    .error-links a:hover {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    @media (max-width: 767px) {
+      .error-code {
+        font-size: 100px;
+        letter-spacing: 2px;
+      }
+
+      .error-title {
+        font-size: 32px;
+      }
+
+      .error-message {
+        font-size: 18px;
+      }
+
+      .error-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .error-actions .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .error-gauge svg * {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="The Mamdani Meter home">
+        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+          <path d="M4 18a10 10 0 0 1 20 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+        <span>THE MAMDANI METER</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/promises.html">Promises</a></li>
+          <li><a href="/updates.html">What Just Happened</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-overlay" role="dialog" aria-modal="true" aria-label="Mobile menu" hidden>
+    <div class="mobile-top">
+      <div class="title">Menu</div>
+      <button class="mobile-close" type="button" aria-label="Close menu">Close</button>
+    </div>
+    <ul class="mobile-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/promises.html">Promises</a></li>
+      <li><a href="/updates.html">What Just Happened</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+    <section class="error-page">
+      <div class="error-content">
+        <h1 class="error-code">404</h1>
+
+        <div class="error-gauge" role="img" aria-label="Error meter showing page not found">
+          <svg width="200" height="120" viewBox="0 0 200 120" aria-hidden="true">
+            <!-- Background arc -->
+            <path d="M 20 100 A 80 80 0 0 1 180 100"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.2)"
+                  stroke-width="12"
+                  stroke-linecap="butt"/>
+
+            <!-- Active arc (red/error state) -->
+            <path d="M 20 100 A 80 80 0 0 1 180 100"
+                  fill="none"
+                  stroke="#ff3333"
+                  stroke-width="12"
+                  stroke-linecap="butt"
+                  stroke-dasharray="60 251"
+                  stroke-dashoffset="0">
+              <animate attributeName="stroke-dasharray"
+                       from="0 251"
+                       to="60 251"
+                       dur="0.8s"
+                       fill="freeze"
+                       calcMode="spline"
+                       keySplines="0.2 0.9 0.2 1"/>
+            </path>
+
+            <!-- Needle -->
+            <g transform-origin="100 100">
+              <line x1="100" y1="100" x2="100" y2="35"
+                    stroke="#fff"
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="5" fill="#fff"/>
+              <circle cx="100" cy="100" r="7" fill="none" stroke="#fff" stroke-width="2"/>
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="180 100 100"
+                to="20 100 100"
+                dur="0.8s"
+                fill="freeze"
+                calcMode="spline"
+                keySplines="0.2 0.9 0.2 1"/>
+            </g>
+          </svg>
+        </div>
+
+        <h2 class="error-title">Page Not Found</h2>
+        <p class="error-message">
+          This page isn't being tracked. It might have been moved, removed, or never existed in the first place.
+        </p>
+
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary">Go to Home</a>
+          <a href="/promises.html" class="btn btn-secondary">View Promises</a>
+        </div>
+
+        <div class="error-suggestions">
+          <h2>Quick Links</h2>
+          <div class="error-links">
+            <a href="/">Home</a>
+            <a href="/promises.html">Promises</a>
+            <a href="/updates.html">What Just Happened</a>
+            <a href="/about.html">About</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links" aria-label="Footer links">
+        <a href="/about.html">ABOUT</a>
+        <a href="/contact.html">CONTACT</a>
+        <a href="/methodology.html">METHODOLOGY</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu interactions
+    const hamburger = document.querySelector(".hamburger");
+    const overlay = document.getElementById("mobileMenu");
+    const closeBtn = document.querySelector(".mobile-close");
+    let lastFocus = null;
+
+    function openMenu(){
+      lastFocus = document.activeElement;
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add("open"));
+      hamburger.setAttribute("aria-expanded","true");
+      closeBtn.focus();
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu(){
+      overlay.classList.remove("open");
+      hamburger.setAttribute("aria-expanded","false");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        overlay.hidden = true;
+        if(lastFocus) lastFocus.focus();
+      }, 260);
+    }
+
+    hamburger.addEventListener("click", () => {
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      expanded ? closeMenu() : openMenu();
+    });
+
+    closeBtn.addEventListener("click", closeMenu);
+
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) closeMenu();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if(!overlay.hidden && e.key === "Escape") closeMenu();
+    });
+  </script>
+</body>
+</html>

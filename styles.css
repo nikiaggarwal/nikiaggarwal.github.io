@@ -14,8 +14,9 @@
   --shadow: rgba(0,0,0,0.15);
 
   /* Meter Status Colors */
-  --status-lets:#0033cc;
-  --status-alright:#00CC66;
+  --status-lets:#00CC66;
+  --status-alright:#0033cc;
+  --status-early:#dbf8ff;
   --status-oof:#ffaa0f;
   --status-yikes:#ff3333;
 
