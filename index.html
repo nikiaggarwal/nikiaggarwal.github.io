@@ -82,12 +82,12 @@
           <!-- Large Meter -->
           <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Making Progress - Momentum Building">
             <svg id="largeMeter" width="240" height="240" viewBox="0 0 240 240" aria-hidden="true">
-              <!-- Background track (270° arc) -->
-              <path id="meterTrack" d="" fill="none" stroke="#e0e0e0" stroke-width="16" stroke-linecap="butt"/>
-
-              <!-- Active track (same arc, stroked with dasharray) -->
-              <path id="meterActive" d="" fill="none" stroke="#0033cc" stroke-width="16" stroke-linecap="butt"
-                    stroke-dasharray="0 9999"/>
+              <!-- Colored segments for all 5 statuses (always visible) -->
+              <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="16" stroke-linecap="butt"/>
+              <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="16" stroke-linecap="butt"/>
+              <path id="segmentEarlyDays" d="" fill="none" stroke="#dbf8ff" stroke-width="16" stroke-linecap="butt"/>
+              <path id="segmentMakingProgress" d="" fill="none" stroke="#0033cc" stroke-width="16" stroke-linecap="butt"/>
+              <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="16" stroke-linecap="butt"/>
 
               <!-- Status label along arc (only current visible) -->
               <text id="meterArcLabel" font-size="14" font-weight="600" fill="#0033cc">
@@ -97,16 +97,12 @@
               <!-- Hidden curve for text positioning -->
               <path id="meterTextCurve" d="" fill="none" />
 
-              <!-- Center photo -->
+              <!-- Center photo clip path -->
               <defs>
                 <clipPath id="photoClip">
                   <circle cx="120" cy="120" r="40"></circle>
                 </clipPath>
               </defs>
-
-              <circle cx="120" cy="120" r="43" fill="#fff" stroke="#fff" stroke-width="3"></circle>
-              <image id="centerImage" href="" x="80" y="80" width="80" height="80" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
-              <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
 
               <!-- Needle -->
               <g id="needleGroup" transform="rotate(270 120 120)">
@@ -118,6 +114,11 @@
                 <circle cx="120" cy="120" r="6" fill="#1a1a1a"></circle>
                 <circle cx="120" cy="120" r="8" fill="none" stroke="#1a1a1a" stroke-width="2"></circle>
               </g>
+
+              <!-- Center photo (on top of needle) -->
+              <circle cx="120" cy="120" r="43" fill="#fff" stroke="#fff" stroke-width="3"></circle>
+              <image id="centerImage" href="" x="80" y="80" width="80" height="80" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
+              <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
             </svg>
           </div>
         </div>
@@ -186,7 +187,7 @@
     // --------------------------
     const FALLBACK_DATA = {
       overallStatus: {
-        status: "Alright-Alright",
+        status: "Early Days",
         label: "Momentum Building",
         lastUpdated: "2026-01-18T19:45:00-05:00"
       },
@@ -446,11 +447,14 @@
     }
 
     // --------------------------
-    // Large Meter SVG geometry (270° arc, open at bottom)
+    // Large Meter SVG geometry (180° arc, open at bottom)
     // --------------------------
     const svg = document.getElementById("largeMeter");
-    const track = document.getElementById("meterTrack");
-    const active = document.getElementById("meterActive");
+    const segmentNope = document.getElementById("segmentNope");
+    const segmentHeadwinds = document.getElementById("segmentHeadwinds");
+    const segmentEarlyDays = document.getElementById("segmentEarlyDays");
+    const segmentMakingProgress = document.getElementById("segmentMakingProgress");
+    const segmentDelivered = document.getElementById("segmentDelivered");
     const textCurve = document.getElementById("meterTextCurve");
     const textPath = document.getElementById("meterTextPath");
     const arcLabel = document.getElementById("meterArcLabel");
@@ -475,16 +479,33 @@
       return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
     }
 
-    const arcD = describeArc(cx, cy, r, startDeg, endDeg);
-    track.setAttribute("d", arcD);
-    active.setAttribute("d", arcD);
+    // Create 5 colored segments for the statuses
+    // Each segment is 36 degrees (180° / 5 = 36°)
+    const segmentDeg = 36;
+
+    // Nope: 270° to 306° (0-20%)
+    const nopeArc = describeArc(cx, cy, r, 270, 306);
+    segmentNope.setAttribute("d", nopeArc);
+
+    // Headwinds: 306° to 342° (20-40%)
+    const headwindsArc = describeArc(cx, cy, r, 306, 342);
+    segmentHeadwinds.setAttribute("d", headwindsArc);
+
+    // Early Days: 342° to 18° (40-60%)
+    const earlyDaysArc = describeArc(cx, cy, r, 342, 18);
+    segmentEarlyDays.setAttribute("d", earlyDaysArc);
+
+    // Making Progress: 18° to 54° (60-80%)
+    const makingProgressArc = describeArc(cx, cy, r, 18, 54);
+    segmentMakingProgress.setAttribute("d", makingProgressArc);
+
+    // Delivered: 54° to 90° (80-100%)
+    const deliveredArc = describeArc(cx, cy, r, 54, 90);
+    segmentDelivered.setAttribute("d", deliveredArc);
 
     // A separate curve slightly outside for the label text
     const labelArcD = describeArc(cx, cy, r + 18, startDeg, endDeg);
     textCurve.setAttribute("d", labelArcD);
-
-    // Compute path length once it’s in DOM
-    const arcLen = active.getTotalLength();
 
     // --------------------------
     // Status -> needle position and active arc amount
@@ -513,10 +534,6 @@
       if (centerImage && s.image) {
         centerImage.setAttribute("href", s.image);
       }
-
-      // Active stroke color + progress
-      active.setAttribute("stroke", s.color);
-      active.setAttribute("stroke-dasharray", `${Math.max(0, Math.min(arcLen, arcLen * b.pct))} ${arcLen}`);
 
       // Arc label (only current status visible)
       arcLabel.setAttribute("fill", s.color);
