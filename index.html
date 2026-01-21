@@ -78,8 +78,9 @@
         <div id="heroTimestamp" class="hero-time mono">Last updated: —</div>
 
         <div class="meter-wrap">
+          <div id="overallStatusLabel" class="overall-label">MAKING PROGRESS</div>
           <!-- Large Meter -->
-          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Alright-Alright - Momentum Building">
+          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Making Progress - Momentum Building">
             <svg id="largeMeter" width="240" height="240" viewBox="0 0 240 240" aria-hidden="true">
               <!-- Background track (270° arc) -->
               <path id="meterTrack" d="" fill="none" stroke="#e0e0e0" stroke-width="16" stroke-linecap="butt"/>
@@ -96,7 +97,7 @@
               <!-- Hidden curve for text positioning -->
               <path id="meterTextCurve" d="" fill="none" />
 
-              <!-- Center "photo" (placeholder) -->
+              <!-- Center photo -->
               <defs>
                 <clipPath id="photoClip">
                   <circle cx="120" cy="120" r="40"></circle>
@@ -104,12 +105,7 @@
               </defs>
 
               <circle cx="120" cy="120" r="43" fill="#fff" stroke="#fff" stroke-width="3"></circle>
-              <g clip-path="url(#photoClip)">
-                <!-- Placeholder “photo” using simple shapes to avoid external assets -->
-                <rect x="80" y="80" width="80" height="80" fill="#f2f2f2"></rect>
-                <circle cx="120" cy="110" r="18" fill="#d9d9d9"></circle>
-                <rect x="92" y="132" width="56" height="30" rx="0" fill="#d9d9d9"></rect>
-              </g>
+              <image id="centerImage" href="" x="80" y="80" width="80" height="80" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
               <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
 
               <!-- Needle -->
@@ -124,8 +120,6 @@
               </g>
             </svg>
           </div>
-
-          <div id="overallStatusLabel" class="overall-label">ALRIGHT-ALRIGHT</div>
         </div>
       </div>
     </section>
@@ -365,14 +359,14 @@
     }
 
     // --------------------------
-    // Helpers: status -> colors/tints
+    // Helpers: status -> colors/tints/images
     // --------------------------
     const STATUS = {
-      "LET'S GOOO": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)" },
-      "Alright-Alright": { color: getCSS("--status-alright"), tint: "rgba(0, 51, 204, 0.08)" },
-      "Early Days": { color: getCSS("--status-early"), tint: "rgba(219, 248, 255, 0.08)" },
-      "Oof": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)" },
-      "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
+      "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)", image: "images/delivered.png" },
+      "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(0, 51, 204, 0.08)", image: "images/making-progress.png" },
+      "Early Days": { color: getCSS("--status-early"), tint: "rgba(219, 248, 255, 0.08)", image: "images/early-days.png" },
+      "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)", image: "images/headwinds.png" },
+      "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)", image: "images/nope.png" }
     };
 
     function getCSS(varName){
@@ -496,23 +490,29 @@
     // Status -> needle position and active arc amount
     // --------------------------
     // Needle animation: from 0% (start at 270°) to target bucket
-    // Buckets from 270° (Nope/0%) to 90° (LET'S GOOO/100%):
-    // LET'S GOOO: 100% (at 90°)
-    // Alright-Alright: 60-75%
+    // Buckets from 270° (Nope/0%) to 90° (Delivered/100%):
+    // Delivered: 100% (at 90°)
+    // Making Progress: 60-75%
     // Early Days: 40-55%
-    // Oof: 20-35%
+    // Headwinds: 20-35%
     // Nope: 0% (at 270°)
     const BUCKETS = {
-      "LET'S GOOO": { pct: 1.0, labelPct: 0.95 },
-      "Alright-Alright": { pct: 0.675, labelPct: 0.67 },
+      "Delivered": { pct: 1.0, labelPct: 0.95 },
+      "Making Progress": { pct: 0.675, labelPct: 0.67 },
       "Early Days": { pct: 0.475, labelPct: 0.47 },
-      "Oof": { pct: 0.275, labelPct: 0.27 },
+      "Headwinds": { pct: 0.275, labelPct: 0.27 },
       "Nope": { pct: 0.0, labelPct: 0.05 }
     };
 
     function setMeterStatus(status){
-      const s = STATUS[status] || STATUS["Oof"];
-      const b = BUCKETS[status] || BUCKETS["Oof"];
+      const s = STATUS[status] || STATUS["Headwinds"];
+      const b = BUCKETS[status] || BUCKETS["Headwinds"];
+
+      // Update center image
+      const centerImage = document.getElementById("centerImage");
+      if (centerImage && s.image) {
+        centerImage.setAttribute("href", s.image);
+      }
 
       // Active stroke color + progress
       active.setAttribute("stroke", s.color);
@@ -524,7 +524,7 @@
       textPath.setAttribute("startOffset", (b.labelPct * 100).toFixed(0) + "%");
 
       // Needle target rotation:
-      // Our needleGroup starts at 270° (0% - eek position).
+      // Our needleGroup starts at 270° (0% - Nope position).
       // We map pct -> rotation from 270° to 90° (180° sweep).
       const startAngle = 270;
       const target = startAngle + (sweepDeg * b.pct);
