@@ -85,17 +85,9 @@
               <!-- Colored segments for all 5 statuses (always visible) -->
               <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="16" stroke-linecap="butt"/>
               <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="16" stroke-linecap="butt"/>
-              <path id="segmentEarlyDays" d="" fill="none" stroke="#dbf8ff" stroke-width="16" stroke-linecap="butt"/>
+              <path id="segmentEarlyDays" d="" fill="none" stroke="#00d4ff" stroke-width="16" stroke-linecap="butt"/>
               <path id="segmentMakingProgress" d="" fill="none" stroke="#0033cc" stroke-width="16" stroke-linecap="butt"/>
               <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="16" stroke-linecap="butt"/>
-
-              <!-- Status label along arc (only current visible) -->
-              <text id="meterArcLabel" font-size="14" font-weight="600" fill="#0033cc">
-                <textPath id="meterTextPath" href="#meterTextCurve" startOffset="50%" text-anchor="middle"></textPath>
-              </text>
-
-              <!-- Hidden curve for text positioning -->
-              <path id="meterTextCurve" d="" fill="none" />
 
               <!-- Center photo clip path -->
               <defs>
@@ -455,9 +447,6 @@
     const segmentEarlyDays = document.getElementById("segmentEarlyDays");
     const segmentMakingProgress = document.getElementById("segmentMakingProgress");
     const segmentDelivered = document.getElementById("segmentDelivered");
-    const textCurve = document.getElementById("meterTextCurve");
-    const textPath = document.getElementById("meterTextPath");
-    const arcLabel = document.getElementById("meterArcLabel");
     const needle = document.getElementById("needleGroup");
 
     // Arc settings
@@ -503,10 +492,6 @@
     const deliveredArc = describeArc(cx, cy, r, 54, 90);
     segmentDelivered.setAttribute("d", deliveredArc);
 
-    // A separate curve slightly outside for the label text
-    const labelArcD = describeArc(cx, cy, r + 18, startDeg, endDeg);
-    textCurve.setAttribute("d", labelArcD);
-
     // --------------------------
     // Status -> needle position and active arc amount
     // --------------------------
@@ -534,11 +519,6 @@
       if (centerImage && s.image) {
         centerImage.setAttribute("href", s.image);
       }
-
-      // Arc label (only current status visible)
-      arcLabel.setAttribute("fill", s.color);
-      textPath.textContent = status.toUpperCase();
-      textPath.setAttribute("startOffset", (b.labelPct * 100).toFixed(0) + "%");
 
       // Needle target rotation:
       // Our needleGroup starts at 270° (0% - Nope position).
