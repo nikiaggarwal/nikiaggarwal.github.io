@@ -464,12 +464,16 @@
     function describeArc(cx, cy, r, startAngle, endAngle){
       const start = polarToCartesian(cx, cy, r, endAngle);
       const end = polarToCartesian(cx, cy, r, startAngle);
-      const largeArcFlag = (Math.abs(endAngle - startAngle) <= 180) ? "0" : "1";
+      // Calculate sweep angle, handling wraparound
+      let sweepAngle = endAngle - startAngle;
+      if (sweepAngle < 0) sweepAngle += 360;
+      const largeArcFlag = (sweepAngle <= 180) ? "0" : "1";
       return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
     }
 
     // Create 5 colored segments for the statuses
     // Each segment is 36 degrees (180° / 5 = 36°)
+    // Going from 270° (left) clockwise to 90° (right) through bottom
     const segmentDeg = 36;
 
     // Nope: 270° to 306° (0-20%)
@@ -480,7 +484,7 @@
     const headwindsArc = describeArc(cx, cy, r, 306, 342);
     segmentHeadwinds.setAttribute("d", headwindsArc);
 
-    // Early Days: 342° to 18° (40-60%)
+    // Early Days: 342° to 18° (going through 360°/0°) (40-60%)
     const earlyDaysArc = describeArc(cx, cy, r, 342, 18);
     segmentEarlyDays.setAttribute("d", earlyDaysArc);
 
