@@ -257,9 +257,12 @@ h1,h2,h3,h4{ margin:0; }
 
 .subscribe-page{
   background: var(--blue);
-  padding: 80px 0;
-  min-height: calc(100vh - 88px - 150px);
+  padding: clamp(32px, 6vw, 80px) 0;
+  min-height: calc(100svh - 88px - 150px);
+  display: flex;
+  align-items: center;
   color:#fff;
+  margin-top: 16px;    
 }
 .subscribe-inner{
   max-width: 900px;
