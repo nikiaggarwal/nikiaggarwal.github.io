@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Promise Title | The Mamdani Meter</title>
+  <meta name="description" content="Tracking this promise at NYC City Hall" />
+  <link rel="canonical" href="https://example.com/promise/" />
+  <meta property="og:title" content="Promise Title | The Mamdani Meter" />
+  <meta property="og:description" content="Tracking this promise at NYC City Hall" />
+  <meta property="og:type" content="article" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/MM Logo.png" />
+  <link rel="apple-touch-icon" href="/images/MM Logo.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="/styles.css" />
+  <!-- Promise Detail Styles -->
+  <link rel="stylesheet" href="/promise/promise-detail.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="The Mamdani Meter home">
+        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+          <path d="M4 18a10 10 0 0 1 20 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+        <span>THE MAMDANI METER</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/promises.html">Promises</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/subscribe.html">Subscribe</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-overlay" role="dialog" aria-modal="true" aria-label="Mobile menu" hidden>
+    <div class="mobile-top">
+      <div class="title">Menu</div>
+      <button class="mobile-close" type="button" aria-label="Close menu">Close</button>
+    </div>
+    <ul class="mobile-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/promises.html">Promises</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/subscribe.html">Subscribe</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+    <!-- HERO WITH METER -->
+    <section class="promise-hero">
+      <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/promises.html">Promises</a>
+          <span aria-hidden="true">/</span>
+          <span id="breadcrumbTitle" aria-current="page">Promise Title</span>
+        </nav>
+
+        <!-- Promise Title & Category -->
+        <div class="promise-hero-header">
+          <div id="promiseCategory" class="promise-category label">CATEGORY</div>
+          <h1 id="promiseTitle" class="promise-title h1">Promise Title Goes Here</h1>
+        </div>
+
+        <!-- Large Meter -->
+        <div class="promise-meter-wrap">
+          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Making Progress">
+            <svg id="promiseMeter" width="300" height="300" viewBox="0 0 400 400" aria-hidden="true">
+              <!-- Colored segments for all 5 statuses -->
+              <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentEarlyDays" d="" fill="none" stroke="#00edf4" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentMakingProgress" d="" fill="none" stroke="#b3f95b" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="28" stroke-linecap="butt"/>
+
+              <!-- Center photo clip path -->
+              <defs>
+                <clipPath id="photoClip">
+                  <circle cx="200" cy="200" r="70"></circle>
+                </clipPath>
+              </defs>
+
+              <!-- Needle -->
+              <g id="needleGroup" transform="rotate(270 200 200)">
+                <path d="M200 200 L194 204 L200 70 L206 204 Z" fill="#1a1a1a"></path>
+                <path d="M200 64 L191 80 L209 80 Z" fill="#1a1a1a"></path>
+                <circle cx="200" cy="200" r="10" fill="#1a1a1a"></circle>
+                <circle cx="200" cy="200" r="14" fill="none" stroke="#1a1a1a" stroke-width="3"></circle>
+              </g>
+
+              <!-- Center photo -->
+              <circle cx="200" cy="200" r="75" fill="#fff" stroke="#fff" stroke-width="5"></circle>
+              <image id="centerImage" href="" x="130" y="130" width="140" height="140" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
+              <circle cx="200" cy="200" r="70" fill="none" stroke="#ffffff" stroke-width="5"></circle>
+            </svg>
+          </div>
+          <div class="promise-status-info">
+            <div id="promiseStatusBadge" class="badge">STATUS</div>
+            <div id="promiseStatusLabel" class="promise-status-label">Status Label</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWO COLUMN CONTENT -->
+    <section class="promise-content">
+      <div class="container">
+        <div class="promise-layout">
+          <!-- MAIN CONTENT -->
+          <div class="promise-main">
+            <!-- Summary -->
+            <article class="content-block">
+              <h2 class="content-block-title h3">Summary</h2>
+              <div id="promiseSummary" class="content-block-body body-lg">
+                <p>This is where the detailed summary of the promise goes. It explains what the promise is about, why it matters, and the current state of progress.</p>
+                <p>Additional context and background information can be included here to help readers understand the full scope of this commitment.</p>
+              </div>
+            </article>
+
+            <!-- Media Container -->
+            <article class="content-block">
+              <h2 class="content-block-title h3">Related Media</h2>
+              <div id="promiseMedia" class="media-container">
+                <!-- Image or Video will be injected here -->
+                <div class="media-placeholder">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                  </svg>
+                  <span>Image or video will appear here</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Timeline -->
+            <article class="content-block">
+              <h2 class="content-block-title h3">Timeline</h2>
+              <div id="promiseTimeline" class="timeline">
+                <!-- Timeline items will be injected here -->
+                <div class="timeline-item">
+                  <div class="timeline-date mono">Jan 2026</div>
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-headline">Example timeline event</div>
+                    <div class="timeline-desc">Description of what happened at this point in time.</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date mono">Dec 2025</div>
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-headline">Earlier event</div>
+                    <div class="timeline-desc">Another milestone or update related to this promise.</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Sources -->
+            <article class="content-block">
+              <h2 class="content-block-title h3">Sources</h2>
+              <ul id="promiseSources" class="sources-list">
+                <li>
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    <span class="source-title">Example Source Title</span>
+                    <span class="source-domain mono">example.com</span>
+                    <svg class="source-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- SIDEBAR -->
+          <aside class="promise-sidebar">
+            <div class="sidebar-sticky">
+              <!-- Quick Facts -->
+              <div class="sidebar-block">
+                <h3 class="sidebar-title label">Quick Facts</h3>
+                <dl class="quick-facts">
+                  <div class="fact-row">
+                    <dt>Category</dt>
+                    <dd id="sidebarCategory">Housing</dd>
+                  </div>
+                  <div class="fact-row">
+                    <dt>Status</dt>
+                    <dd id="sidebarStatus">Making Progress</dd>
+                  </div>
+                  <div class="fact-row">
+                    <dt>Last Updated</dt>
+                    <dd id="sidebarUpdated" class="mono">Jan 18, 2026</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <!-- Share -->
+              <div class="sidebar-block">
+                <h3 class="sidebar-title label">Share</h3>
+                <div class="share-buttons">
+                  <a id="shareTwitter" href="#" class="share-btn" aria-label="Share on Twitter" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a id="shareFacebook" href="#" class="share-btn" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  </a>
+                  <button id="shareCopy" class="share-btn" aria-label="Copy link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREV/NEXT NAVIGATION -->
+    <nav class="promise-nav" aria-label="Promise navigation">
+      <div class="container">
+        <div class="promise-nav-inner">
+          <a id="prevPromise" href="#" class="promise-nav-link promise-nav-prev">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            <div class="promise-nav-text">
+              <span class="promise-nav-label label">Previous</span>
+              <span id="prevPromiseTitle" class="promise-nav-title">Previous Promise Title</span>
+            </div>
+          </a>
+          <a id="nextPromise" href="#" class="promise-nav-link promise-nav-next">
+            <div class="promise-nav-text">
+              <span class="promise-nav-label label">Next</span>
+              <span id="nextPromiseTitle" class="promise-nav-title">Next Promise Title</span>
+            </div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links" aria-label="Footer links">
+        <a href="/about.html">ABOUT</a>
+        <a href="/contact.html">CONTACT</a>
+        <a href="/methodology.html">METHODOLOGY</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --------------------------
+    // GOOGLE SHEETS CONFIGURATION
+    // --------------------------
+    const SHEETS_CONFIG = {
+      promises: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=0&single=true&output=csv",
+      updates: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=1426316595&single=true&output=csv",
+      cacheDuration: 5 * 60 * 1000
+    };
+
+    // --------------------------
+    // Status Configuration
+    // --------------------------
+    const STATUS = {
+      "Delivered": { color: "#00CC66", tint: "rgba(0, 204, 102, 0.08)", image: "/images/delivered.png" },
+      "Making Progress": { color: "#b3f95b", tint: "rgba(179, 249, 91, 0.08)", image: "/images/making-progress.png" },
+      "Early Days": { color: "#00edf4", tint: "rgba(29, 222, 228, 0.08)", image: "/images/early-days.png" },
+      "Headwinds": { color: "#ffaa0f", tint: "rgba(255, 170, 15, 0.08)", image: "/images/headwinds.png" },
+      "Nope": { color: "#ff3333", tint: "rgba(255, 51, 51, 0.08)", image: "/images/nope.png" }
+    };
+
+    const BUCKETS = {
+      "Delivered": { pct: 1.0 },
+      "Making Progress": { pct: 0.675 },
+      "Early Days": { pct: 0.475 },
+      "Headwinds": { pct: 0.275 },
+      "Nope": { pct: 0.0 }
+    };
+
+    // --------------------------
+    // Get promise ID from URL
+    // --------------------------
+    function getPromiseId() {
+      const path = window.location.pathname;
+      const match = path.match(/\/promise\/([^\/]+)/);
+      return match ? decodeURIComponent(match[1]) : null;
+    }
+
+    // --------------------------
+    // CSV Parser
+    // --------------------------
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      if (lines.length < 2) return [];
+      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+      const rows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || '';
+        });
+        rows.push(row);
+      }
+      return rows;
+    }
+
+    // --------------------------
+    // Fetch with caching
+    // --------------------------
+    async function fetchSheet(url, cacheKey) {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) {
+          return data;
+        }
+      }
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const text = await response.text();
+        const data = parseCSV(text);
+        localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+        return data;
+      } catch (error) {
+        console.warn(`Failed to fetch ${cacheKey}:`, error);
+        if (cached) return JSON.parse(cached).data;
+        throw error;
+      }
+    }
+
+    // --------------------------
+    // Escape HTML
+    // --------------------------
+    function escapeHTML(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    // --------------------------
+    // Format date
+    // --------------------------
+    function formatDate(dateStr) {
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    // --------------------------
+    // Meter SVG Setup
+    // --------------------------
+    const cx = 200, cy = 200, r = 150;
+    const sweepDeg = 180;
+
+    function polarToCartesian(cx, cy, r, deg) {
+      const rad = (deg - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+    }
+
+    function describeArc(cx, cy, r, startAngle, endAngle) {
+      const start = polarToCartesian(cx, cy, r, endAngle);
+      const end = polarToCartesian(cx, cy, r, startAngle);
+      let sweepAngle = endAngle - startAngle;
+      if (sweepAngle < 0) sweepAngle += 360;
+      const largeArcFlag = (sweepAngle <= 180) ? "0" : "1";
+      return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+    }
+
+    function setupMeterSegments() {
+      document.getElementById("segmentNope").setAttribute("d", describeArc(cx, cy, r, 270, 306));
+      document.getElementById("segmentHeadwinds").setAttribute("d", describeArc(cx, cy, r, 306, 342));
+      document.getElementById("segmentEarlyDays").setAttribute("d", describeArc(cx, cy, r, 342, 18));
+      document.getElementById("segmentMakingProgress").setAttribute("d", describeArc(cx, cy, r, 18, 54));
+      document.getElementById("segmentDelivered").setAttribute("d", describeArc(cx, cy, r, 54, 90));
+    }
+
+    function setMeterStatus(status) {
+      const s = STATUS[status] || STATUS["Headwinds"];
+      const b = BUCKETS[status] || BUCKETS["Headwinds"];
+      const needle = document.getElementById("needleGroup");
+      const centerImage = document.getElementById("centerImage");
+
+      if (centerImage && s.image) {
+        centerImage.setAttribute("href", s.image);
+      }
+
+      const target = 270 + (sweepDeg * b.pct);
+
+      try {
+        needle.animate(
+          [
+            { transform: "rotate(270deg)", transformOrigin: "200px 200px" },
+            { transform: `rotate(${target}deg)`, transformOrigin: "200px 200px" }
+          ],
+          { duration: 800, easing: "cubic-bezier(0.2, 0.9, 0.2, 1)", fill: "forwards" }
+        );
+      } catch (e) {
+        needle.setAttribute("transform", `rotate(${target} 200 200)`);
+      }
+    }
+
+    // --------------------------
+    // Render Promise Data
+    // --------------------------
+    function renderPromise(promise, allPromises) {
+      const s = STATUS[promise.status] || STATUS["Headwinds"];
+
+      // Update page title
+      document.title = `${promise.title} | The Mamdani Meter`;
+
+      // Hero section
+      document.getElementById("breadcrumbTitle").textContent = promise.title;
+      document.getElementById("promiseCategory").textContent = promise.category.toUpperCase();
+      document.getElementById("promiseTitle").textContent = promise.title;
+
+      // Status badge
+      const badge = document.getElementById("promiseStatusBadge");
+      badge.textContent = promise.status.toUpperCase();
+      badge.style.background = s.color;
+
+      document.getElementById("promiseStatusLabel").textContent = promise.statusLabel || '';
+      document.getElementById("promiseStatusLabel").style.color = s.color;
+
+      // Summary
+      if (promise.summary) {
+        document.getElementById("promiseSummary").innerHTML = `<p>${escapeHTML(promise.summary)}</p>`;
+      }
+
+      // Media
+      if (promise.mediaUrl) {
+        const mediaContainer = document.getElementById("promiseMedia");
+        if (promise.mediaType === 'video') {
+          mediaContainer.innerHTML = `
+            <div class="media-video">
+              <iframe src="${escapeHTML(promise.mediaUrl)}" frameborder="0" allowfullscreen></iframe>
+            </div>
+          `;
+        } else {
+          mediaContainer.innerHTML = `
+            <img src="${escapeHTML(promise.mediaUrl)}" alt="${escapeHTML(promise.mediaAlt || promise.title)}" />
+          `;
+        }
+      }
+
+      // Sidebar
+      document.getElementById("sidebarCategory").textContent = promise.category;
+      document.getElementById("sidebarStatus").textContent = promise.status;
+      document.getElementById("sidebarStatus").style.color = s.color;
+      if (promise.lastUpdated) {
+        document.getElementById("sidebarUpdated").textContent = formatDate(promise.lastUpdated);
+      }
+
+      // Share links
+      const pageUrl = encodeURIComponent(window.location.href);
+      const pageTitle = encodeURIComponent(promise.title);
+      document.getElementById("shareTwitter").href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+      document.getElementById("shareFacebook").href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+      document.getElementById("shareCopy").addEventListener("click", () => {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied!");
+      });
+
+      // Set meter
+      setMeterStatus(promise.status);
+
+      // Prev/Next navigation
+      const currentIndex = allPromises.findIndex(p => p.id === promise.id);
+      const prevPromise = currentIndex > 0 ? allPromises[currentIndex - 1] : null;
+      const nextPromise = currentIndex < allPromises.length - 1 ? allPromises[currentIndex + 1] : null;
+
+      const prevLink = document.getElementById("prevPromise");
+      const nextLink = document.getElementById("nextPromise");
+
+      if (prevPromise) {
+        prevLink.href = `/promise/${encodeURIComponent(prevPromise.id)}`;
+        document.getElementById("prevPromiseTitle").textContent = prevPromise.title;
+      } else {
+        prevLink.style.visibility = "hidden";
+      }
+
+      if (nextPromise) {
+        nextLink.href = `/promise/${encodeURIComponent(nextPromise.id)}`;
+        document.getElementById("nextPromiseTitle").textContent = nextPromise.title;
+      } else {
+        nextLink.style.visibility = "hidden";
+      }
+    }
+
+    // --------------------------
+    // Render Timeline (from Updates tab)
+    // --------------------------
+    function renderTimeline(events) {
+      const container = document.getElementById("promiseTimeline");
+
+      if (!events || events.length === 0) {
+        // Hide timeline section if no events
+        container.closest('.content-block').style.display = 'none';
+        return;
+      }
+
+      container.innerHTML = events.map(event => `
+        <div class="timeline-item">
+          <div class="timeline-date mono">${escapeHTML(event.date || '')}</div>
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-headline">${escapeHTML(event.headline || '')}</div>
+            ${event.category ? `<div class="timeline-desc">${escapeHTML(event.category)}</div>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --------------------------
+    // Render Sources (from Updates tab)
+    // --------------------------
+    function renderSources(updates, promiseId) {
+      const container = document.getElementById("promiseSources");
+
+      // Filter updates for this promise that have source info
+      const sources = updates.filter(u =>
+        u.promiseId === promiseId &&
+        u['source url'] &&
+        u['source url'].trim() !== ''
+      );
+
+      if (!sources || sources.length === 0) {
+        // Hide sources section if no sources
+        container.closest('.content-block').style.display = 'none';
+        return;
+      }
+
+      container.innerHTML = sources.map(source => {
+        let domain = '';
+        try {
+          domain = new URL(source['source url']).hostname.replace('www.', '');
+        } catch (e) {
+          domain = '';
+        }
+        return `
+          <li>
+            <a href="${escapeHTML(source['source url'])}" target="_blank" rel="noopener noreferrer">
+              <span class="source-title">${escapeHTML(source['source title'] || 'Source')}</span>
+              ${domain ? `<span class="source-domain mono">${escapeHTML(domain)}</span>` : ''}
+              <svg class="source-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+              </svg>
+            </a>
+          </li>
+        `;
+      }).join('');
+    }
+
+    // --------------------------
+    // Initialize
+    // --------------------------
+    async function init() {
+      setupMeterSegments();
+
+      const promiseId = getPromiseId();
+      if (!promiseId) {
+        window.location.href = '/promises.html';
+        return;
+      }
+
+      try {
+        // Fetch promises and updates in parallel
+        const [promises, updates] = await Promise.all([
+          fetchSheet(SHEETS_CONFIG.promises, 'promises_cache'),
+          fetchSheet(SHEETS_CONFIG.updates, 'updates_cache')
+        ]);
+
+        const promise = promises.find(p => p.id === promiseId);
+
+        if (!promise) {
+          window.location.href = '/promises.html';
+          return;
+        }
+
+        renderPromise(promise, promises);
+
+        // Render sources from updates tab
+        renderSources(updates, promiseId);
+
+        // Render timeline from updates for this promise
+        const promiseUpdates = updates.filter(u => u.promiseId === promiseId);
+        renderTimeline(promiseUpdates);
+
+      } catch (error) {
+        console.error("Failed to load promise:", error);
+      }
+    }
+
+    init();
+
+    // --------------------------
+    // Mobile menu
+    // --------------------------
+    const hamburger = document.querySelector(".hamburger");
+    const overlay = document.getElementById("mobileMenu");
+    const closeBtn = document.querySelector(".mobile-close");
+    let lastFocus = null;
+
+    function openMenu() {
+      lastFocus = document.activeElement;
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add("open"));
+      hamburger.setAttribute("aria-expanded", "true");
+      closeBtn.focus();
+      document.body.style.overflow = "hidden";
+    }
+    function closeMenu() {
+      overlay.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        overlay.hidden = true;
+        if (lastFocus) lastFocus.focus();
+      }, 260);
+    }
+
+    hamburger.addEventListener("click", () => {
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      expanded ? closeMenu() : openMenu();
+    });
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeMenu(); });
+    document.addEventListener("keydown", (e) => { if (!overlay.hidden && e.key === "Escape") closeMenu(); });
+  </script>
+</body>
+</html>

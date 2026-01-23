@@ -10,6 +10,10 @@
   <meta property="og:description" content="Tracking promises, policies, and progress at NYC City Hall" />
   <meta property="og:type" content="website" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/MM Logo.png" />
+  <link rel="apple-touch-icon" href="images/MM Logo.png" />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,7 +44,6 @@
         <ul class="nav-links">
           <li><a href="/" aria-current="page">Home</a></li>
           <li><a href="/promises.html">Promises</a></li>
-          <li><a href="/updates.html">What Just Happened</a></li>
           <li><a href="/about.html">About</a></li>
           <li><a href="/subscribe.html">Subscribe</a></li>
         </ul>
@@ -63,7 +66,6 @@
     <ul class="mobile-menu">
       <li><a href="/" aria-current="page">Home</a></li>
       <li><a href="/promises.html">Promises</a></li>
-      <li><a href="/updates.html">What Just Happened</a></li>
       <li><a href="/about.html">About</a></li>
       <li><a href="/subscribe.html">Subscribe</a></li>
     </ul>
@@ -73,49 +75,45 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
-        <div class="h1">THE MAMDANI METER</div>
-        <p class="hero-sub">
-          Tracking promises, policies, and progress at NYC City Hall.
-        </p>
         <div id="heroTimestamp" class="hero-time mono">Last updated: —</div>
+        <div id="overallStatusLabel" class="overall-label">MAKING PROGRESS</div>
+        <div id="overallStatusDescription" class="overall-description">Momentum Building</div>
 
         <div class="meter-wrap">
-          <div id="overallStatusLabel" class="overall-label">MAKING PROGRESS</div>
           <!-- Large Meter -->
           <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Making Progress - Momentum Building">
-            <svg id="largeMeter" width="240" height="240" viewBox="0 0 240 240" aria-hidden="true">
+            <svg id="largeMeter" width="400" height="400" viewBox="0 0 400 400" aria-hidden="true">
               <!-- Colored segments for all 5 statuses (always visible) -->
-              <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="16" stroke-linecap="butt"/>
-              <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="16" stroke-linecap="butt"/>
-              <path id="segmentEarlyDays" d="" fill="none" stroke="#00edf4" stroke-width="16" stroke-linecap="butt"/>
-              <path id="segmentMakingProgress" d="" fill="none" stroke="#b3f95b" stroke-width="16" stroke-linecap="butt"/>
-              <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="16" stroke-linecap="butt"/>
+              <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentEarlyDays" d="" fill="none" stroke="#00edf4" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentMakingProgress" d="" fill="none" stroke="#b3f95b" stroke-width="28" stroke-linecap="butt"/>
+              <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="28" stroke-linecap="butt"/>
 
               <!-- Center photo clip path -->
               <defs>
                 <clipPath id="photoClip">
-                  <circle cx="120" cy="120" r="40"></circle>
+                  <circle cx="200" cy="200" r="70"></circle>
                 </clipPath>
               </defs>
 
               <!-- Needle -->
-              <g id="needleGroup" transform="rotate(270 120 120)">
+              <g id="needleGroup" transform="rotate(270 200 200)">
                 <!-- Clock-hand style: wide base tapering to point -->
-                <path d="M120 120 L116 122 L120 44 L124 122 Z" fill="#1a1a1a"></path>
+                <path d="M200 200 L194 204 L200 70 L206 204 Z" fill="#1a1a1a"></path>
                 <!-- Tip arrow -->
-                <path d="M120 40 L114 50 L126 50 Z" fill="#1a1a1a"></path>
+                <path d="M200 64 L191 80 L209 80 Z" fill="#1a1a1a"></path>
                 <!-- Base anchor -->
-                <circle cx="120" cy="120" r="6" fill="#1a1a1a"></circle>
-                <circle cx="120" cy="120" r="8" fill="none" stroke="#1a1a1a" stroke-width="2"></circle>
+                <circle cx="200" cy="200" r="10" fill="#1a1a1a"></circle>
+                <circle cx="200" cy="200" r="14" fill="none" stroke="#1a1a1a" stroke-width="3"></circle>
               </g>
 
               <!-- Center photo (on top of needle) -->
-              <circle cx="120" cy="120" r="43" fill="#fff" stroke="#fff" stroke-width="3"></circle>
-              <image id="centerImage" href="" x="80" y="80" width="80" height="80" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
-              <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
+              <circle cx="200" cy="200" r="75" fill="#fff" stroke="#fff" stroke-width="5"></circle>
+              <image id="centerImage" href="" x="130" y="130" width="140" height="140" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
+              <circle cx="200" cy="200" r="70" fill="none" stroke="#ffffff" stroke-width="5"></circle>
             </svg>
           </div>
-          <div id="overallStatusDescription" class="overall-description">Momentum Building</div>
         </div>
       </div>
     </section>
@@ -456,8 +454,8 @@
     const needle = document.getElementById("needleGroup");
 
     // Arc settings
-    const cx = 120, cy = 120;
-    const r = 88;            // radius for 240x240 with 16px stroke
+    const cx = 200, cy = 200;
+    const r = 150;           // radius for 400x400 with 28px stroke
     const startDeg = 270;    // bottom-left (9 o'clock position)
     const endDeg = 90;       // top-right (3 o'clock position)
     const sweepDeg = 180;    // 180 degree arc from 270° to 90°
@@ -540,13 +538,13 @@
       try{
         needle.animate(
           [
-            { transform: "rotate(270deg)", transformOrigin: "120px 120px" },
-            { transform: `rotate(${target}deg)`, transformOrigin: "120px 120px" }
+            { transform: "rotate(270deg)", transformOrigin: "200px 200px" },
+            { transform: `rotate(${target}deg)`, transformOrigin: "200px 200px" }
           ],
           { duration: 800, easing: "cubic-bezier(0.2, 0.9, 0.2, 1)", fill: "forwards" }
         );
       } catch(e){
-        needle.setAttribute("transform", `rotate(${target} 120 120)`);
+        needle.setAttribute("transform", `rotate(${target} 200 200)`);
       }
     }
 
