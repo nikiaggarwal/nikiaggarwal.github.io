@@ -444,21 +444,6 @@
     init();
 
     // --------------------------
-    // Sticky Filters
-    // --------------------------
-    const filtersSection = document.getElementById('filtersSection');
-    const nav = document.querySelector('.nav');
-    const navHeight = 88;
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > filtersSection.offsetTop - navHeight) {
-        filtersSection.classList.add('sticky');
-      } else {
-        filtersSection.classList.remove('sticky');
-      }
-    });
-
-    // --------------------------
     // Mobile menu
     // --------------------------
     const hamburger = document.querySelector(".hamburger");
