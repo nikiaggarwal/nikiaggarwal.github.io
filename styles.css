@@ -16,7 +16,7 @@
   /* Meter Status Colors */
   --status-lets:#00CC66;
   --status-alright:#0033cc;
-  --status-early:#dbf8ff;
+  --status-early:#1ddee4;
   --status-oof:#ffaa0f;
   --status-yikes:#ff3333;
 
@@ -216,7 +216,7 @@ h1,h2,h3,h4{ margin:0; }
 
 /* Sections */
 .hero{
-  background: var(--blue);
+  background: var(--orange);
   padding: 80px 0;
   color:#fff;
 }
@@ -246,9 +246,41 @@ h1,h2,h3,h4{ margin:0; }
   letter-spacing:1px;
   text-align:center;
 }
+.overall-description{
+  margin-top: 20px;
+  font-size:18px;
+  font-weight:400;
+  color: rgba(255,255,255,0.9);
+  text-align:center;
+  max-width: 400px;
+}
+
+.subscribe-page{
+  background: var(--blue);
+  padding: 80px 0;
+  min-height: calc(100vh - 88px - 150px);
+  color:#fff;
+}
+.subscribe-inner{
+  max-width: 900px;
+  margin:0 auto;
+  text-align:center;
+  padding: 0 16px;
+}
+.subscribe-sub{
+  margin-top: 20px;
+  color: rgba(255,255,255,0.9);
+  font-size:20px;
+}
+.subscribe-form-wrap{
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .what-happened{
-  background: var(--orange);
+  background: var(--blue);
   padding: 72px 0;
 }
 .section-head{

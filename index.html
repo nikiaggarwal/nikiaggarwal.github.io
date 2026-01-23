@@ -42,6 +42,7 @@
           <li><a href="/promises.html">Promises</a></li>
           <li><a href="/updates.html">What Just Happened</a></li>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/subscribe.html">Subscribe</a></li>
         </ul>
       </nav>
 
@@ -64,6 +65,7 @@
       <li><a href="/promises.html">Promises</a></li>
       <li><a href="/updates.html">What Just Happened</a></li>
       <li><a href="/about.html">About</a></li>
+      <li><a href="/subscribe.html">Subscribe</a></li>
     </ul>
   </div>
 
@@ -113,6 +115,7 @@
               <circle cx="120" cy="120" r="40" fill="none" stroke="#ffffff" stroke-width="3"></circle>
             </svg>
           </div>
+          <div id="overallStatusDescription" class="overall-description">Momentum Building</div>
         </div>
       </div>
     </section>
@@ -357,7 +360,7 @@
     const STATUS = {
       "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)", image: "images/delivered.png" },
       "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(0, 51, 204, 0.08)", image: "images/making-progress.png" },
-      "Early Days": { color: getCSS("--status-early"), tint: "rgba(219, 248, 255, 0.08)", image: "images/early-days.png" },
+      "Early Days": { color: getCSS("--status-early"), tint: "rgba(29, 222, 228, 0.08)", image: "images/early-days.png" },
       "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)", image: "images/headwinds.png" },
       "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)", image: "images/nope.png" }
     };
@@ -391,6 +394,9 @@
 
       const overallLabelEl = document.getElementById("overallStatusLabel");
       overallLabelEl.textContent = overallStatus.status.toUpperCase();
+
+      const overallDescEl = document.getElementById("overallStatusDescription");
+      overallDescEl.textContent = overallStatus.label || "";
 
       // Update meter a11y label
       const meterA11y = document.getElementById("meterA11yWrap");
