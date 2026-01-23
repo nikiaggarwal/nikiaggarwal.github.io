@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Promises Made | The Mamdani Meter</title>
+  <meta name="description" content="Track all the promises made by NYC City Hall" />
+  <link rel="canonical" href="https://example.com/promises.html" />
+  <meta property="og:title" content="Promises Made | The Mamdani Meter" />
+  <meta property="og:description" content="Track all the promises made by NYC City Hall" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="The Mamdani Meter home">
+        <!-- small static meter icon -->
+        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+          <path d="M4 18a10 10 0 0 1 20 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+        <span>THE MAMDANI METER</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/promises.html" aria-current="page">Promises</a></li>
+          <li><a href="/updates.html">What Just Happened</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/subscribe.html">Subscribe</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-overlay" role="dialog" aria-modal="true" aria-label="Mobile menu" hidden>
+    <div class="mobile-top">
+      <div class="title">Menu</div>
+      <button class="mobile-close" type="button" aria-label="Close menu">Close</button>
+    </div>
+    <ul class="mobile-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/promises.html" aria-current="page">Promises</a></li>
+      <li><a href="/updates.html">What Just Happened</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/subscribe.html">Subscribe</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+    <!-- PAGE HEADER -->
+    <section class="promises-header">
+      <div class="promises-container">
+        <h1 class="h1">PROMISES MADE</h1>
+        <p class="promises-subtitle">Tracking the commitments, progress, and roadblocks across NYC City Hall's agenda</p>
+      </div>
+    </section>
+
+    <!-- FILTER SECTION -->
+    <section class="filters-section" id="filtersSection">
+      <div class="promises-container">
+        <div class="filter-group">
+          <div class="filter-label">Status</div>
+          <div class="filter-chips" role="group" aria-label="Filter by status">
+            <button class="filter-chip active" data-filter-type="status" data-filter-value="All">All</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Delivered">Delivered</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Making Progress">Making Progress</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Early Days">Early Days</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Headwinds">Headwinds</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Nope">Nope</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Category</div>
+          <div class="filter-chips" role="group" aria-label="Filter by category">
+            <button class="filter-chip active" data-filter-type="category" data-filter-value="All">All</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Housing">Housing</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Reform & Funding">Reform & Funding</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Education">Education</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Labor">Labor</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Affordability">Affordability</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Climate">Climate</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="LGBTQ+">LGBTQ+</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Healthcare">Healthcare</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Community">Community</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Small Business">Small Business</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Trump-Proofing">Trump-Proofing</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMISES GRID -->
+    <section class="promises-grid-section">
+      <div class="promises-container">
+        <div id="promisesGrid" class="grid" aria-label="Promises grid">
+          <!-- Cards injected by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" hidden>
+          <p>No promises match these filters</p>
+          <button class="btn btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-wrap" id="loadMoreWrap" hidden>
+          <button class="btn btn-secondary" id="loadMoreBtn">Load 12 more promises</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links" aria-label="Footer links">
+        <a href="/about.html">ABOUT</a>
+        <a href="/contact.html">CONTACT</a>
+        <a href="/methodology.html">METHODOLOGY</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --------------------------
+    // GOOGLE SHEETS CONFIGURATION
+    // --------------------------
+    const SHEETS_CONFIG = {
+      promises: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=0&single=true&output=csv",
+      cacheDuration: 5 * 60 * 1000
+    };
+
+    // Fallback data
+    const FALLBACK_PROMISES = [
+      {
+        id: "p1",
+        title: "Fund tenant legal support citywide",
+        category: "Housing",
+        status: "Headwinds",
+        statusLabel: "Budget pending",
+        oneLineSummary: "Funding discussions are active, but no final commitment yet."
+      },
+      {
+        id: "p2",
+        title: "Expand bus lanes on key corridors",
+        category: "Transit",
+        status: "Making Progress",
+        statusLabel: "In motion",
+        oneLineSummary: "Agencies are coordinating next steps and public input."
+      },
+      {
+        id: "p3",
+        title: "Launch paid youth internships",
+        category: "Education",
+        status: "Delivered",
+        statusLabel: "Pilot live",
+        oneLineSummary: "A pilot program is running with early results expected soon."
+      },
+      {
+        id: "p4",
+        title: "Improve subway accessibility timelines",
+        category: "Transit",
+        status: "Nope",
+        statusLabel: "Stalled",
+        oneLineSummary: "No clear plan or timeline has been published."
+      },
+      {
+        id: "p5",
+        title: "Strengthen workplace protections",
+        category: "Labor",
+        status: "Making Progress",
+        statusLabel: "Drafting",
+        oneLineSummary: "Policy language is taking shape with stakeholder feedback."
+      },
+      {
+        id: "p6",
+        title: "Build more deeply affordable housing",
+        category: "Housing",
+        status: "Headwinds",
+        statusLabel: "Negotiating",
+        oneLineSummary: "Key details depend on land, financing, and approvals."
+      }
+    ];
+
+    // --------------------------
+    // Data & State
+    // --------------------------
+    let allPromises = [];
+    let filteredPromises = [];
+    let displayedCount = 0;
+    const ITEMS_PER_PAGE = 12;
+
+    const filters = {
+      status: 'All',
+      category: 'All'
+    };
+
+    // --------------------------
+    // Status Colors
+    // --------------------------
+    const STATUS = {
+      "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)" },
+      "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(0, 51, 204, 0.08)" },
+      "Early Days": { color: getCSS("--status-early"), tint: "rgba(29, 222, 228, 0.08)" },
+      "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)" },
+      "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
+    };
+
+    function getCSS(varName){
+      return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    }
+
+    // --------------------------
+    // CSV Parser
+    // --------------------------
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      if (lines.length < 2) return [];
+
+      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+      const rows = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || '';
+        });
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    // --------------------------
+    // Fetch Promises
+    // --------------------------
+    async function fetchPromises() {
+      try {
+        const cached = localStorage.getItem('promises_cache');
+        if (cached) {
+          const { data, timestamp } = JSON.parse(cached);
+          if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) {
+            return data;
+          }
+        }
+
+        const response = await fetch(SHEETS_CONFIG.promises);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const text = await response.text();
+        const data = parseCSV(text);
+
+        localStorage.setItem('promises_cache', JSON.stringify({
+          data,
+          timestamp: Date.now()
+        }));
+
+        return data;
+      } catch (error) {
+        console.warn('Failed to fetch promises:', error);
+        if (cached) {
+          return JSON.parse(cached).data;
+        }
+        return FALLBACK_PROMISES;
+      }
+    }
+
+    // --------------------------
+    // Filter Promises
+    // --------------------------
+    function filterPromises() {
+      filteredPromises = allPromises.filter(p => {
+        const statusMatch = filters.status === 'All' || p.status === filters.status;
+        const categoryMatch = filters.category === 'All' || p.category === filters.category;
+        return statusMatch && categoryMatch;
+      });
+
+      displayedCount = 0;
+      renderPromises();
+    }
+
+    // --------------------------
+    // Render Promises
+    // --------------------------
+    function renderPromises() {
+      const grid = document.getElementById('promisesGrid');
+      const emptyState = document.getElementById('emptyState');
+      const loadMoreWrap = document.getElementById('loadMoreWrap');
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+      if (filteredPromises.length === 0) {
+        grid.innerHTML = '';
+        emptyState.hidden = false;
+        loadMoreWrap.hidden = true;
+        return;
+      }
+
+      emptyState.hidden = true;
+
+      const newDisplayCount = Math.min(displayedCount + ITEMS_PER_PAGE, filteredPromises.length);
+
+      if (displayedCount === 0) {
+        grid.innerHTML = '';
+      }
+
+      const promisesToAdd = filteredPromises.slice(displayedCount, newDisplayCount);
+
+      promisesToAdd.forEach((p, index) => {
+        const card = makeCard(p);
+        card.style.opacity = '0';
+        grid.appendChild(card);
+
+        setTimeout(() => {
+          card.style.transition = 'opacity 300ms ease-in';
+          card.style.opacity = '1';
+        }, index * 30);
+      });
+
+      displayedCount = newDisplayCount;
+
+      const remaining = filteredPromises.length - displayedCount;
+      if (remaining > 0) {
+        const loadCount = Math.min(ITEMS_PER_PAGE, remaining);
+        loadMoreBtn.textContent = `Load ${loadCount} more promise${loadCount > 1 ? 's' : ''}`;
+        loadMoreWrap.hidden = false;
+      } else {
+        loadMoreWrap.hidden = true;
+      }
+    }
+
+    // --------------------------
+    // Make Promise Card
+    // --------------------------
+    function makeCard(p){
+      const s = STATUS[p.status] || STATUS["Headwinds"];
+
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = `/promise/${encodeURIComponent(p.id)}`;
+      a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}. ${p.statusLabel}.`);
+
+      a.style.background = s.tint;
+
+      a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
+      a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
+
+      a.innerHTML = `
+        <div class="badge" style="background:${s.color}">${p.status.toUpperCase()}</div>
+        <div class="card-title">${escapeHTML(p.title)}</div>
+        <div class="card-cat label">${escapeHTML(p.category)}</div>
+        <div class="card-status" style="color:${s.color}">${escapeHTML(p.statusLabel)}</div>
+        <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>
+      `;
+      return a;
+    }
+
+    function escapeHTML(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    // --------------------------
+    // Filter Chip Handlers
+    // --------------------------
+    function setupFilterChips() {
+      const chips = document.querySelectorAll('.filter-chip');
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const filterType = chip.dataset.filterType;
+          const filterValue = chip.dataset.filterValue;
+
+          const siblings = document.querySelectorAll(`[data-filter-type="${filterType}"]`);
+          siblings.forEach(s => s.classList.remove('active'));
+          chip.classList.add('active');
+
+          filters[filterType] = filterValue;
+          filterPromises();
+        });
+      });
+    }
+
+    // --------------------------
+    // Clear Filters
+    // --------------------------
+    document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+      filters.status = 'All';
+      filters.category = 'All';
+
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.classList.remove('active');
+        if (chip.dataset.filterValue === 'All') {
+          chip.classList.add('active');
+        }
+      });
+
+      filterPromises();
+    });
+
+    // --------------------------
+    // Load More
+    // --------------------------
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      renderPromises();
+    });
+
+    // --------------------------
+    // Initialize
+    // --------------------------
+    async function init() {
+      allPromises = await fetchPromises();
+      filteredPromises = allPromises;
+      setupFilterChips();
+      renderPromises();
+    }
+
+    init();
+
+    // --------------------------
+    // Sticky Filters
+    // --------------------------
+    const filtersSection = document.getElementById('filtersSection');
+    const nav = document.querySelector('.nav');
+    const navHeight = 88;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > filtersSection.offsetTop - navHeight) {
+        filtersSection.classList.add('sticky');
+      } else {
+        filtersSection.classList.remove('sticky');
+      }
+    });
+
+    // --------------------------
+    // Mobile menu
+    // --------------------------
+    const hamburger = document.querySelector(".hamburger");
+    const overlay = document.getElementById("mobileMenu");
+    const closeBtn = document.querySelector(".mobile-close");
+    let lastFocus = null;
+
+    function openMenu(){
+      lastFocus = document.activeElement;
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add("open"));
+      hamburger.setAttribute("aria-expanded","true");
+      closeBtn.focus();
+      document.body.style.overflow = "hidden";
+    }
+    function closeMenu(){
+      overlay.classList.remove("open");
+      hamburger.setAttribute("aria-expanded","false");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        overlay.hidden = true;
+        if(lastFocus) lastFocus.focus();
+      }, 260);
+    }
+
+    hamburger.addEventListener("click", () => {
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      expanded ? closeMenu() : openMenu();
+    });
+    closeBtn.addEventListener("click", closeMenu);
+
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) closeMenu();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(!overlay.hidden && e.key === "Escape") closeMenu();
+    });
+  </script>
+</body>
+</html>
