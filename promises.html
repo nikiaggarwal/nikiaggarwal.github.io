@@ -361,7 +361,7 @@
 
       const a = document.createElement("a");
       a.className = "card";
-      a.href = `/promise/${encodeURIComponent(p.id)}`;
+      a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
       a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}. ${p.statusLabel}.`);
 
       a.style.background = s.tint;

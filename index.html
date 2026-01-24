@@ -413,7 +413,7 @@
         const a = document.createElement('a');
         a.className = 'update-item';
         a.setAttribute('role', 'listitem');
-        a.href = `/promise/${encodeURIComponent(update.promiseId)}`;
+        a.href = `/promise/?id=${encodeURIComponent(update.promiseId)}`;
         a.setAttribute('aria-label', `Update: ${update.headline} (${update.category})`);
 
         a.innerHTML = `
@@ -556,7 +556,7 @@
 
       const a = document.createElement("a");
       a.className = "card";
-      a.href = `/promise/${encodeURIComponent(p.id)}`;
+      a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
       a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}. ${p.statusLabel}.`);
 
       // Tint background

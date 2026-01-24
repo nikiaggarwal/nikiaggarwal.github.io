@@ -310,9 +310,8 @@
     // Get promise ID from URL
     // --------------------------
     function getPromiseId() {
-      const path = window.location.pathname;
-      const match = path.match(/\/promise\/([^\/]+)/);
-      return match ? decodeURIComponent(match[1]) : null;
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id');
     }
 
     // --------------------------
@@ -509,14 +508,14 @@
       const nextLink = document.getElementById("nextPromise");
 
       if (prevPromise) {
-        prevLink.href = `/promise/${encodeURIComponent(prevPromise.id)}`;
+        prevLink.href = `/promise/?id=${encodeURIComponent(prevPromise.id)}`;
         document.getElementById("prevPromiseTitle").textContent = prevPromise.title;
       } else {
         prevLink.style.visibility = "hidden";
       }
 
       if (nextPromise) {
-        nextLink.href = `/promise/${encodeURIComponent(nextPromise.id)}`;
+        nextLink.href = `/promise/?id=${encodeURIComponent(nextPromise.id)}`;
         document.getElementById("nextPromiseTitle").textContent = nextPromise.title;
       } else {
         nextLink.style.visibility = "hidden";
