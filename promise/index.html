@@ -281,10 +281,30 @@
     }
 
     // --------------------------
-    // CSV Parser (handles commas and quotes in fields)
+    // CSV Parser (handles commas, quotes, and multi-line fields)
     // --------------------------
     function parseCSV(text) {
-      const lines = text.trim().split('\n');
+      const rows = [];
+      let current = '';
+      let inQuotes = false;
+      const chars = text.trim();
+      const lines = [];
+
+      // First, split into proper lines handling quoted newlines
+      let lineStart = 0;
+      for (let i = 0; i < chars.length; i++) {
+        const char = chars[i];
+        if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === '\n' && !inQuotes) {
+          lines.push(chars.slice(lineStart, i));
+          lineStart = i + 1;
+        }
+      }
+      if (lineStart < chars.length) {
+        lines.push(chars.slice(lineStart));
+      }
+
       if (lines.length < 2) return [];
 
       function parseLine(line) {
@@ -321,7 +341,6 @@
       }
 
       const headers = parseLine(lines[0]);
-      const rows = [];
       for (let i = 1; i < lines.length; i++) {
         const values = parseLine(lines[i]);
         const row = {};
