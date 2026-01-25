@@ -634,3 +634,10 @@ footer{
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
 }
+
+/* Text on making-progress green background should be black */
+[style*="background"][style*="#b3f95b"],
+[style*="background"][style*="rgb(179, 249, 91)"],
+.badge[style*="#b3f95b"]{
+  color: #000 !important;
+}

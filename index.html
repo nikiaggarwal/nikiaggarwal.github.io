@@ -77,7 +77,6 @@
       <div class="hero-inner">
         <div id="heroTimestamp" class="hero-time mono">Last updated: —</div>
         <div id="overallStatusLabel" class="overall-label">MAKING PROGRESS</div>
-        <div id="overallStatusDescription" class="overall-description">Momentum Building</div>
 
         <div class="meter-wrap">
           <!-- Large Meter -->
@@ -426,12 +425,9 @@
       const overallLabelEl = document.getElementById("overallStatusLabel");
       overallLabelEl.textContent = overallStatus.status.toUpperCase();
 
-      const overallDescEl = document.getElementById("overallStatusDescription");
-      overallDescEl.textContent = overallStatus.label || "";
-
       // Update meter a11y label
       const meterA11y = document.getElementById("meterA11yWrap");
-      meterA11y.setAttribute("aria-label", `Status: ${overallStatus.status} - ${overallStatus.label}`);
+      meterA11y.setAttribute("aria-label", `Status: ${overallStatus.status}`);
 
       setMeterStatus(overallStatus.status);
     }
@@ -451,9 +447,6 @@
 
         a.innerHTML = `
           <div class="update-date">${escapeHTML(update.date)}</div>
-          <div class="update-meter" aria-hidden="true">
-            <span style="font-weight:900;">M</span>
-          </div>
           <div class="update-content">
             <div class="update-headline">${escapeHTML(update.headline)}</div>
             <div class="update-cat">${escapeHTML(update.category)}</div>
@@ -603,7 +596,6 @@
         <div class="badge" style="background:${s.color}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
-        <div class="card-status" style="color:${s.color}">${escapeHTML(p.statusLabel)}</div>
         <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>
       `;
       return a;
