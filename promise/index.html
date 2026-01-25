@@ -234,6 +234,7 @@
 
   <footer>
     <div class="container">
+      <div class="footer-tagline">Tracking Policy, not Politics</div>
       <div class="footer-links" aria-label="Footer links">
         <a href="/about.html">ABOUT</a>
         <a href="/contact.html">CONTACT</a>
@@ -527,7 +528,6 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-headline">${escapeHTML(event.headline || '')}</div>
-            ${event.category ? `<div class="timeline-desc">${escapeHTML(event.category)}</div>` : ''}
           </div>
         </div>
       `).join('');
