@@ -141,8 +141,8 @@
             <article class="content-block">
               <h2 class="content-block-title h3">Summary</h2>
               <div id="promiseSummary" class="content-block-body body-lg">
-                <p>This is where the detailed summary of the promise goes. It explains what the promise is about, why it matters, and the current state of progress.</p>
-                <p>Additional context and background information can be included here to help readers understand the full scope of this commitment.</p>
+                <p>Summary has not been added yet.</p>
+                <p>Check back next week!</p>
               </div>
             </article>
 
@@ -218,7 +218,7 @@
                   </div>
                   <div class="fact-row">
                     <dt>Last Updated</dt>
-                    <dd id="sidebarUpdated" class="mono">Jan 18, 2026</dd>
+                    <dd id="sidebarUpdated" class="mono">N/A</dd>
                   </div>
                 </dl>
               </div>
@@ -588,7 +588,7 @@
 
       // Filter updates for this promise that have source info
       const sources = updates.filter(u =>
-        u.promiseId === promiseId &&
+        u.promiseID === promiseId &&
         u['source url'] &&
         u['source url'].trim() !== ''
       );
@@ -652,7 +652,7 @@
         renderSources(updates, promiseId);
 
         // Render timeline from updates for this promise
-        const promiseUpdates = updates.filter(u => u.promiseId === promiseId);
+        const promiseUpdates = updates.filter(u => u.promiseID === promiseId);
         renderTimeline(promiseUpdates);
 
       } catch (error) {

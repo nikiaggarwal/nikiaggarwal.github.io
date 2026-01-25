@@ -270,11 +270,44 @@
       const lines = text.trim().split('\n');
       if (lines.length < 2) return [];
 
-      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+      function parseLine(line) {
+        const values = [];
+        let current = '';
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
+          const nextChar = line[i + 1];
+
+          if (inQuotes) {
+            if (char === '"' && nextChar === '"') {
+              current += '"';
+              i++; // skip escaped quote
+            } else if (char === '"') {
+              inQuotes = false;
+            } else {
+              current += char;
+            }
+          } else {
+            if (char === '"') {
+              inQuotes = true;
+            } else if (char === ',') {
+              values.push(current.trim());
+              current = '';
+            } else {
+              current += char;
+            }
+          }
+        }
+        values.push(current.trim());
+        return values;
+      }
+
+      const headers = parseLine(lines[0]);
       const rows = [];
 
       for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        const values = parseLine(lines[i]);
         const row = {};
         headers.forEach((header, index) => {
           row[header] = values[index] || '';
@@ -413,7 +446,7 @@
         const a = document.createElement('a');
         a.className = 'update-item';
         a.setAttribute('role', 'listitem');
-        a.href = `/promise/?id=${encodeURIComponent(update.promiseId)}`;
+        a.href = `/promise/?id=${encodeURIComponent(update.promiseID)}`;
         a.setAttribute('aria-label', `Update: ${update.headline} (${update.category})`);
 
         a.innerHTML = `
