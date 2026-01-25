@@ -121,7 +121,7 @@
     <section class="what-happened">
       <div class="container">
         <div class="section-head">
-          <div class="h2">WHAT JUST HAPPENED</div>
+          <div class="h2">LATEST FROM CITY HALL</div>
         </div>
 
         <div class="updates" role="list" aria-label="Latest updates">
@@ -136,7 +136,7 @@
         <div class="section-head">
           <div class="h2">THE PROMISES</div>
           <div class="promises-sub">
-            Six promises we’re watching closely right now—across housing, transit, education, and labor.
+            Zohran Mamdani campaigned on an ambitious agenda. Click below to see what progress has been made so far.
           </div>
         </div>
 
@@ -592,8 +592,9 @@
       a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
       a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
 
+      const badgeTextColor = p.status === "Making Progress" ? "#000" : "#fff";
       a.innerHTML = `
-        <div class="badge" style="background:${s.color}">${p.status.toUpperCase()}</div>
+        <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
         <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>

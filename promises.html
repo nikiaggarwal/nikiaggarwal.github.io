@@ -225,7 +225,7 @@
     // --------------------------
     const STATUS = {
       "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)" },
-      "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(0, 51, 204, 0.08)" },
+      "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(179, 249, 91, 0.08)" },
       "Early Days": { color: getCSS("--status-early"), tint: "rgba(29, 222, 228, 0.08)" },
       "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)" },
       "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
@@ -362,18 +362,18 @@
       const a = document.createElement("a");
       a.className = "card";
       a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
-      a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}. ${p.statusLabel}.`);
+      a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}.`);
 
       a.style.background = s.tint;
 
       a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
       a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
 
+      const badgeTextColor = p.status === "Making Progress" ? "#000" : "#fff";
       a.innerHTML = `
-        <div class="badge" style="background:${s.color}">${p.status.toUpperCase()}</div>
+        <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
-        <div class="card-status" style="color:${s.color}">${escapeHTML(p.statusLabel)}</div>
         <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>
       `;
       return a;
