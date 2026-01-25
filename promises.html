@@ -237,25 +237,67 @@
     }
 
     // --------------------------
-    // CSV Parser
+    // CSV Parser (handles commas, quotes, and newlines in fields)
     // --------------------------
     function parseCSV(text) {
-      const lines = text.trim().split('\n');
-      if (lines.length < 2) return [];
-
-      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
       const rows = [];
+      let current = '';
+      let inQuotes = false;
+      let row = [];
 
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        const row = {};
-        headers.forEach((header, index) => {
-          row[header] = values[index] || '';
-        });
-        rows.push(row);
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (inQuotes) {
+          if (char === '"' && nextChar === '"') {
+            current += '"';
+            i++; // skip escaped quote
+          } else if (char === '"') {
+            inQuotes = false;
+          } else {
+            current += char;
+          }
+        } else {
+          if (char === '"') {
+            inQuotes = true;
+          } else if (char === ',') {
+            row.push(current.trim());
+            current = '';
+          } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+            if (char === '\r') i++; // skip \r in \r\n
+            row.push(current.trim());
+            current = '';
+            if (row.length > 0 && row.some(cell => cell !== '')) {
+              rows.push(row);
+            }
+            row = [];
+          } else if (char !== '\r') {
+            current += char;
+          }
+        }
+      }
+      // Handle last field/row
+      if (current || row.length > 0) {
+        row.push(current.trim());
+        if (row.some(cell => cell !== '')) {
+          rows.push(row);
+        }
       }
 
-      return rows;
+      if (rows.length < 2) return [];
+
+      const headers = rows[0];
+      const result = [];
+      for (let i = 1; i < rows.length; i++) {
+        const values = rows[i];
+        const obj = {};
+        headers.forEach((header, index) => {
+          obj[header] = values[index] || '';
+        });
+        result.push(obj);
+      }
+      return result;
     }
 
     // --------------------------
