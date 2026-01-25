@@ -48,7 +48,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
 }
 
 .promise-status-info {
@@ -56,6 +56,9 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .promise-status-label {
@@ -215,6 +218,32 @@
   font-size: 16px;
   color: #666;
   line-height: 1.5;
+}
+
+/* Sidebar Timeline */
+.timeline--sidebar .timeline-item {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.timeline--sidebar .timeline-date {
+  text-align: left;
+  font-size: 12px;
+}
+.timeline--sidebar .timeline-marker {
+  display: none;
+}
+.timeline--sidebar .timeline-content {
+  padding-left: 12px;
+  border-left: 3px solid var(--blue);
+}
+.timeline--sidebar .timeline-headline {
+  font-size: 15px;
+}
+.timeline--sidebar .timeline-desc {
+  font-size: 14px;
+}
+.sidebar-timeline {
+  max-height: none;
 }
 
 /* Sources */

@@ -139,7 +139,7 @@
           <div class="promise-main">
             <!-- Summary -->
             <article class="content-block">
-              <h2 class="content-block-title h3">Summary</h2>
+              <h2 class="content-block-title h3">Promise Summary</h2>
               <div id="promiseSummary" class="content-block-body body-lg">
                 <p>Summary has not been added yet.</p>
                 <p>Check back next week!</p>
@@ -156,30 +156,6 @@
                     <path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                   </svg>
                   <span>Image or video will appear here</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Timeline -->
-            <article class="content-block">
-              <h2 class="content-block-title h3">Timeline</h2>
-              <div id="promiseTimeline" class="timeline">
-                <!-- Timeline items will be injected here -->
-                <div class="timeline-item">
-                  <div class="timeline-date mono">Jan 2026</div>
-                  <div class="timeline-marker"></div>
-                  <div class="timeline-content">
-                    <div class="timeline-headline">Example timeline event</div>
-                    <div class="timeline-desc">Description of what happened at this point in time.</div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-date mono">Dec 2025</div>
-                  <div class="timeline-marker"></div>
-                  <div class="timeline-content">
-                    <div class="timeline-headline">Earlier event</div>
-                    <div class="timeline-desc">Another milestone or update related to this promise.</div>
-                  </div>
                 </div>
               </div>
             </article>
@@ -204,40 +180,29 @@
           <!-- SIDEBAR -->
           <aside class="promise-sidebar">
             <div class="sidebar-sticky">
-              <!-- Quick Facts -->
-              <div class="sidebar-block">
-                <h3 class="sidebar-title label">Quick Facts</h3>
-                <dl class="quick-facts">
-                  <div class="fact-row">
-                    <dt>Category</dt>
-                    <dd id="sidebarCategory">Housing</dd>
+              <!-- Timeline -->
+              <article class="sidebar-block sidebar-timeline">
+                <h3 class="sidebar-title label">Timeline</h3>
+                <div id="promiseTimeline" class="timeline timeline--sidebar">
+                  <!-- Timeline items will be injected here -->
+                  <div class="timeline-item">
+                    <div class="timeline-date mono">Jan 2026</div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <div class="timeline-headline">Example timeline event</div>
+                      <div class="timeline-desc">Description of what happened at this point in time.</div>
+                    </div>
                   </div>
-                  <div class="fact-row">
-                    <dt>Status</dt>
-                    <dd id="sidebarStatus">Making Progress</dd>
+                  <div class="timeline-item">
+                    <div class="timeline-date mono">Dec 2025</div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <div class="timeline-headline">Earlier event</div>
+                      <div class="timeline-desc">Another milestone or update related to this promise.</div>
+                    </div>
                   </div>
-                  <div class="fact-row">
-                    <dt>Last Updated</dt>
-                    <dd id="sidebarUpdated" class="mono">N/A</dd>
-                  </div>
-                </dl>
-              </div>
-
-              <!-- Share -->
-              <div class="sidebar-block">
-                <h3 class="sidebar-title label">Share</h3>
-                <div class="share-buttons">
-                  <a id="shareTwitter" href="#" class="share-btn" aria-label="Share on Twitter" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  </a>
-                  <a id="shareFacebook" href="#" class="share-btn" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                  </a>
-                  <button id="shareCopy" class="share-btn" aria-label="Copy link">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                  </button>
                 </div>
-              </div>
+              </article>
             </div>
           </aside>
         </div>
@@ -487,6 +452,12 @@
       const badge = document.getElementById("promiseStatusBadge");
       badge.textContent = promise.status.toUpperCase();
       badge.style.background = s.color;
+      // Use dark text for light backgrounds (Making Progress)
+      if (promise.status === "Making Progress") {
+        badge.classList.add("badge--dark-text");
+      } else {
+        badge.classList.remove("badge--dark-text");
+      }
 
       document.getElementById("promiseStatusLabel").textContent = promise.statusLabel || '';
       document.getElementById("promiseStatusLabel").style.color = s.color;
@@ -511,24 +482,6 @@
           `;
         }
       }
-
-      // Sidebar
-      document.getElementById("sidebarCategory").textContent = promise.category;
-      document.getElementById("sidebarStatus").textContent = promise.status;
-      document.getElementById("sidebarStatus").style.color = s.color;
-      if (promise.lastUpdated) {
-        document.getElementById("sidebarUpdated").textContent = formatDate(promise.lastUpdated);
-      }
-
-      // Share links
-      const pageUrl = encodeURIComponent(window.location.href);
-      const pageTitle = encodeURIComponent(promise.title);
-      document.getElementById("shareTwitter").href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
-      document.getElementById("shareFacebook").href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-      document.getElementById("shareCopy").addEventListener("click", () => {
-        navigator.clipboard.writeText(window.location.href);
-        alert("Link copied!");
-      });
 
       // Set meter
       setMeterStatus(promise.status);
@@ -564,7 +517,7 @@
 
       if (!events || events.length === 0) {
         // Hide timeline section if no events
-        container.closest('.content-block').style.display = 'none';
+        container.closest('.sidebar-block').style.display = 'none';
         return;
       }
 
