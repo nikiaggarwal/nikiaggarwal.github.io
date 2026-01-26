@@ -302,6 +302,14 @@ h1,h2,h3,h4{ margin:0; }
   color: #1a1a1a;
   padding: 72px 0;
 }
+.context-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+.context-col{
+  min-width: 0;
+}
 .context-eyebrow{
   font-size: 14px;
   font-weight: 600;
@@ -311,14 +319,19 @@ h1,h2,h3,h4{ margin:0; }
 }
 .context-quote{
   font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
-  font-size: 42px;
+  font-size: 36px;
   font-weight: 900;
   line-height: 1.15;
   margin-bottom: 32px;
-  max-width: 700px;
+}
+.context-intro{
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 32px;
+  color: #1a1a1a;
 }
 .context-body{
-  max-width: 640px;
   font-size: 18px;
   line-height: 1.7;
   color: #1a1a1a;
@@ -661,7 +674,9 @@ footer{
   .overall-label{ font-size:56px; }
   .hero{ padding: 56px 0; }
   .what-happened, .promises, .context-section{ padding: 56px 0; }
-  .context-quote{ font-size: 36px; }
+  .context-grid{ gap: 48px; }
+  .context-quote{ font-size: 32px; }
+  .context-intro{ font-size: 22px; }
   .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap:20px; }
   #largeMeter{ width: 340px; height: 340px; }
 }
@@ -674,7 +689,9 @@ footer{
   .hero-description{ font-size:16px; max-width: 320px; }
   .hero{ padding: 40px 0; }
   .what-happened, .promises, .context-section{ padding: 40px 0; }
+  .context-grid{ grid-template-columns: 1fr; gap: 48px; }
   .context-quote{ font-size: 28px; }
+  .context-intro{ font-size: 20px; }
   .context-body{ font-size: 16px; }
   .nav-links{ display:none; }
   .hamburger{ display:block; }
