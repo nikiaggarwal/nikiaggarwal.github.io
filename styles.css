@@ -294,6 +294,40 @@ h1,h2,h3,h4{ margin:0; }
   align-items: center;
 }
 
+/* Context Section */
+.context-section{
+  background: var(--orange);
+  color: #1a1a1a;
+  padding: 72px 0;
+}
+.context-eyebrow{
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 16px;
+}
+.context-quote{
+  font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 32px;
+  max-width: 700px;
+}
+.context-body{
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+.context-body p{
+  margin-bottom: 1em;
+}
+.context-body p:last-child{
+  margin-bottom: 0;
+}
+
 .what-happened{
   background: var(--orange);
   padding: 72px 0;
@@ -624,7 +658,8 @@ footer{
   .h3{ font-size:26px; }
   .overall-label{ font-size:56px; }
   .hero{ padding: 56px 0; }
-  .what-happened, .promises{ padding: 56px 0; }
+  .what-happened, .promises, .context-section{ padding: 56px 0; }
+  .context-quote{ font-size: 36px; }
   .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap:20px; }
   #largeMeter{ width: 340px; height: 340px; }
 }
@@ -636,7 +671,9 @@ footer{
   .overall-description{ font-size:18px; }
   .hero-description{ font-size:16px; max-width: 320px; }
   .hero{ padding: 40px 0; }
-  .what-happened, .promises{ padding: 40px 0; }
+  .what-happened, .promises, .context-section{ padding: 40px 0; }
+  .context-quote{ font-size: 28px; }
+  .context-body{ font-size: 16px; }
   .nav-links{ display:none; }
   .hamburger{ display:block; }
   .brand{ width:auto; font-size:16px; }
