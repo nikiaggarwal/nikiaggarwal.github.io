@@ -665,6 +665,20 @@ footer{
 }
 .footer-links a:hover{ color: var(--orange); }
 
+.footer-contact{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.footer-contact a{
+  color: #fff;
+}
+.footer-contact a:hover{
+  color: var(--orange);
+}
+
 /* Responsive */
 @media (max-width: 1199px){
   .container, .nav-inner, .promises-container{ padding: 0 32px; }
