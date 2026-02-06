@@ -405,6 +405,124 @@ h1,h2,h3,h4{ margin:0; }
 }
 .update-item:hover .update-arrow{ color:#291cd1; }
 
+/* Engagement Section */
+.engagement-section{
+  background: var(--blue);
+  color: #fff;
+  padding: 72px 0;
+}
+.engagement-header{
+  text-align: center;
+  margin-bottom: 50px;
+}
+.engagement-label{
+  background: var(--orange);
+  color: #000;
+  display: inline-block;
+  padding: 6px 16px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.engagement-title{
+  font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.engagement-subtitle{
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+.engagement-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.engagement-card{
+  background: #fff;
+  color: #000;
+  padding: 32px;
+  border: 3px solid #000;
+  transition: transform 0.2s;
+}
+.engagement-card:hover{
+  transform: translateY(-4px);
+}
+.engagement-card .card-icon{
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.engagement-card .card-title{
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+.engagement-card .card-description{
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: #333;
+}
+.engagement-card .btn{
+  background: var(--orange);
+  color: #000;
+  border: none;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+  box-shadow: none;
+}
+.engagement-card .btn:hover{
+  background: #FFA500;
+  transform: none;
+  box-shadow: none;
+}
+.social-icons{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+.social-icon-btn{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.2s;
+}
+.social-icon-btn:hover{
+  background: #000;
+  color: #fff;
+  transform: scale(1.1);
+}
+.social-icon-btn svg{
+  width: 24px;
+  height: 24px;
+}
+
 .promises{
   background:#fff;
   padding: 72px 0;
@@ -687,7 +805,7 @@ footer{
   .h3{ font-size:26px; }
   .overall-label{ font-size:56px; }
   .hero{ padding: 56px 0; }
-  .what-happened, .promises, .context-section{ padding: 56px 0; }
+  .what-happened, .promises, .context-section, .engagement-section{ padding: 56px 0; }
   .context-grid{ gap: 48px; }
   .context-quote{ font-size: 32px; }
   .context-intro{ font-size: 22px; }
@@ -702,7 +820,7 @@ footer{
   .overall-description{ font-size:18px; }
   .hero-description{ font-size:16px; max-width: 320px; }
   .hero{ padding: 40px 0; }
-  .what-happened, .promises, .context-section{ padding: 40px 0; }
+  .what-happened, .promises, .context-section, .engagement-section{ padding: 40px 0; }
   .context-grid{ grid-template-columns: 1fr; gap: 48px; }
   .context-quote{ font-size: 28px; }
   .context-intro{ font-size: 20px; }
@@ -716,6 +834,9 @@ footer{
   .filters-section{ padding: 24px 0; }
   .promises-grid-section{ padding: 32px 0; }
   #largeMeter{ width: 280px; height: 280px; }
+  .engagement-section{ padding: 40px 24px; }
+  .engagement-title{ font-size: 32px; }
+  .engagement-grid{ grid-template-columns: 1fr; }
 }
 
 /* Reduced motion */
