@@ -24,6 +24,13 @@
 
   <!-- Global Styles -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-jyb0zobCuDsT0C5VAgYRm.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
 </head>
 
 <body>
@@ -656,6 +663,9 @@
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
       `;
+      a.addEventListener("click", () => {
+        if (window.plausible) plausible('Promise Click', {props: {title: p.title, category: p.category, status: p.status}});
+      });
       return a;
     }
 
