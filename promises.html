@@ -404,7 +404,7 @@
       const s = STATUS[p.status] || STATUS["Headwinds"];
 
       const a = document.createElement("a");
-      a.className = "card";
+      a.className = `card plausible-event-name=Promise+Click plausible-event-title=${encodeURIComponent(p.title)} plausible-event-category=${encodeURIComponent(p.category)} plausible-event-status=${encodeURIComponent(p.status)}`;
       a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
       a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}.`);
 
@@ -420,9 +420,6 @@
         <div class="card-cat label">${escapeHTML(p.category)}</div>
         <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>
       `;
-      a.addEventListener("click", () => {
-        if (window.plausible) plausible('Promise Click', {props: {title: p.title, category: p.category, status: p.status}});
-      });
       return a;
     }
 
