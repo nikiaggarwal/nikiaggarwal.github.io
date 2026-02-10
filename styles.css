@@ -427,18 +427,25 @@ h1,h2,h3,h4{ margin:0; }
   display: inline-block;
   background: var(--orange);
   color: #000;
-  border: none;
+  border: 3px solid #000;
   padding: 18px 48px;
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 0.5px;
-  transition: background 0.2s;
+  transition: all 150ms ease;
+  box-shadow: 4px 4px 0 rgba(0,0,0,1);
 }
 .subscribe-btn:hover{
   background: #FFA500;
   color: #000;
+  transform: translate(-2px,-2px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,1);
+}
+.subscribe-btn:active{
+  transform: translate(2px,2px);
+  box-shadow: 2px 2px 0 rgba(0,0,0,1);
 }
 .share-section{
   display: flex;
