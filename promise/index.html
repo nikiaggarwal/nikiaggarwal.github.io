@@ -480,8 +480,11 @@
         badge.classList.remove("badge--dark-text");
       }
 
-      document.getElementById("promiseStatusLabel").innerHTML = escapeHTML(promise.statusLabel || '').replace(/\\n/g, '<br>');
-      document.getElementById("promiseStatusLabel").style.color = s.color;
+      const statusLabelEl = document.getElementById("promiseStatusLabel");
+      const labelHTML = escapeHTML(promise.statusLabel || '')
+        .replace(/\\n/g, '<br><br>')
+        .replace(/\*([^*]+)\*/g, `<span style="color:${s.color}">$1</span>`);
+      statusLabelEl.innerHTML = labelHTML;
 
       // Summary
       if (promise.summary) {
