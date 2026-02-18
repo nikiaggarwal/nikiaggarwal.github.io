@@ -57,12 +57,9 @@
     }
 
     .sc-hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 56px;
-      align-items: center;
       position: relative;
       z-index: 1;
+      max-width: 640px;
     }
 
     .sc-hero-eyebrow {
@@ -93,12 +90,8 @@
       line-height: 1.7;
     }
 
-    /* Floating subscribe card */
-    .sc-subscribe-card {
-      background: #fff;
-      border: 3px solid #000;
-      box-shadow: 6px 6px 0 rgba(0,0,0,0.6);
-      padding: 28px;
+    .sc-hero-embed {
+      margin-top: 32px;
     }
 
     /* ── ARCHIVE ── */
@@ -262,13 +255,6 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      .sc-hero-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .sc-subscribe-card {
-        max-width: 480px;
-      }
       .sc-featured {
         grid-template-columns: 1fr 360px;
       }
@@ -343,13 +329,10 @@
     <section class="sc-hero">
       <div class="container">
         <div class="sc-hero-inner">
-          <div>
-            <div class="sc-hero-eyebrow">Free Weekly Newsletter</div>
-            <h1 class="sc-hero-title">Weekly<br><span>Scorecard</span></h1>
-            <p class="sc-hero-desc">Every week, we break down what moved, what stalled, and do a deep dive on one promise. Accessible, honest, no political noise.</p>
-          </div>
-
-          <div class="sc-subscribe-card">
+          <div class="sc-hero-eyebrow">Free Weekly Newsletter</div>
+          <h1 class="sc-hero-title">Weekly<br><span>Scorecard</span></h1>
+          <p class="sc-hero-desc">Every week, we break down what moved, what stalled, and do a deep dive on one promise. Accessible, honest, no political noise.</p>
+          <div class="sc-hero-embed">
             <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
             <iframe
               src="https://subscribe-forms.beehiiv.com/6b6df386-892f-4c5c-a2c1-fbf1e96a52a9"
@@ -404,11 +387,12 @@
   <footer>
     <div class="footer-bg-text">NYC</div>
     <div class="footer-inner container">
-      <div class="footer-tagline">TRACKING POLICY,<br><span>NOT POLITICS.</span></div>
       <div class="footer-grid">
-        <div class="footer-about">
-          <div class="footer-col-label">About</div>
-          <p>The Mamdani Meter tracks every campaign promise made by Zohran Mamdani — from introduction to implementation. Accountability, not spin.</p>
+        <div>
+          <div class="footer-tagline">TRACKING POLICY,<br><span>NOT POLITICS.</span></div>
+          <div class="footer-about">
+            <p>The Mamdani Meter tracks every campaign promise made by Zohran Mamdani — from introduction to implementation. Accountability, not spin.</p>
+          </div>
         </div>
         <div class="footer-nav">
           <div class="footer-col-label">Navigate</div>

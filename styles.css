@@ -905,8 +905,8 @@ footer{
 .footer-inner{
   position: relative;
   z-index: 2;
-  padding-top: 40px;
-  padding-bottom: 14px;
+  padding-top: 28px;
+  padding-bottom: 8px;
 }
 .footer-tagline{
   font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
@@ -915,7 +915,6 @@ footer{
   text-transform: uppercase;
   line-height: 0.95;
   letter-spacing: 0.5px;
-  margin-bottom: 32px;
 }
 .footer-tagline span{
   color: var(--orange);
@@ -935,6 +934,9 @@ footer{
   text-transform: uppercase;
   color: var(--orange);
   margin-bottom: 16px;
+}
+.footer-about{
+  margin-top: 20px;
 }
 .footer-about p{
   font-size: 13px;
