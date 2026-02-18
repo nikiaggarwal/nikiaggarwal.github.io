@@ -173,8 +173,8 @@
           </div>
         </div>
 
-        <div id="promiseGrid" class="grid" aria-label="Promises grid">
-          <!-- Cards injected by JS (keeps statuses/colors consistent) -->
+        <div id="promiseGrid" class="promise-list" aria-label="Promises list">
+          <!-- Rows injected by JS -->
         </div>
 
         <div class="cta-row">
@@ -567,12 +567,41 @@
       });
     }
 
+    function getRecentPromiseIds() {
+      const now = new Date();
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      const recentIds = new Set();
+      updates.forEach(u => {
+        try {
+          // Parse date formats like "02/14" or "2/14" (assume current year)
+          const parts = (u.date || '').split('/');
+          if (parts.length === 2) {
+            const d = new Date(now.getFullYear(), parseInt(parts[0]) - 1, parseInt(parts[1]));
+            if (d >= weekAgo && d <= now) {
+              recentIds.add(u.promiseID || u.promiseId);
+            }
+          }
+        } catch(e) {}
+      });
+      return recentIds;
+    }
+
     function renderPromisesSection() {
       const grid = document.getElementById("promiseGrid");
       if (!grid) return;
 
       grid.innerHTML = '';
-      promises.slice(0, 6).forEach(p => grid.appendChild(makeCard(p)));
+
+      // Legend (only insert once)
+      if (!grid.parentNode.querySelector('.promise-legend')) {
+        const legend = document.createElement('div');
+        legend.className = 'promise-legend';
+        legend.innerHTML = '<div class="promise-legend-bar"></div><span class="promise-legend-label">Moved this week</span>';
+        grid.parentNode.insertBefore(legend, grid);
+      }
+
+      const recentIds = getRecentPromiseIds();
+      promises.slice(0, 10).forEach(p => grid.appendChild(makePromiseRow(p, recentIds.has(p.id))));
     }
 
     // --------------------------
@@ -704,6 +733,30 @@
         <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
+      `;
+      return a;
+    }
+
+    function makePromiseRow(p, movedThisWeek) {
+      const s = STATUS[p.status] || STATUS["Early Days"];
+
+      const a = document.createElement("a");
+      a.className = 'promise-row' + (movedThisWeek ? ' promise-row--moved' : '');
+      a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
+      a.setAttribute("aria-label", `${p.title}. ${p.category}. ${p.status}.`);
+
+      a.innerHTML = `
+        <div class="promise-row-left">
+          <div class="promise-title">${escapeHTML(p.title)}</div>
+          ${movedThisWeek ? '<div class="promise-moved-bar"></div>' : ''}
+        </div>
+        <div class="promise-row-right">
+          <span class="promise-category">${escapeHTML(p.category)}</span>
+          <span class="promise-status-badge" style="border-color:${s.color};background:${s.tint} !important">${escapeHTML(p.status).toUpperCase()}</span>
+        </div>
+        <svg class="promise-row-arrow" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M9 6l6 6-6 6"/>
+        </svg>
       `;
       return a;
     }
