@@ -57,9 +57,12 @@
     }
 
     .sc-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 56px;
+      align-items: center;
       position: relative;
       z-index: 1;
-      max-width: 640px;
     }
 
     .sc-hero-eyebrow {
@@ -90,9 +93,101 @@
       line-height: 1.7;
     }
 
-    .sc-hero-embed {
-      margin-top: 32px;
+    /* Subscribe card */
+    .sc-subscribe-card {
+      background: #fff;
+      border: 3px solid #000;
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.6);
+      padding: 28px;
     }
+
+    .sc-subscribe-card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .sc-subscribe-card-title {
+      font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #000;
+      margin: 0 0 8px;
+    }
+
+    .sc-subscribe-card-desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.55;
+      margin: 0 0 20px;
+    }
+
+    .sc-subscribe-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sc-subscribe-form input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #000;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+      color: #000;
+      background: #fff;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 150ms ease;
+    }
+
+    .sc-subscribe-form input[type="email"]:focus {
+      border-color: var(--blue);
+    }
+
+    .sc-subscribe-form input[type="email"]::placeholder {
+      color: #aaa;
+    }
+
+    .sc-subscribe-form button {
+      width: 100%;
+      padding: 13px 20px;
+      background: #000;
+      color: #fff;
+      border: 2px solid #000;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .sc-subscribe-form button:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .sc-subscribe-form button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .sc-subscribe-msg {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .sc-subscribe-msg.success { color: #009944; display: block; }
+    .sc-subscribe-msg.error   { color: #c00; display: block; }
 
     /* ── ARCHIVE ── */
     .sc-archive {
@@ -255,6 +350,13 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
+      .sc-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .sc-subscribe-card {
+        max-width: 480px;
+      }
       .sc-featured {
         grid-template-columns: 1fr 360px;
       }
@@ -329,19 +431,21 @@
     <section class="sc-hero">
       <div class="container">
         <div class="sc-hero-inner">
-          <div class="sc-hero-eyebrow">Free Weekly Newsletter</div>
-          <h1 class="sc-hero-title">Weekly<br><span>Scorecard</span></h1>
-          <p class="sc-hero-desc">Every week, we break down what moved, what stalled, and do a deep dive on one promise. Accessible, honest, no political noise.</p>
-          <div class="sc-hero-embed">
-            <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-            <iframe
-              src="https://subscribe-forms.beehiiv.com/6b6df386-892f-4c5c-a2c1-fbf1e96a52a9"
-              class="beehiiv-embed"
-              data-test-id="beehiiv-embed"
-              frameborder="0"
-              scrolling="no"
-              style="width:100%; height:220px; margin:0; border-radius:0 !important; background-color:transparent;"
-            ></iframe>
+          <div>
+            <div class="sc-hero-eyebrow">Weekly Newsletter</div>
+            <h1 class="sc-hero-title">Weekly<br><span>Scorecard</span></h1>
+            <p class="sc-hero-desc">Every week, we break down what moved, what stalled, and do a deep dive on one promise. Accessible, honest, no political noise.</p>
+          </div>
+
+          <div class="sc-subscribe-card">
+            <div class="sc-subscribe-card-label">Every Sunday · Five Minutes</div>
+            <p class="sc-subscribe-card-title">Never miss an issue</p>
+            <p class="sc-subscribe-card-desc">Real data on where the promises stand — straight to your inbox.</p>
+            <form class="sc-subscribe-form" id="subscribeForm">
+              <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+              <button type="submit">Get it for Free →</button>
+            </form>
+            <p class="sc-subscribe-msg" id="subscribeMsg"></p>
           </div>
         </div>
       </div>
@@ -453,6 +557,39 @@
     closeBtn.addEventListener("click", closeMenu);
     overlay.addEventListener("click", (e) => { if (e.target === overlay) closeMenu(); });
     document.addEventListener("keydown", (e) => { if (!overlay.hidden && e.key === "Escape") closeMenu(); });
+
+    // Subscribe form
+    const subscribeForm = document.getElementById("subscribeForm");
+    const subscribeMsg  = document.getElementById("subscribeMsg");
+
+    subscribeForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = subscribeForm.querySelector("button");
+      btn.disabled = true;
+      btn.textContent = "Submitting…";
+      subscribeMsg.className = "sc-subscribe-msg";
+
+      try {
+        const res = await fetch("https://formspree.io/f/mvzbqvgn", {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(subscribeForm),
+        });
+        if (res.ok) {
+          subscribeMsg.textContent = "You're in! Check your inbox to confirm.";
+          subscribeMsg.className = "sc-subscribe-msg success";
+          subscribeForm.reset();
+        } else {
+          throw new Error();
+        }
+      } catch {
+        subscribeMsg.textContent = "Something went wrong. Please try again.";
+        subscribeMsg.className = "sc-subscribe-msg error";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Subscribe Free →";
+      }
+    });
 
     // Scroll reveal
     const revealEls = document.querySelectorAll(".reveal");
