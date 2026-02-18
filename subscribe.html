@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Subscribe | The Mamdani Meter</title>
-  <meta name="description" content="Subscribe to The Mamdani Meter for updates on NYC City Hall promises and progress" />
+  <title>Weekly Scorecard | The Mamdani Meter</title>
+  <meta name="description" content="Every week, we break down what moved, what stalled, and do a deep dive on one promise. Accessible, honest, no political noise." />
   <link rel="canonical" href="https://themamdanimeter.com/subscribe.html" />
-  <meta property="og:title" content="Subscribe | The Mamdani Meter" />
-  <meta property="og:description" content="Subscribe to The Mamdani Meter for updates on NYC City Hall promises and progress" />
+  <meta property="og:title" content="Weekly Scorecard | The Mamdani Meter" />
+  <meta property="og:description" content="Every week, we break down what moved, what stalled, and do a deep dive on one promise." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://themamdanimeter.com/subscribe.html" />
   <meta property="og:image" content="https://themamdanimeter.com/images/MM Logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Subscribe | The Mamdani Meter" />
-  <meta name="twitter:description" content="Subscribe to The Mamdani Meter for updates on NYC City Hall promises and progress" />
+  <meta name="twitter:title" content="Weekly Scorecard | The Mamdani Meter" />
+  <meta name="twitter:description" content="Every week, we break down what moved, what stalled, and do a deep dive on one promise." />
   <meta name="twitter:image" content="https://themamdanimeter.com/images/MM Logo.png" />
 
   <!-- Favicon -->
@@ -37,6 +37,262 @@
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
   </script>
+
+  <style>
+    /* ── SCORECARD PAGE HERO ── */
+    .sc-hero {
+      background: var(--blue);
+      padding: clamp(48px, 7vw, 80px) 0 clamp(64px, 8vw, 96px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sc-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+
+    .sc-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sc-hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+
+    .sc-hero-title {
+      font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.9;
+      color: #fff;
+      margin: 0 0 20px;
+    }
+
+    .sc-hero-title span { color: var(--orange); }
+
+    .sc-hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      max-width: 460px;
+      line-height: 1.7;
+    }
+
+    /* Floating subscribe card */
+    .sc-subscribe-card {
+      background: #fff;
+      border: 3px solid #000;
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.6);
+      padding: 28px;
+    }
+
+    /* ── ARCHIVE ── */
+    .sc-archive {
+      padding: 64px 0 96px;
+      background: #fff;
+      border-top: 4px solid #000;
+    }
+
+    .sc-archive-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 2px solid #000;
+      padding-bottom: 14px;
+      margin-bottom: 48px;
+    }
+
+    .sc-archive-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .sc-archive-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    /* ── FEATURED CARD ── */
+    .sc-featured {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0 rgba(0,0,0,1);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+      background: #fff;
+    }
+
+    .sc-featured:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 rgba(0,0,0,1);
+      color: inherit;
+    }
+
+    .sc-featured-body {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sc-latest-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,204,102,0.1);
+      color: #009944;
+      border: 2px solid rgba(0,204,102,0.35);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      align-self: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .sc-latest-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00CC66;
+      animation: sc-pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes sc-pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .sc-issue-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .sc-issue-title {
+      font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #000;
+      margin: 0 0 auto;
+    }
+
+    .sc-issue-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 2px solid #e0e0e0;
+    }
+
+    .sc-issue-stat {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #777;
+    }
+
+    .sc-issue-stat strong { color: #000; }
+
+    .sc-issue-cta {
+      margin-left: auto;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      white-space: nowrap;
+      transition: letter-spacing 150ms ease;
+    }
+
+    .sc-featured:hover .sc-issue-cta { letter-spacing: 2px; }
+
+    .sc-featured-image {
+      overflow: hidden;
+      min-height: 340px;
+    }
+
+    .sc-featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.on { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .sc-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .sc-subscribe-card {
+        max-width: 480px;
+      }
+      .sc-featured {
+        grid-template-columns: 1fr 360px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .sc-featured {
+        grid-template-columns: 1fr;
+      }
+      .sc-featured-image {
+        min-height: 220px;
+        order: -1;
+      }
+      .sc-featured-body {
+        padding: 24px;
+      }
+      .sc-issue-title {
+        font-size: 24px;
+      }
+      .sc-issue-cta {
+        margin-left: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -46,10 +302,7 @@
   <header class="nav" role="banner">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="The Mamdani Meter home">
-        <!-- small static meter icon -->
-        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
-          <path d="M4 18a10 10 0 0 1 20 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square"/>
-        </svg>
+        <img src="images/MM Logo.png" alt="" width="28" height="28" aria-hidden="true">
         <span>THE MAMDANI METER</span>
       </a>
 
@@ -85,24 +338,70 @@
   </div>
 
   <main id="main">
-    <!-- SUBSCRIBE SECTION -->
-    <section class="subscribe-page">
-      <div class="container">
-        <div class="subscribe-inner">
-          <div class="h1">SUBSCRIBE</div>
-          
 
-          <div class="subscribe-form-wrap">
+    <!-- PAGE HEADER -->
+    <section class="sc-hero">
+      <div class="container">
+        <div class="sc-hero-inner">
+          <div>
+            <div class="sc-hero-eyebrow">Free Weekly Newsletter</div>
+            <h1 class="sc-hero-title">Weekly<br><span>Scorecard</span></h1>
+            <p class="sc-hero-desc">Every week, we break down what moved, what stalled, and do a deep dive on one promise. Accessible, honest, no political noise.</p>
+          </div>
+
+          <div class="sc-subscribe-card">
             <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-            <iframe src="https://subscribe-forms.beehiiv.com/6b6df386-892f-4c5c-a2c1-fbf1e96a52a9" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; min-height: 339px; height: 400px; margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
+            <iframe
+              src="https://subscribe-forms.beehiiv.com/6b6df386-892f-4c5c-a2c1-fbf1e96a52a9"
+              class="beehiiv-embed"
+              data-test-id="beehiiv-embed"
+              frameborder="0"
+              scrolling="no"
+              style="width:100%; min-height:339px; height:400px; margin:0; border-radius:0 !important; background-color:transparent;"
+            ></iframe>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ISSUE ARCHIVE -->
+    <section class="sc-archive">
+      <div class="container">
+
+        <div class="sc-archive-header">
+          <span class="sc-archive-label">All Issues</span>
+          <span class="sc-archive-count">1 Issue Published</span>
+        </div>
+
+        <!-- LATEST ISSUE — FEATURED -->
+        <a
+          href="https://themamdanimeter.beehiiv.com/p/mamdani-wants-the-richest-to-pay-less-wait-what"
+          target="_blank"
+          rel="noopener"
+          class="sc-featured reveal"
+        >
+          <div class="sc-featured-body">
+            <div class="sc-latest-badge">Latest Issue</div>
+            <div class="sc-issue-week">Week 6 · Feb 16, 2026</div>
+            <h2 class="sc-issue-title">Mamdani wants the richest to pay less. Wait, what?</h2>
+            <div class="sc-issue-meta">
+              <span class="sc-issue-stat"><strong>3</strong> promises moved</span>
+              <span class="sc-issue-stat">5 min read</span>
+              <span class="sc-issue-cta">Read Full Issue →</span>
+            </div>
+          </div>
+
+          <div class="sc-featured-image">
+            <img src="images/Feb 18 Newsletter Preview.png" alt="Feb 18, 2026 issue preview" />
+          </div>
+        </a>
+
+      </div>
+    </section>
+
   </main>
 
   <footer>
-
     <div class="footer-bg-text">NYC</div>
     <div class="footer-inner container">
       <div class="footer-tagline">TRACKING POLICY,<br><span>NOT POLITICS.</span></div>
@@ -117,7 +416,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/promises.html">Promises</a></li>
             <li><a href="/faq.html">FAQ</a></li>
-            <li><a href="/subscribe.html">Subscribe</a></li>
+            <li><a href="/subscribe.html">Weekly Scorecard</a></li>
           </ul>
         </div>
         <div class="footer-subscribe">
@@ -140,44 +439,48 @@
   </footer>
 
   <script>
-    // --------------------------
-    // Mobile menu interactions + focus management
-    // --------------------------
+    // Mobile menu
     const hamburger = document.querySelector(".hamburger");
     const overlay = document.getElementById("mobileMenu");
     const closeBtn = document.querySelector(".mobile-close");
     let lastFocus = null;
 
-    function openMenu(){
+    function openMenu() {
       lastFocus = document.activeElement;
       overlay.hidden = false;
       requestAnimationFrame(() => overlay.classList.add("open"));
-      hamburger.setAttribute("aria-expanded","true");
+      hamburger.setAttribute("aria-expanded", "true");
       closeBtn.focus();
       document.body.style.overflow = "hidden";
     }
-    function closeMenu(){
+    function closeMenu() {
       overlay.classList.remove("open");
-      hamburger.setAttribute("aria-expanded","false");
+      hamburger.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
       setTimeout(() => {
         overlay.hidden = true;
-        if(lastFocus) lastFocus.focus();
+        if (lastFocus) lastFocus.focus();
       }, 260);
     }
 
     hamburger.addEventListener("click", () => {
-      const expanded = hamburger.getAttribute("aria-expanded") === "true";
-      expanded ? closeMenu() : openMenu();
+      hamburger.getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu();
     });
     closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeMenu(); });
+    document.addEventListener("keydown", (e) => { if (!overlay.hidden && e.key === "Escape") closeMenu(); });
 
-    overlay.addEventListener("click", (e) => {
-      if(e.target === overlay) closeMenu();
-    });
-    document.addEventListener("keydown", (e) => {
-      if(!overlay.hidden && e.key === "Escape") closeMenu();
-    });
+    // Scroll reveal
+    const revealEls = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("on");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    revealEls.forEach(el => obs.observe(el));
   </script>
 </body>
 </html>
