@@ -145,19 +145,12 @@
               <p>Zohran's campaign energized New Yorkers with a vision of a more affordable, community-centered city. Now everyone is asking the same question: Can he govern as boldly as he campaigned?</p>
     
               <p>Real progress happens via department rules, approvals, and budget allocations, but this work is often underreported and lacks the context needed to understand its significance.</p>
-              <p>The Mamdani Meter is a public dashboard that follows if and how campaign promises are being met by City Hall. It's designed for supporters who want to stay grounded in reality, skeptics engaging in good faith, and anyone who wants to keep up with policy without the political noise.</p>
+              <p><strong>The Mamdani Meter is a public dashboard that follows if and how campaign promises are being met by City Hall.</strong> It's designed for supporters who want to stay grounded in reality, skeptics engaging in good faith, and anyone who wants to keep up with policy without the political noise.</p>
             </div>
           </div>
           <!-- Right Column -->
           <div class="context-col">
-            <div class="context-eyebrow mono">THE TRACKER</div>
-            <div class="context-intro">The Mamdani Meter shows you what's moving, what's stalled, and what still needs to happen.</div>
-            <div class="context-body">
-              <p><strong>Check the Mamda-Meter</strong><br>The progress gauge above shows overall completion across all tracked promises.</p>
-              <p><strong>Explore the Promises</strong><br>Each campaign promise below displays as a card with its progress status.</p>
-              <p><strong>Dig Deeper</strong><br>Click any promise card to see its individual progress meter, context, and updates.</p>
-              <p>We update the cards and Mamda-meter regularly as developments happen.</p>
-            </div>
+            <img src="images/Context-headlines.png" alt="Headlines about Mayor Mamdani's campaign promises" class="context-headlines-img" />
           </div>
         </div>
       </div>
@@ -601,7 +594,7 @@
       }
 
       const recentIds = getRecentPromiseIds();
-      promises.slice(0, 10).forEach(p => grid.appendChild(makePromiseRow(p, recentIds.has(p.id))));
+      promises.slice(0, 8).forEach(p => grid.appendChild(makePromiseRow(p, recentIds.has(p.id))));
     }
 
     // --------------------------

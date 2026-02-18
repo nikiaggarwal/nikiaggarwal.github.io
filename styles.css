@@ -347,6 +347,11 @@ h1,h2,h3,h4{ margin:0; }
 .context-body p:last-child{
   margin-bottom: 0;
 }
+.context-headlines-img{
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
 
 .what-happened{
   background: var(--orange);
