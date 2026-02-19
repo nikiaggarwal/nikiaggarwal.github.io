@@ -576,7 +576,7 @@
           body: new FormData(subscribeForm),
         });
         if (res.ok) {
-          subscribeMsg.textContent = "You're in! Check your inbox to confirm.";
+          subscribeMsg.textContent = "You're in! We'll see you in your inbox";
           subscribeMsg.className = "sc-subscribe-msg success";
           subscribeForm.reset();
         } else {

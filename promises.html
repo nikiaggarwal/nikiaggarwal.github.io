@@ -131,19 +131,14 @@
     <!-- PROMISES GRID -->
     <section class="promises-grid-section">
       <div class="promises-container">
-        <div id="promisesGrid" class="grid" aria-label="Promises grid">
-          <!-- Cards injected by JS -->
+        <div id="promisesGrid" class="promise-list" aria-label="Promises list">
+          <!-- Rows injected by JS -->
         </div>
 
         <!-- Empty State -->
         <div id="emptyState" class="empty-state" hidden>
           <p>No promises match these filters</p>
           <button class="btn btn-secondary" id="clearFiltersBtn">Clear Filters</button>
-        </div>
-
-        <!-- Load More Button -->
-        <div class="load-more-wrap" id="loadMoreWrap" hidden>
-          <button class="btn btn-secondary" id="loadMoreBtn">Load 12 more promises</button>
         </div>
       </div>
     </section>
@@ -254,8 +249,6 @@
     // --------------------------
     let allPromises = [];
     let filteredPromises = [];
-    let displayedCount = 0;
-    const ITEMS_PER_PAGE = 12;
 
     const filters = {
       status: 'All',
@@ -384,7 +377,6 @@
         return statusMatch && categoryMatch;
       });
 
-      displayedCount = 0;
       renderPromises();
     }
 
@@ -392,73 +384,52 @@
     // Render Promises
     // --------------------------
     function renderPromises() {
-      const grid = document.getElementById('promisesGrid');
+      const list = document.getElementById('promisesGrid');
       const emptyState = document.getElementById('emptyState');
-      const loadMoreWrap = document.getElementById('loadMoreWrap');
-      const loadMoreBtn = document.getElementById('loadMoreBtn');
 
       if (filteredPromises.length === 0) {
-        grid.innerHTML = '';
+        list.innerHTML = '';
         emptyState.hidden = false;
-        loadMoreWrap.hidden = true;
         return;
       }
 
       emptyState.hidden = true;
+      list.innerHTML = '';
 
-      const newDisplayCount = Math.min(displayedCount + ITEMS_PER_PAGE, filteredPromises.length);
-
-      if (displayedCount === 0) {
-        grid.innerHTML = '';
-      }
-
-      const promisesToAdd = filteredPromises.slice(displayedCount, newDisplayCount);
-
-      promisesToAdd.forEach((p, index) => {
-        const card = makeCard(p);
-        card.style.opacity = '0';
-        grid.appendChild(card);
+      filteredPromises.forEach((p, index) => {
+        const row = makePromiseRow(p);
+        row.style.opacity = '0';
+        list.appendChild(row);
 
         setTimeout(() => {
-          card.style.transition = 'opacity 300ms ease-in';
-          card.style.opacity = '1';
-        }, index * 30);
+          row.style.transition = 'opacity 300ms ease-in';
+          row.style.opacity = '1';
+        }, index * 20);
       });
-
-      displayedCount = newDisplayCount;
-
-      const remaining = filteredPromises.length - displayedCount;
-      if (remaining > 0) {
-        const loadCount = Math.min(ITEMS_PER_PAGE, remaining);
-        loadMoreBtn.textContent = `Load ${loadCount} more promise${loadCount > 1 ? 's' : ''}`;
-        loadMoreWrap.hidden = false;
-      } else {
-        loadMoreWrap.hidden = true;
-      }
     }
 
     // --------------------------
-    // Make Promise Card
+    // Make Promise Row
     // --------------------------
-    function makeCard(p){
-      const s = STATUS[p.status] || STATUS["Headwinds"];
+    function makePromiseRow(p) {
+      const s = STATUS[p.status] || STATUS["Early Days"];
 
       const a = document.createElement("a");
-      a.className = `card plausible-event-name=Promise+Click plausible-event-title=${encodeURIComponent(p.title)} plausible-event-category=${encodeURIComponent(p.category)} plausible-event-status=${encodeURIComponent(p.status)}`;
+      a.className = `promise-row plausible-event-name=Promise+Click plausible-event-title=${encodeURIComponent(p.title)} plausible-event-category=${encodeURIComponent(p.category)} plausible-event-status=${encodeURIComponent(p.status)}`;
       a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
-      a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}.`);
+      a.setAttribute("aria-label", `${p.title}. ${p.category}. ${p.status}.`);
 
-      a.style.background = s.tint;
-
-      a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
-      a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
-
-      const badgeTextColor = p.status === "Making Progress" ? "#000" : "#fff";
       a.innerHTML = `
-        <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
-        <div class="card-title">${escapeHTML(p.title)}</div>
-        <div class="card-cat label">${escapeHTML(p.category)}</div>
-        <div class="card-meta">${escapeHTML(p.oneLineSummary)}</div>
+        <div class="promise-row-left">
+          <div class="promise-title">${escapeHTML(p.title)}</div>
+        </div>
+        <div class="promise-row-right">
+          <span class="promise-category">${escapeHTML(p.category)}</span>
+          <span class="promise-status-badge" style="border-color:${s.color};background:${s.tint} !important">${escapeHTML(p.status).toUpperCase()}</span>
+        </div>
+        <svg class="promise-row-arrow" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M9 6l6 6-6 6"/>
+        </svg>
       `;
       return a;
     }
@@ -508,13 +479,6 @@
       });
 
       filterPromises();
-    });
-
-    // --------------------------
-    // Load More
-    // --------------------------
-    document.getElementById('loadMoreBtn').addEventListener('click', () => {
-      renderPromises();
     });
 
     // --------------------------

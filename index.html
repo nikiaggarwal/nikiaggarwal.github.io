@@ -166,7 +166,7 @@
           </div>
         </div>
 
-        <div id="promiseGrid" class="promise-list" aria-label="Promises list">
+        <div id="promiseGrid" class="grid" aria-label="Promises list">
           <!-- Rows injected by JS -->
         </div>
 
@@ -585,17 +585,7 @@
       if (!grid) return;
 
       grid.innerHTML = '';
-
-      // Legend (only insert once)
-      if (!grid.parentNode.querySelector('.promise-legend')) {
-        const legend = document.createElement('div');
-        legend.className = 'promise-legend';
-        legend.innerHTML = '<div class="promise-legend-bar"></div><span class="promise-legend-label">Moved this week</span>';
-        grid.parentNode.insertBefore(legend, grid);
-      }
-
-      const recentIds = getRecentPromiseIds();
-      promises.slice(0, 8).forEach(p => grid.appendChild(makePromiseRow(p, recentIds.has(p.id))));
+      promises.slice(0, 6).forEach(p => grid.appendChild(makeCard(p)));
     }
 
     // --------------------------
@@ -727,6 +717,7 @@
         <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
+        <div class="card-meta">${escapeHTML(p.oneLineSummary || '')}</div>
       `;
       return a;
     }
