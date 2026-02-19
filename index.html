@@ -170,8 +170,8 @@
           <!-- Rows injected by JS -->
         </div>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="/promises.html">View All Promises</a>
+        <div class="promises-summary-bar" id="promisesSummaryBar">
+          <!-- injected by JS -->
         </div>
       </div>
     </section>
@@ -289,7 +289,7 @@
           id: "p1",
           title: "Fund tenant legal support citywide",
           category: "Housing",
-          status: "Oof",
+          status: "Headwinds",
           statusLabel: "Budget pending",
           oneLineSummary: "Funding discussions are active, but no final commitment yet."
         },
@@ -297,7 +297,7 @@
           id: "p2",
           title: "Expand bus lanes on key corridors",
           category: "Transit",
-          status: "Alright-Alright",
+          status: "Making Progress",
           statusLabel: "In motion",
           oneLineSummary: "Agencies are coordinating next steps and public input."
         },
@@ -305,7 +305,7 @@
           id: "p3",
           title: "Launch paid youth internships",
           category: "Education",
-          status: "LET'S GOOO",
+          status: "Delivered",
           statusLabel: "Pilot live",
           oneLineSummary: "A pilot program is running with early results expected soon."
         },
@@ -313,7 +313,7 @@
           id: "p4",
           title: "Improve subway accessibility timelines",
           category: "Transit",
-          status: "Yikes",
+          status: "Nope",
           statusLabel: "Stalled",
           oneLineSummary: "No clear plan or timeline has been published."
         },
@@ -321,7 +321,7 @@
           id: "p5",
           title: "Strengthen workplace protections",
           category: "Labor",
-          status: "Alright-Alright",
+          status: "Making Progress",
           statusLabel: "Drafting",
           oneLineSummary: "Policy language is taking shape with stakeholder feedback."
         },
@@ -329,7 +329,7 @@
           id: "p6",
           title: "Build more deeply affordable housing",
           category: "Housing",
-          status: "Oof",
+          status: "Headwinds",
           statusLabel: "Negotiating",
           oneLineSummary: "Key details depend on land, financing, and approvals."
         }
@@ -517,6 +517,7 @@
       renderHeroSection();
       renderUpdatesSection();
       renderPromisesSection();
+      renderPromisesSummary();
     }
 
     function renderHeroSection() {
@@ -586,6 +587,32 @@
 
       grid.innerHTML = '';
       promises.slice(0, 6).forEach(p => grid.appendChild(makeCard(p)));
+    }
+
+    function renderPromisesSummary() {
+      const bar = document.getElementById('promisesSummaryBar');
+      if (!bar) return;
+
+      const counts = {};
+      promises.forEach(p => {
+        if (p.status) counts[p.status] = (counts[p.status] || 0) + 1;
+      });
+
+      const total = promises.length;
+      const statusOrder = ["Delivered", "Making Progress", "Early Days", "Headwinds", "Nope"];
+
+      const dotsHTML = statusOrder
+        .filter(s => counts[s])
+        .map(s => {
+          const color = STATUS[s]?.color || '#888';
+          return `<span class="summary-item"><span class="summary-dot" style="background:${color}"></span>${counts[s]} ${escapeHTML(s)}</span>`;
+        })
+        .join('');
+
+      bar.innerHTML = `
+        <div class="summary-counts">${dotsHTML}</div>
+        <a class="btn btn-primary" href="/promises.html">View All ${total} Promises &rarr;</a>
+      `;
     }
 
     // --------------------------
@@ -717,7 +744,6 @@
         <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
         <div class="card-cat label">${escapeHTML(p.category)}</div>
-        <div class="card-meta">${escapeHTML(p.oneLineSummary || '')}</div>
       `;
       return a;
     }
