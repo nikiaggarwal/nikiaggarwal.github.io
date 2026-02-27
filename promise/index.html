@@ -531,7 +531,7 @@
 
       // Summary
       if (promise.summary) {
-        document.getElementById("promiseSummary").innerHTML = `<p>${escapeHTML(promise.summary)}</p>`;
+        document.getElementById("promiseSummary").innerHTML = `<p>${escapeHTML(promise.summary).replace(/\\n/g, '<br><br>')}</p>`;
       }
 
       // Media
