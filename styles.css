@@ -560,6 +560,37 @@ h1,h2,h3,h4{ margin:0; }
   margin-top:16px;
 }
 
+/* Summary Bar */
+.promises-summary{
+  background:#fff;
+}
+.summary-stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+.summary-stat{
+  padding:28px 20px;
+  border-left:1px solid #e8e8e8;
+  text-align:left;
+}
+.summary-stat:first-child{
+  border-left:none;
+}
+.summary-stat-number{
+  font-family:'Archivo Black',sans-serif;
+  font-size:52px;
+  line-height:1;
+  margin-bottom:8px;
+}
+.summary-stat-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:#999;
+}
+
 /* Filter Section */
 .filters-section{
   padding: 40px 0;
@@ -1118,6 +1149,9 @@ footer{
   .promise-title{ font-size:16px; }
   .promise-category{ width:auto; text-align:left; }
   .promises-header{ padding: 32px 0; }
+  .summary-stats{ grid-template-columns:repeat(3,1fr); }
+  .summary-stat{ padding:20px 16px; }
+  .summary-stat-number{ font-size:40px; }
   .filters-section{ padding: 24px 0; }
   .promises-grid-section{ padding: 32px 0; }
   #largeMeter{ width: 280px; height: 280px; }

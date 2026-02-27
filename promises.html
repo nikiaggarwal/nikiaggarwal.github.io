@@ -88,8 +88,17 @@
     <!-- PAGE HEADER -->
     <section class="promises-header">
       <div class="promises-container">
-        <h1 class="h1">PROMISES MADE</h1>
-        <p class="promises-subtitle">Tracking the commitments, progress, and roadblocks across NYC City Hall's agenda</p>
+        <h1 class="h1">THE FULL LIST</h1>
+        <p class="promises-subtitle">The receipts, organized</p>
+      </div>
+    </section>
+
+    <!-- SUMMARY BAR -->
+    <section class="promises-summary">
+      <div class="promises-container">
+        <div class="summary-stats" id="summaryStats">
+          <!-- populated by JS -->
+        </div>
       </div>
     </section>
 
@@ -485,11 +494,34 @@
     });
 
     // --------------------------
+    // Render Summary Bar
+    // --------------------------
+    function renderSummary() {
+      const order = ["Delivered", "Making Progress", "Early Days", "Headwinds", "Nope"];
+      const counts = {};
+      order.forEach(s => counts[s] = 0);
+      allPromises.forEach(p => {
+        if (Object.prototype.hasOwnProperty.call(counts, p.status)) counts[p.status]++;
+      });
+
+      const container = document.getElementById('summaryStats');
+      container.innerHTML = order.map(status => {
+        const s = STATUS[status];
+        return `
+          <div class="summary-stat">
+            <div class="summary-stat-number" style="color:${s.color}">${counts[status]}</div>
+            <div class="summary-stat-label">${status.toUpperCase()}</div>
+          </div>`;
+      }).join('');
+    }
+
+    // --------------------------
     // Initialize
     // --------------------------
     async function init() {
       allPromises = await fetchPromises();
       filteredPromises = allPromises;
+      renderSummary();
       setupFilterChips();
       renderPromises();
     }
