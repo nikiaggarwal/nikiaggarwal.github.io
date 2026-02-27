@@ -992,9 +992,55 @@ footer{
 .footer-nav ul li a:hover{
   color: var(--orange);
 }
-.footer-subscribe .beehiiv-embed{
-  max-width: 100%;
+.footer-subscribe-form{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
+.footer-subscribe-form input[type="email"]{
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 150ms ease;
+}
+.footer-subscribe-form input[type="email"]::placeholder{
+  color: rgba(255,255,255,0.4);
+}
+.footer-subscribe-form input[type="email"]:focus{
+  border-color: var(--orange);
+}
+.footer-subscribe-form button{
+  padding: 10px 16px;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+.footer-subscribe-form button:hover{
+  opacity: 0.85;
+}
+.footer-subscribe-form button:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.footer-subscribe-msg{
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+.footer-subscribe-msg.success{ color: #4caf7d; display: block; }
+.footer-subscribe-msg.error  { color: #ff6b6b; display: block; }
 .footer-bottom{
   display: flex;
   align-items: center;
