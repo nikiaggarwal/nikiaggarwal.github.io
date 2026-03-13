@@ -340,6 +340,97 @@
       display: block;
     }
 
+    /* ── PAST ISSUES GRID ── */
+    .sc-past {
+      margin-top: 48px;
+    }
+
+    .sc-past-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .sc-past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .sc-past-card {
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+      text-decoration: none;
+      color: inherit;
+      background: #fff;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+      overflow: hidden;
+    }
+
+    .sc-past-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 rgba(0,0,0,0.8);
+      color: inherit;
+    }
+
+    .sc-past-card-image {
+      overflow: hidden;
+      height: 160px;
+      background: #f0f0f0;
+    }
+
+    .sc-past-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sc-past-card-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sc-past-card-week {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .sc-past-card-title {
+      font-family: 'Archivo Black', 'IBM Plex Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #000;
+      margin: 0 0 auto;
+    }
+
+    .sc-past-card-cta {
+      margin-top: 16px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      transition: letter-spacing 150ms ease;
+    }
+
+    .sc-past-card:hover .sc-past-card-cta { letter-spacing: 2px; }
+
     /* ── REVEAL ── */
     .reveal {
       opacity: 0;
@@ -360,6 +451,9 @@
       .sc-featured {
         grid-template-columns: 1fr 360px;
       }
+      .sc-past-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 767px) {
@@ -378,6 +472,9 @@
       }
       .sc-issue-cta {
         margin-left: 0;
+      }
+      .sc-past-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -457,31 +554,87 @@
 
         <div class="sc-archive-header">
           <span class="sc-archive-label">All Issues</span>
-          <span class="sc-archive-count">2 Issues Published</span>
+          <span class="sc-archive-count">5 Issues Published</span>
         </div>
 
         <!-- LATEST ISSUE — FEATURED -->
         <a
-          href="https://themamdanimeter.beehiiv.com/p/best-housing-week-yet-and-mamdani-s-first-broken-promise"
+          href="https://themamdanimeter.beehiiv.com/p/good-news-rich-people-are-crying-wolf"
           target="_blank"
           rel="noopener"
           class="sc-featured reveal"
         >
           <div class="sc-featured-body">
             <div class="sc-latest-badge">Latest Issue</div>
-            <div class="sc-issue-week">Week 8 · Feb 26, 2026</div>
-            <h2 class="sc-issue-title">Mamdani's first broken promise</h2>
+            <div class="sc-issue-week">Week 10 · Mar 13, 2026</div>
+            <h2 class="sc-issue-title">Good News: The rich are staying put</h2>
             <div class="sc-issue-meta">
-              <span class="sc-issue-stat"><strong>3</strong>/25 promises moved</span>
-              <span class="sc-issue-stat">4 min read</span>
+              <span class="sc-issue-stat"><strong>4</strong>/25 promises moved</span>
+              <span class="sc-issue-stat">6 min read</span>
               <span class="sc-issue-cta">Read Full Issue →</span>
             </div>
           </div>
 
           <div class="sc-featured-image">
-            <img src="images/Feb 26 Newsletter Preview.png" alt="Feb 26, 2026 issue preview" />
+            <img src="images/Mar 13 Newsletter Preview.png" alt="Mar 13, 2026 issue preview" />
           </div>
         </a>
+
+        <!-- PAST ISSUES GALLERY -->
+        <div class="sc-past">
+          <div class="sc-past-label">Past Issues</div>
+          <div class="sc-past-grid">
+
+            <a
+              href="https://themamdanimeter.beehiiv.com/p/best-housing-week-yet-and-mamdani-s-first-broken-promise"
+              target="_blank"
+              rel="noopener"
+              class="sc-past-card reveal"
+            >
+              <div class="sc-past-card-image">
+                <img src="images/Feb 26 Newsletter Preview.png" alt="Feb 26, 2026 issue preview" />
+              </div>
+              <div class="sc-past-card-body">
+                <div class="sc-past-card-week">Week 8 · Feb 26, 2026</div>
+                <h3 class="sc-past-card-title">Mamdani's first broken promise</h3>
+                <span class="sc-past-card-cta">Read Issue →</span>
+              </div>
+            </a>
+
+            <a
+              href="https://themamdanimeter.beehiiv.com/p/mamdani-wants-the-richest-to-pay-less-wait-what"
+              target="_blank"
+              rel="noopener"
+              class="sc-past-card reveal"
+            >
+              <div class="sc-past-card-image">
+                <img src="images/Feb 18 Newsletter Preview.png" alt="Feb 18, 2026 issue preview" />
+              </div>
+              <div class="sc-past-card-body">
+                <div class="sc-past-card-week">Week 6 · Feb 16, 2026</div>
+                <h3 class="sc-past-card-title">Mamdani wants the richest to pay less. Wait, what?</h3>
+                <span class="sc-past-card-cta">Read Issue →</span>
+              </div>
+            </a>
+
+            <a
+              href="https://themamdanimeter.beehiiv.com/p/introducing-the-mamdani-meter"
+              target="_blank"
+              rel="noopener"
+              class="sc-past-card reveal"
+            >
+              <div class="sc-past-card-image">
+                <img src="images/Context-headlines.png" alt="Introducing the Mamdani Meter" />
+              </div>
+              <div class="sc-past-card-body">
+                <div class="sc-past-card-week">Issue 1 · Feb 5, 2026</div>
+                <h3 class="sc-past-card-title">Introducing the Mamdani Meter</h3>
+                <span class="sc-past-card-cta">Read Issue →</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
 
       </div>
     </section>
