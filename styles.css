@@ -1147,7 +1147,7 @@ footer{
   .promise-row{ flex-direction:column; align-items:flex-start; gap:12px; }
   .promise-row-right{ gap:12px; }
   .promise-title{ font-size:16px; }
-  .promise-category{ width:auto; text-align:left; }
+  .promise-category{ display:none; }
   .promises-header{ padding: 32px 0; }
   .summary-stats{ grid-template-columns:repeat(3,1fr); }
   .summary-stat{ padding:20px 16px; }
