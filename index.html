@@ -859,6 +859,7 @@
             body: new FormData(form),
           });
           if (res.ok) {
+            plausible('Newsletter Signup', {props: {source: 'footer'}});
             msg.textContent = "You're in! We'll see you in your inbox";
             msg.className = "footer-subscribe-msg success";
             form.reset();

@@ -732,6 +732,7 @@
           body: new FormData(subscribeForm),
         });
         if (res.ok) {
+          plausible('Newsletter Signup', {props: {source: 'subscribe page'}});
           subscribeMsg.textContent = "You're in! We'll see you in your inbox";
           subscribeMsg.className = "sc-subscribe-msg success";
           subscribeForm.reset();
@@ -776,6 +777,7 @@
             body: new FormData(form),
           });
           if (res.ok) {
+            plausible('Newsletter Signup', {props: {source: 'footer'}});
             msg.textContent = "You're in! We'll see you in your inbox";
             msg.className = "footer-subscribe-msg success";
             form.reset();
