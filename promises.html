@@ -110,10 +110,10 @@
           <div class="filter-chips" role="group" aria-label="Filter by status">
             <button class="filter-chip active" data-filter-type="status" data-filter-value="All">All</button>
             <button class="filter-chip" data-filter-type="status" data-filter-value="Delivered">Delivered</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Making Progress">Making Progress</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Gaining Ground">Gaining Ground</button>
             <button class="filter-chip" data-filter-type="status" data-filter-value="Early Days">Early Days</button>
             <button class="filter-chip" data-filter-type="status" data-filter-value="Headwinds">Headwinds</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Nope">Nope</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="Blocked">Blocked</button>
           </div>
         </div>
 
@@ -218,7 +218,7 @@
         id: "p2",
         title: "Expand bus lanes on key corridors",
         category: "Transit",
-        status: "Making Progress",
+        status: "Gaining Ground",
         statusLabel: "In motion",
         oneLineSummary: "Agencies are coordinating next steps and public input."
       },
@@ -234,7 +234,7 @@
         id: "p4",
         title: "Improve subway accessibility timelines",
         category: "Transit",
-        status: "Nope",
+        status: "Blocked",
         statusLabel: "Stalled",
         oneLineSummary: "No clear plan or timeline has been published."
       },
@@ -242,7 +242,7 @@
         id: "p5",
         title: "Strengthen workplace protections",
         category: "Labor",
-        status: "Making Progress",
+        status: "Gaining Ground",
         statusLabel: "Drafting",
         oneLineSummary: "Policy language is taking shape with stakeholder feedback."
       },
@@ -272,10 +272,10 @@
     // --------------------------
     const STATUS = {
       "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)" },
-      "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(179, 249, 91, 0.08)" },
+      "Gaining Ground": { color: getCSS("--status-alright"), tint: "rgba(179, 249, 91, 0.08)" },
       "Early Days": { color: getCSS("--status-early"), tint: "rgba(29, 222, 228, 0.08)" },
       "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)" },
-      "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
+      "Blocked": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)" }
     };
 
     function getCSS(varName){
@@ -497,7 +497,7 @@
     // Render Summary Bar
     // --------------------------
     function renderSummary() {
-      const order = ["Delivered", "Making Progress", "Early Days", "Headwinds", "Nope"];
+      const order = ["Delivered", "Gaining Ground", "Early Days", "Headwinds", "Blocked"];
       const counts = {};
       order.forEach(s => counts[s] = 0);
       allPromises.forEach(p => {

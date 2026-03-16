@@ -106,7 +106,7 @@
 
         <!-- Large Meter -->
         <div class="promise-meter-wrap">
-          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Making Progress">
+          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Gaining Ground">
             <svg id="promiseMeter" width="300" height="300" viewBox="0 0 400 400" aria-hidden="true">
               <!-- Colored segments for all 5 statuses -->
               <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
@@ -302,18 +302,18 @@
     // --------------------------
     const STATUS = {
       "Delivered": { color: "#00CC66", tint: "rgba(0, 204, 102, 0.08)", image: "/images/delivered.png" },
-      "Making Progress": { color: "#b3f95b", tint: "rgba(179, 249, 91, 0.08)", image: "/images/making-progress.png" },
+      "Gaining Ground": { color: "#b3f95b", tint: "rgba(179, 249, 91, 0.08)", image: "/images/making-progress.png" },
       "Early Days": { color: "#00edf4", tint: "rgba(29, 222, 228, 0.08)", image: "/images/early-days.png" },
       "Headwinds": { color: "#ffaa0f", tint: "rgba(255, 170, 15, 0.08)", image: "/images/headwinds.png" },
-      "Nope": { color: "#ff3333", tint: "rgba(255, 51, 51, 0.08)", image: "/images/nope.png" }
+      "Blocked": { color: "#ff3333", tint: "rgba(255, 51, 51, 0.08)", image: "/images/nope.png" }
     };
 
     const BUCKETS = {
       "Delivered": { pct: 1.0 },
-      "Making Progress": { pct: 0.675 },
+      "Gaining Ground": { pct: 0.675 },
       "Early Days": { pct: 0.475 },
       "Headwinds": { pct: 0.275 },
-      "Nope": { pct: 0.0 }
+      "Blocked": { pct: 0.0 }
     };
 
     // --------------------------
@@ -516,8 +516,8 @@
       const badge = document.getElementById("promiseStatusBadge");
       badge.textContent = promise.status.toUpperCase();
       badge.style.background = s.color;
-      // Use dark text for light backgrounds (Making Progress)
-      if (promise.status === "Making Progress") {
+      // Use dark text for light backgrounds (Gaining Ground)
+      if (promise.status === "Gaining Ground") {
         badge.classList.add("badge--dark-text");
       } else {
         badge.classList.remove("badge--dark-text");

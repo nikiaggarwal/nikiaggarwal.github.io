@@ -90,7 +90,7 @@
 
         <div class="meter-wrap">
           <!-- Large Meter -->
-          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Making Progress - Momentum Building">
+          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Gaining Ground - Momentum Building">
             <svg id="largeMeter" width="400" height="400" viewBox="0 0 400 400" aria-hidden="true">
               <!-- Colored segments for all 5 statuses (always visible) -->
               <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
@@ -300,7 +300,7 @@
           id: "p2",
           title: "Expand bus lanes on key corridors",
           category: "Transit",
-          status: "Making Progress",
+          status: "Gaining Ground",
           statusLabel: "In motion",
           oneLineSummary: "Agencies are coordinating next steps and public input."
         },
@@ -316,7 +316,7 @@
           id: "p4",
           title: "Improve subway accessibility timelines",
           category: "Transit",
-          status: "Nope",
+          status: "Blocked",
           statusLabel: "Stalled",
           oneLineSummary: "No clear plan or timeline has been published."
         },
@@ -324,7 +324,7 @@
           id: "p5",
           title: "Strengthen workplace protections",
           category: "Labor",
-          status: "Making Progress",
+          status: "Gaining Ground",
           statusLabel: "Drafting",
           oneLineSummary: "Policy language is taking shape with stakeholder feedback."
         },
@@ -493,10 +493,10 @@
     // --------------------------
     const STATUS = {
       "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)", image: "images/delivered.png" },
-      "Making Progress": { color: getCSS("--status-alright"), tint: "rgba(179, 249, 91, 0.08)", image: "images/making-progress.png" },
+      "Gaining Ground": { color: getCSS("--status-alright"), tint: "rgba(179, 249, 91, 0.08)", image: "images/making-progress.png" },
       "Early Days": { color: getCSS("--status-early"), tint: "rgba(29, 222, 228, 0.08)", image: "images/early-days.png" },
       "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)", image: "images/headwinds.png" },
-      "Nope": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)", image: "images/nope.png" }
+      "Blocked": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)", image: "images/nope.png" }
     };
 
     function getCSS(varName){
@@ -602,7 +602,7 @@
       });
 
       const total = promises.length;
-      const statusOrder = ["Delivered", "Making Progress", "Early Days", "Headwinds", "Nope"];
+      const statusOrder = ["Delivered", "Gaining Ground", "Early Days", "Headwinds", "Blocked"];
 
       const dotsHTML = statusOrder
         .filter(s => counts[s])
@@ -656,7 +656,7 @@
     // Going from 270° (left) clockwise to 90° (right) through bottom
     const segmentDeg = 36;
 
-    // Nope: 270° to 306° (0-20%)
+    // Blocked: 270° to 306° (0-20%)
     const nopeArc = describeArc(cx, cy, r, 270, 306);
     segmentNope.setAttribute("d", nopeArc);
 
@@ -668,7 +668,7 @@
     const earlyDaysArc = describeArc(cx, cy, r, 342, 18);
     segmentEarlyDays.setAttribute("d", earlyDaysArc);
 
-    // Making Progress: 18° to 54° (60-80%)
+    // Gaining Ground: 18° to 54° (60-80%)
     const makingProgressArc = describeArc(cx, cy, r, 18, 54);
     segmentMakingProgress.setAttribute("d", makingProgressArc);
 
@@ -680,18 +680,18 @@
     // Status -> needle position and active arc amount
     // --------------------------
     // Needle animation: from 0% (start at 270°) to target bucket
-    // Buckets from 270° (Nope/0%) to 90° (Delivered/100%):
+    // Buckets from 270° (Blocked/0%) to 90° (Delivered/100%):
     // Delivered: 100% (at 90°)
-    // Making Progress: 60-75%
+    // Gaining Ground: 60-75%
     // Early Days: 40-55%
     // Headwinds: 20-35%
-    // Nope: 0% (at 270°)
+    // Blocked: 0% (at 270°)
     const BUCKETS = {
       "Delivered": { pct: 1.0, labelPct: 0.95 },
-      "Making Progress": { pct: 0.675, labelPct: 0.67 },
+      "Gaining Ground": { pct: 0.675, labelPct: 0.67 },
       "Early Days": { pct: 0.475, labelPct: 0.47 },
       "Headwinds": { pct: 0.275, labelPct: 0.27 },
-      "Nope": { pct: 0.0, labelPct: 0.05 }
+      "Blocked": { pct: 0.0, labelPct: 0.05 }
     };
 
     function setMeterStatus(status){
@@ -705,7 +705,7 @@
       }
 
       // Needle target rotation:
-      // Our needleGroup starts at 270° (0% - Nope position).
+      // Our needleGroup starts at 270° (0% - Blocked position).
       // We map pct -> rotation from 270° to 90° (180° sweep).
       const startAngle = 270;
       const target = startAngle + (sweepDeg * b.pct);
@@ -742,7 +742,7 @@
       a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
       a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
 
-      const badgeTextColor = p.status === "Making Progress" ? "#000" : "#fff";
+      const badgeTextColor = p.status === "Gaining Ground" ? "#000" : "#fff";
       a.innerHTML = `
         <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
         <div class="card-title">${escapeHTML(p.title)}</div>
