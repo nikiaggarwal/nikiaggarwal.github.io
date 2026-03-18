@@ -86,7 +86,7 @@
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-time mono">CURRENT STATUS</div>
-        <div id="overallStatusLabel" class="overall-label">MAKING PROGRESS</div>
+        <div id="overallStatusLabel" class="overall-label">GAINING GROUND</div>
 
         <div class="meter-wrap">
           <!-- Large Meter -->
@@ -284,9 +284,9 @@
     // --------------------------
     const FALLBACK_DATA = {
       overallStatus: {
-        status: "Early Days",
-        label: "Momentum Building",
-        lastUpdated: "2026-01-18T19:45:00-05:00"
+        status: "Gaining Ground",
+        label: "Tackled five promises in first month from banning hotel junk fees to announcing the pilot of 2-care",
+        lastUpdated: "2026-03-17"
       },
       promises: [
         {
@@ -802,7 +802,8 @@
     // --------------------------
     // Initialize the page
     // --------------------------
-    loadData();
+    renderHeroSection(); // Render hero immediately with hardcoded fallback data
+    loadData();          // Then fetch sheets and re-render everything
 
     // --------------------------
     // Mobile menu interactions + focus management
