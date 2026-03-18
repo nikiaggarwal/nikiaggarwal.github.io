@@ -234,6 +234,7 @@ h1,h2,h3,h4{ margin:0; }
 .hero-content{
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
 }
 .hero-content h1{
@@ -477,6 +478,8 @@ h1,h2,h3,h4{ margin:0; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 .fork-card{
   display: flex;
@@ -523,9 +526,15 @@ h1,h2,h3,h4{ margin:0; }
   color: #fff;
   border-color: var(--blue);
   box-shadow: 4px 4px 0 rgba(0,51,204,0.4);
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease;
 }
-.fork-card--subscribe:hover{ box-shadow: 6px 6px 0 rgba(0,51,204,0.4); color: #fff; }
+.fork-card--subscribe:hover{
+  background: #fff;
+  color: var(--blue);
+  box-shadow: 6px 6px 0 rgba(0,51,204,0.4);
+}
 .fork-card--subscribe > span:last-child{ color: var(--orange); }
+.fork-card--subscribe:hover > span:last-child{ color: var(--blue); }
 
 .subscribe-page{
   background: var(--blue);
@@ -1104,9 +1113,9 @@ footer{
 .footer-subscribe-form button{
   padding: 10px 16px;
   background: var(--orange);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 0;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;

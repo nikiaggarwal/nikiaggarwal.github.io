@@ -387,9 +387,20 @@
     }
 
     function formatLastUpdated(iso) {
+      if (!iso) return '—';
       try {
-        const [year, month, day] = iso.split('-').map(Number);
-        return new Date(year, month - 1, day).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+        // YYYY-MM-DD: parse as local date to avoid UTC offset shifting the day
+        const isoMatch = iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (isoMatch) {
+          return new Date(+isoMatch[1], +isoMatch[2] - 1, +isoMatch[3])
+            .toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+        }
+        // Any other format Google Sheets might return — let the browser parse it
+        const d = new Date(iso);
+        if (!isNaN(d.getTime())) {
+          return d.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+        }
+        return iso;
       } catch(e) { return iso; }
     }
 
