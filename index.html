@@ -82,150 +82,120 @@
   </div>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-time mono">CURRENT STATUS</div>
-        <div id="overallStatusLabel" class="overall-label">GAINING GROUND</div>
 
-        <div class="meter-wrap">
-          <!-- Large Meter -->
-          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Gaining Ground - Momentum Building">
-            <svg id="largeMeter" width="400" height="400" viewBox="0 0 400 400" aria-hidden="true">
-              <!-- Colored segments for all 5 statuses (always visible) -->
+    <!-- HERO -->
+    <section class="hero-v2">
+      <div class="hero-v2-inner">
+        <div class="hero-content">
+          <h1>The Mamdani<br>Meter</h1>
+          <p>Tracking every campaign promise from election to action.</p>
+          <a href="/subscribe.html" class="subscribe-btn">Get the weekly scorecard</a>
+        </div>
+        <div class="hero-meter">
+          <div id="overallStatusLabel" class="overall-label">GAINING GROUND</div>
+          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Gaining Ground">
+            <svg id="largeMeter" viewBox="0 0 400 400" aria-hidden="true">
               <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
               <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="28" stroke-linecap="butt"/>
               <path id="segmentEarlyDays" d="" fill="none" stroke="#00edf4" stroke-width="28" stroke-linecap="butt"/>
               <path id="segmentMakingProgress" d="" fill="none" stroke="#b3f95b" stroke-width="28" stroke-linecap="butt"/>
               <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="28" stroke-linecap="butt"/>
-
-              <!-- Center photo clip path -->
               <defs>
                 <clipPath id="photoClip">
                   <circle cx="200" cy="200" r="70"></circle>
                 </clipPath>
               </defs>
-
-              <!-- Needle -->
               <g id="needleGroup" transform="rotate(270 200 200)">
-                <!-- Clock-hand style: wide base tapering to point -->
                 <path d="M200 200 L194 204 L200 70 L206 204 Z" fill="#1a1a1a"></path>
-                <!-- Tip arrow -->
                 <path d="M200 64 L191 80 L209 80 Z" fill="#1a1a1a"></path>
-                <!-- Base anchor -->
                 <circle cx="200" cy="200" r="10" fill="#1a1a1a"></circle>
                 <circle cx="200" cy="200" r="14" fill="none" stroke="#1a1a1a" stroke-width="3"></circle>
               </g>
-
-              <!-- Center photo (on top of needle) -->
               <circle cx="200" cy="200" r="75" fill="#fff" stroke="#fff" stroke-width="5"></circle>
               <image id="centerImage" href="" x="130" y="130" width="140" height="140" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
               <circle cx="200" cy="200" r="70" fill="none" stroke="#ffffff" stroke-width="5"></circle>
             </svg>
           </div>
-        </div>
-
-        <div class="hero-description">Tracking Zohran's campaign promises from election to action.</div>
-        <div id="heroTimestamp" class="hero-time mono">Last updated: —</div>
-        <div class="hero-cta">
-          <a href="/subscribe.html" class="subscribe-btn">Get the weekly scorecard</a>
+          <div id="heroTimestamp" class="mono">Last updated: —</div>
         </div>
       </div>
     </section>
 
-    <!-- CONTEXT SECTION -->
-    <section class="context-section">
+    <!-- SCOREBOARD -->
+    <section class="scoreboard">
+      <div class="scoreboard-inner">
+        <a href="/promises.html" class="score-cell score-cell--label">
+          <span id="scoreTotal">—</span>
+          <span>Promises Tracked</span>
+        </a>
+        <a href="/promises.html" class="score-cell" style="--cell-color:#00CC66">
+          <span id="scoreDelivered">—</span>
+          <span>Delivered</span>
+        </a>
+        <a href="/promises.html" class="score-cell" style="--cell-color:#b3f95b">
+          <span id="scoreGaining">—</span>
+          <span>Gaining Ground</span>
+        </a>
+        <a href="/promises.html" class="score-cell" style="--cell-color:#00edf4">
+          <span id="scoreEarly">—</span>
+          <span>Early Days</span>
+        </a>
+        <a href="/promises.html" class="score-cell" style="--cell-color:#ffaa0f">
+          <span id="scoreHeadwinds">—</span>
+          <span>Headwinds</span>
+        </a>
+        <a href="/promises.html" class="score-cell" style="--cell-color:#ff3333">
+          <span id="scoreBlocked">—</span>
+          <span>Blocked</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- WHAT MOVED -->
+    <section class="what-moved">
       <div class="container">
-        <div class="context-grid">
-          <!-- Left Column -->
-          <div class="context-col">
-            <div class="context-eyebrow mono">WHY THIS EXISTS</div>
-            <div class="context-quote">You showed up in November. Here’s how Zohran is showing up for you. </div>
-            <div class="context-body">
-              <p>Our news feeds cover political controversies and obstacles, but they rarely include the quieter work of good governing: a task force’s findings on how to speed up affordable housing; a subcommittee hearing about creating more childcare centers; the budget line item carved out for more mental health care providers. </p>
-    
-              <p>In other words, the work that most determines whether your life gets more affordable is also the least visible work there is. 
-</p>
-              <p><strong>We believe that if you voted for change, you deserve to know whether it's actually coming.</strong>That's what the Mamdani Meter is for. It's designed for supporters who want to stay grounded in reality, skeptics engaging in good faith, and anyone who wants to keep up with policy without the political noise.</p>
-            </div>
-          </div>
-          <!-- Right Column -->
-          <div class="context-col">
-            <img src="images/Context-headlines.png" alt="Headlines about Mayor Mamdani's campaign promises" class="context-headlines-img" />
-          </div>
+        <span class="mono">WHAT MOVED THIS WEEK</span>
+        <div class="what-moved-list">
+          <!-- populated by JS -->
         </div>
+        <a href="/promises.html" class="what-moved-link">See all promises &rarr;</a>
       </div>
     </section>
 
-    <!-- THE PROMISES -->
-    <section class="promises">
+    <!-- WHY THIS EXISTS -->
+    <section class="why-section">
       <div class="container">
-        <div class="section-head">
-          <div class="h2">THE PROMISES</div>
-          <div class="promises-sub">
-            Here's where things stand now. Click on a card for details.
-          </div>
-        </div>
-
-        <div id="promiseGrid" class="grid" aria-label="Promises list">
-          <!-- Rows injected by JS -->
-        </div>
-
-        <div class="promises-summary-bar" id="promisesSummaryBar">
-          <!-- injected by JS -->
+        <div class="why-inner">
+          <span class="mono">WHY THIS EXISTS</span>
+          <blockquote>The work that most determines whether your life gets more affordable is also the least visible work there is.</blockquote>
+          <p>If you voted for change, you deserve to know whether it's actually coming. The Mamdani Meter tracks every campaign promise — for supporters who want to stay grounded, skeptics engaging in good faith, and anyone who wants policy without the noise.</p>
         </div>
       </div>
     </section>
 
-    <!-- ENGAGEMENT SECTION -->
-    <section class="engagement-section">
+    <!-- FORK -->
+    <section class="fork-section">
       <div class="container">
-        <h2 class="engagement-title">Find this useful?</h2>
-
-        <div class="engagement-cta">
-          <a href="/subscribe.html" class="subscribe-btn">Subscribe for Updates</a>
-        </div>
-
-        <div class="share-section">
-          <div class="share-label">Share with friends</div>
-          <div class="share-icons">
-            <button class="share-icon-btn" aria-label="Share on LinkedIn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent('https://www.themamdanimeter.com'), '_blank')">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </button>
-            <button class="share-icon-btn" aria-label="Share on Instagram" onclick="window.open('https://www.instagram.com/', '_blank')">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
-              </svg>
-            </button>
-            <button class="share-icon-btn" aria-label="Copy link" onclick="copyLink(this)">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-              </svg>
-              <span class="copy-tooltip">Link copied!</span>
-            </button>
-          </div>
+        <div class="fork-grid">
+          <a href="/promises.html" class="fork-card">
+            <span class="mono">WANT THE FULL PICTURE?</span>
+            <strong>Browse All Promises</strong>
+            <p>Filter by topic, see every update, track progress on each commitment.</p>
+            <span>See all promises &rarr;</span>
+          </a>
+          <a href="/subscribe.html" class="fork-card fork-card--subscribe">
+            <span class="mono">WANT THE HIGHLIGHTS?</span>
+            <strong>Get the Weekly Scorecard</strong>
+            <p>Every Sunday. 5-minute read. What moved, what stalled, and one deep dive.</p>
+            <span>Subscribe free &rarr;</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- WHAT JUST HAPPENED -->
-    <section class="what-happened">
-      <div class="container">
-        <div class="section-head">
-          <div class="h2">MOST RECENT PROGRESS</div>
-        </div>
-
-        <div class="updates" role="list" aria-label="Latest updates">
-          <!-- Updates will be loaded dynamically from Google Sheets -->
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
-
     <div class="footer-bg-text">NYC</div>
     <div class="footer-inner container">
       <div class="footer-grid">
@@ -269,18 +239,16 @@
   <script>
     // --------------------------
     // GOOGLE SHEETS CONFIGURATION
-    // Replace these URLs with your published Google Sheets CSV URLs
-    // See SHEETS_SETUP.md for instructions
     // --------------------------
     const SHEETS_CONFIG = {
       promises: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=0&single=true&output=csv",
       updates: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=1426316595&single=true&output=csv",
       overall: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=288337905&single=true&output=csv",
-      cacheDuration: 5 * 60 * 1000 // 5 minutes
+      cacheDuration: 5 * 60 * 1000
     };
 
     // --------------------------
-    // Fallback data (used if sheets fail to load)
+    // Fallback data
     // --------------------------
     const FALLBACK_DATA = {
       overallStatus: {
@@ -289,86 +257,26 @@
         lastUpdated: "2026-03-17"
       },
       promises: [
-        {
-          id: "p1",
-          title: "Fund tenant legal support citywide",
-          category: "Housing",
-          status: "Headwinds",
-          statusLabel: "Budget pending",
-          oneLineSummary: "Funding discussions are active, but no final commitment yet."
-        },
-        {
-          id: "p2",
-          title: "Expand bus lanes on key corridors",
-          category: "Transit",
-          status: "Gaining Ground",
-          statusLabel: "In motion",
-          oneLineSummary: "Agencies are coordinating next steps and public input."
-        },
-        {
-          id: "p3",
-          title: "Launch paid youth internships",
-          category: "Education",
-          status: "Delivered",
-          statusLabel: "Pilot live",
-          oneLineSummary: "A pilot program is running with early results expected soon."
-        },
-        {
-          id: "p4",
-          title: "Improve subway accessibility timelines",
-          category: "Transit",
-          status: "Blocked",
-          statusLabel: "Stalled",
-          oneLineSummary: "No clear plan or timeline has been published."
-        },
-        {
-          id: "p5",
-          title: "Strengthen workplace protections",
-          category: "Labor",
-          status: "Gaining Ground",
-          statusLabel: "Drafting",
-          oneLineSummary: "Policy language is taking shape with stakeholder feedback."
-        },
-        {
-          id: "p6",
-          title: "Build more deeply affordable housing",
-          category: "Housing",
-          status: "Headwinds",
-          statusLabel: "Negotiating",
-          oneLineSummary: "Key details depend on land, financing, and approvals."
-        }
+        { id: "p1", title: "Fund tenant legal support citywide", category: "Housing", status: "Headwinds", statusLabel: "Budget pending", oneLineSummary: "Funding discussions are active, but no final commitment yet." },
+        { id: "p2", title: "Expand bus lanes on key corridors", category: "Transit", status: "Gaining Ground", statusLabel: "In motion", oneLineSummary: "Agencies are coordinating next steps and public input." },
+        { id: "p3", title: "Launch paid youth internships", category: "Education", status: "Delivered", statusLabel: "Pilot live", oneLineSummary: "A pilot program is running with early results expected soon." },
+        { id: "p4", title: "Improve subway accessibility timelines", category: "Transit", status: "Blocked", statusLabel: "Stalled", oneLineSummary: "No clear plan or timeline has been published." },
+        { id: "p5", title: "Strengthen workplace protections", category: "Labor", status: "Gaining Ground", statusLabel: "Drafting", oneLineSummary: "Policy language is taking shape with stakeholder feedback." },
+        { id: "p6", title: "Build more deeply affordable housing", category: "Housing", status: "Headwinds", statusLabel: "Negotiating", oneLineSummary: "Key details depend on land, financing, and approvals." }
       ],
       updates: [
-        {
-          date: "01/18",
-          promiseId: "123",
-          headline: "Council hearing scheduled for bus lane expansion",
-          category: "Transit"
-        },
-        {
-          date: "01/12",
-          promiseId: "456",
-          headline: "Draft bill released for tenant legal support funding",
-          category: "Housing"
-        },
-        {
-          date: "01/04",
-          promiseId: "789",
-          headline: "Pilot announced for after-school paid internships",
-          category: "Education"
-        }
+        { date: "01/18", promiseID: "p2", headline: "Council hearing scheduled for bus lane expansion", category: "Transit" },
+        { date: "01/12", promiseID: "p1", headline: "Draft bill released for tenant legal support funding", category: "Housing" },
+        { date: "01/04", promiseID: "p3", headline: "Pilot announced for after-school paid internships", category: "Education" }
       ]
     };
 
-    // --------------------------
-    // Data variables (will be populated from sheets or fallback)
-    // --------------------------
     let overallStatus = FALLBACK_DATA.overallStatus;
     let promises = FALLBACK_DATA.promises;
     let updates = FALLBACK_DATA.updates;
 
     // --------------------------
-    // Google Sheets CSV Parser
+    // CSV Parser
     // --------------------------
     function parseCSV(text) {
       const lines = text.trim().split('\n');
@@ -386,7 +294,7 @@
           if (inQuotes) {
             if (char === '"' && nextChar === '"') {
               current += '"';
-              i++; // skip escaped quote
+              i++;
             } else if (char === '"') {
               inQuotes = false;
             } else {
@@ -409,310 +317,196 @@
 
       const headers = parseLine(lines[0]);
       const rows = [];
-
       for (let i = 1; i < lines.length; i++) {
         const values = parseLine(lines[i]);
         const row = {};
-        headers.forEach((header, index) => {
-          row[header] = values[index] || '';
-        });
+        headers.forEach((header, index) => { row[header] = values[index] || ''; });
         rows.push(row);
       }
-
       return rows;
     }
 
     // --------------------------
-    // Fetch data from Google Sheets with caching
+    // Fetch with cache
     // --------------------------
     async function fetchSheet(url, cacheKey) {
-      // Check cache first
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
         const { data, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) {
-          return data;
-        }
+        if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) return data;
       }
-
-      // Fetch fresh data
       try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const text = await response.text();
         const data = parseCSV(text);
-
-        // Cache the result
-        localStorage.setItem(cacheKey, JSON.stringify({
-          data,
-          timestamp: Date.now()
-        }));
-
+        localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
         return data;
       } catch (error) {
         console.warn(`Failed to fetch ${cacheKey}:`, error);
-        // Return cached data if available, even if expired
-        if (cached) {
-          return JSON.parse(cached).data;
-        }
+        if (cached) return JSON.parse(cached).data;
         throw error;
       }
     }
 
     // --------------------------
-    // Load all data from Google Sheets
+    // Load all data
     // --------------------------
     async function loadData() {
       try {
-        // Only fetch if URLs are configured
         if (SHEETS_CONFIG.promises !== "YOUR_PROMISES_SHEET_URL_HERE") {
           promises = await fetchSheet(SHEETS_CONFIG.promises, 'promises_cache');
         }
-
         if (SHEETS_CONFIG.updates !== "YOUR_UPDATES_SHEET_URL_HERE") {
           updates = await fetchSheet(SHEETS_CONFIG.updates, 'updates_cache');
         }
-
         if (SHEETS_CONFIG.overall !== "YOUR_OVERALL_SHEET_URL_HERE") {
           const overallData = await fetchSheet(SHEETS_CONFIG.overall, 'overall_cache');
-          if (overallData && overallData.length > 0) {
-            overallStatus = overallData[0];
-          }
+          if (overallData && overallData.length > 0) overallStatus = overallData[0];
         }
-
         console.log('✓ Data loaded from Google Sheets');
       } catch (error) {
         console.warn('Using fallback data:', error);
       }
-
-      // Render the page with loaded data
       renderPage();
     }
 
     // --------------------------
-    // Helpers: status -> colors/tints/images
+    // Status config
     // --------------------------
     const STATUS = {
-      "Delivered": { color: getCSS("--status-lets"), tint: "rgba(0, 204, 102, 0.08)", image: "images/delivered.png" },
+      "Delivered":      { color: getCSS("--status-lets"),    tint: "rgba(0, 204, 102, 0.08)",  image: "images/delivered.png" },
       "Gaining Ground": { color: getCSS("--status-alright"), tint: "rgba(179, 249, 91, 0.08)", image: "images/making-progress.png" },
-      "Early Days": { color: getCSS("--status-early"), tint: "rgba(29, 222, 228, 0.08)", image: "images/early-days.png" },
-      "Headwinds": { color: getCSS("--status-oof"), tint: "rgba(255, 170, 15, 0.08)", image: "images/headwinds.png" },
-      "Blocked": { color: getCSS("--status-yikes"), tint: "rgba(255, 51, 51, 0.08)", image: "images/nope.png" }
+      "Early Days":     { color: getCSS("--status-early"),   tint: "rgba(29, 222, 228, 0.08)", image: "images/early-days.png" },
+      "Headwinds":      { color: getCSS("--status-oof"),     tint: "rgba(255, 170, 15, 0.08)", image: "images/headwinds.png" },
+      "Blocked":        { color: getCSS("--status-yikes"),   tint: "rgba(255, 51, 51, 0.08)",  image: "images/nope.png" }
     };
 
-    function getCSS(varName){
+    function getCSS(varName) {
       return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
     }
 
-    function formatLastUpdated(iso){
-      try{
-        const d = new Date(iso);
-        const opts = { year:"numeric", month:"long", day:"numeric", hour:"numeric", minute:"2-digit" };
-        return d.toLocaleString(undefined, opts);
-      } catch(e){
-        return iso;
-      }
+    function formatLastUpdated(iso) {
+      try {
+        const [year, month, day] = iso.split('-').map(Number);
+        return new Date(year, month - 1, day).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+      } catch(e) { return iso; }
     }
 
     // --------------------------
-    // Render all dynamic content
+    // Render
     // --------------------------
     function renderPage() {
       renderHeroSection();
+      renderScoreboard();
       renderUpdatesSection();
-      renderPromisesSection();
-      renderPromisesSummary();
     }
 
     function renderHeroSection() {
-      const tsEl = document.getElementById("heroTimestamp");
-      tsEl.textContent = "Last updated: " + formatLastUpdated(overallStatus.lastUpdated);
-
-      const overallLabelEl = document.getElementById("overallStatusLabel");
-      overallLabelEl.textContent = overallStatus.status.toUpperCase();
-
-      // Update meter a11y label
-      const meterA11y = document.getElementById("meterA11yWrap");
-      meterA11y.setAttribute("aria-label", `Status: ${overallStatus.status}`);
-
+      document.getElementById("heroTimestamp").textContent = "Last updated " + formatLastUpdated(overallStatus.lastUpdated);
+      document.getElementById("overallStatusLabel").textContent = overallStatus.status.toUpperCase();
+      document.getElementById("meterA11yWrap").setAttribute("aria-label", `Status: ${overallStatus.status}`);
       setMeterStatus(overallStatus.status);
     }
 
-    function renderUpdatesSection() {
-      const updatesContainer = document.querySelector('.updates');
-      if (!updatesContainer) return;
+    function renderScoreboard() {
+      const counts = {};
+      promises.forEach(p => { if (p.status) counts[p.status] = (counts[p.status] || 0) + 1; });
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      set('scoreTotal',     promises.length || '—');
+      set('scoreDelivered', counts['Delivered']      || 0);
+      set('scoreGaining',   counts['Gaining Ground'] || 0);
+      set('scoreEarly',     counts['Early Days']     || 0);
+      set('scoreHeadwinds', counts['Headwinds']      || 0);
+      set('scoreBlocked',   counts['Blocked']        || 0);
+    }
 
-      updatesContainer.innerHTML = '';
+    function renderUpdatesSection() {
+      const list = document.querySelector('.what-moved-list');
+      if (!list) return;
+      list.innerHTML = '';
+
+      const promiseLookup = {};
+      promises.forEach(p => { promiseLookup[p.id] = p; });
 
       updates.slice(0, 3).forEach(update => {
+        const promise = promiseLookup[update.promiseID] || null;
+        const status = promise ? promise.status : null;
+        const accentColor = status && STATUS[status] ? STATUS[status].color : '#ccc';
+        const promiseTitle = promise ? promise.title : update.headline;
+
         const a = document.createElement('a');
-        a.className = 'update-item';
-        a.setAttribute('role', 'listitem');
+        a.className = 'moved-item';
+        a.style.setProperty('--accent', accentColor);
         a.href = `/promise/?id=${encodeURIComponent(update.promiseID)}`;
-        a.setAttribute('aria-label', `Update: ${update.headline} (${update.category})`);
+        a.setAttribute('aria-label', `${promiseTitle}: ${update.headline} (${update.category})`);
 
         a.innerHTML = `
-          <div class="update-date">${escapeHTML(update.date)}</div>
-          <div class="update-content">
-            <div class="update-headline">${escapeHTML(update.headline)}</div>
-            <div class="update-cat">${escapeHTML(update.category)}</div>
+          <div class="moved-item-accent"></div>
+          <div class="moved-item-content">
+            <strong>${escapeHTML(promiseTitle)}</strong>
+            <span>${escapeHTML(update.headline)}</span>
           </div>
-          <svg class="update-arrow" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M9 6l6 6-6 6" />
+          <div class="moved-item-meta">
+            <span>${escapeHTML(update.category)}</span>
+            <span>${escapeHTML(update.date)}</span>
+          </div>
+          <svg class="moved-item-arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M9 6l6 6-6 6"/>
           </svg>
         `;
-
-        updatesContainer.appendChild(a);
+        list.appendChild(a);
       });
-    }
-
-    function getRecentPromiseIds() {
-      const now = new Date();
-      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-      const recentIds = new Set();
-      updates.forEach(u => {
-        try {
-          // Parse date formats like "02/14" or "2/14" (assume current year)
-          const parts = (u.date || '').split('/');
-          if (parts.length === 2) {
-            const d = new Date(now.getFullYear(), parseInt(parts[0]) - 1, parseInt(parts[1]));
-            if (d >= weekAgo && d <= now) {
-              recentIds.add(u.promiseID || u.promiseId);
-            }
-          }
-        } catch(e) {}
-      });
-      return recentIds;
-    }
-
-    function renderPromisesSection() {
-      const grid = document.getElementById("promiseGrid");
-      if (!grid) return;
-
-      grid.innerHTML = '';
-      promises.slice(0, 6).forEach(p => grid.appendChild(makeCard(p)));
-    }
-
-    function renderPromisesSummary() {
-      const bar = document.getElementById('promisesSummaryBar');
-      if (!bar) return;
-
-      const counts = {};
-      promises.forEach(p => {
-        if (p.status) counts[p.status] = (counts[p.status] || 0) + 1;
-      });
-
-      const total = promises.length;
-      const statusOrder = ["Delivered", "Gaining Ground", "Early Days", "Headwinds", "Blocked"];
-
-      const dotsHTML = statusOrder
-        .filter(s => counts[s])
-        .map(s => {
-          const color = STATUS[s]?.color || '#888';
-          return `<span class="summary-item"><span class="summary-dot" style="background:${color}"></span>${counts[s]} ${escapeHTML(s)}</span>`;
-        })
-        .join('');
-
-      bar.innerHTML = `
-        <div class="summary-counts">${dotsHTML}</div>
-        <a class="btn btn-primary" href="/promises.html">View All ${total} Promises &rarr;</a>
-      `;
     }
 
     // --------------------------
-    // Large Meter SVG geometry (180° arc, open at bottom)
+    // Meter SVG geometry
     // --------------------------
-    const svg = document.getElementById("largeMeter");
-    const segmentNope = document.getElementById("segmentNope");
-    const segmentHeadwinds = document.getElementById("segmentHeadwinds");
-    const segmentEarlyDays = document.getElementById("segmentEarlyDays");
+    const segmentNope          = document.getElementById("segmentNope");
+    const segmentHeadwinds     = document.getElementById("segmentHeadwinds");
+    const segmentEarlyDays     = document.getElementById("segmentEarlyDays");
     const segmentMakingProgress = document.getElementById("segmentMakingProgress");
-    const segmentDelivered = document.getElementById("segmentDelivered");
-    const needle = document.getElementById("needleGroup");
+    const segmentDelivered     = document.getElementById("segmentDelivered");
+    const needle               = document.getElementById("needleGroup");
 
-    // Arc settings
-    const cx = 200, cy = 200;
-    const r = 150;           // radius for 400x400 with 28px stroke
-    const startDeg = 270;    // bottom-left (9 o'clock position)
-    const endDeg = 90;       // top-right (3 o'clock position)
-    const sweepDeg = 180;    // 180 degree arc from 270° to 90°
+    const cx = 200, cy = 200, r = 150, sweepDeg = 180;
 
-    function polarToCartesian(cx, cy, r, deg){
+    function polarToCartesian(cx, cy, r, deg) {
       const rad = (deg - 90) * Math.PI / 180;
       return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
     }
 
-    function describeArc(cx, cy, r, startAngle, endAngle){
+    function describeArc(cx, cy, r, startAngle, endAngle) {
       const start = polarToCartesian(cx, cy, r, endAngle);
-      const end = polarToCartesian(cx, cy, r, startAngle);
-      // Calculate sweep angle, handling wraparound
-      let sweepAngle = endAngle - startAngle;
-      if (sweepAngle < 0) sweepAngle += 360;
-      const largeArcFlag = (sweepAngle <= 180) ? "0" : "1";
-      return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+      const end   = polarToCartesian(cx, cy, r, startAngle);
+      let sweep = endAngle - startAngle;
+      if (sweep < 0) sweep += 360;
+      return ["M", start.x, start.y, "A", r, r, 0, sweep <= 180 ? "0" : "1", 0, end.x, end.y].join(" ");
     }
 
-    // Create 5 colored segments for the statuses
-    // Each segment is 36 degrees (180° / 5 = 36°)
-    // Going from 270° (left) clockwise to 90° (right) through bottom
-    const segmentDeg = 36;
+    segmentNope.setAttribute("d",           describeArc(cx, cy, r, 270, 306));
+    segmentHeadwinds.setAttribute("d",      describeArc(cx, cy, r, 306, 342));
+    segmentEarlyDays.setAttribute("d",      describeArc(cx, cy, r, 342, 18));
+    segmentMakingProgress.setAttribute("d", describeArc(cx, cy, r, 18, 54));
+    segmentDelivered.setAttribute("d",      describeArc(cx, cy, r, 54, 90));
 
-    // Blocked: 270° to 306° (0-20%)
-    const nopeArc = describeArc(cx, cy, r, 270, 306);
-    segmentNope.setAttribute("d", nopeArc);
-
-    // Headwinds: 306° to 342° (20-40%)
-    const headwindsArc = describeArc(cx, cy, r, 306, 342);
-    segmentHeadwinds.setAttribute("d", headwindsArc);
-
-    // Early Days: 342° to 18° (going through 360°/0°) (40-60%)
-    const earlyDaysArc = describeArc(cx, cy, r, 342, 18);
-    segmentEarlyDays.setAttribute("d", earlyDaysArc);
-
-    // Gaining Ground: 18° to 54° (60-80%)
-    const makingProgressArc = describeArc(cx, cy, r, 18, 54);
-    segmentMakingProgress.setAttribute("d", makingProgressArc);
-
-    // Delivered: 54° to 90° (80-100%)
-    const deliveredArc = describeArc(cx, cy, r, 54, 90);
-    segmentDelivered.setAttribute("d", deliveredArc);
-
-    // --------------------------
-    // Status -> needle position and active arc amount
-    // --------------------------
-    // Needle animation: from 0% (start at 270°) to target bucket
-    // Buckets from 270° (Blocked/0%) to 90° (Delivered/100%):
-    // Delivered: 100% (at 90°)
-    // Gaining Ground: 60-75%
-    // Early Days: 40-55%
-    // Headwinds: 20-35%
-    // Blocked: 0% (at 270°)
     const BUCKETS = {
-      "Delivered": { pct: 1.0, labelPct: 0.95 },
-      "Gaining Ground": { pct: 0.675, labelPct: 0.67 },
-      "Early Days": { pct: 0.475, labelPct: 0.47 },
-      "Headwinds": { pct: 0.275, labelPct: 0.27 },
-      "Blocked": { pct: 0.0, labelPct: 0.05 }
+      "Delivered":      { pct: 1.0   },
+      "Gaining Ground": { pct: 0.675 },
+      "Early Days":     { pct: 0.475 },
+      "Headwinds":      { pct: 0.275 },
+      "Blocked":        { pct: 0.0   }
     };
 
-    function setMeterStatus(status){
+    function setMeterStatus(status) {
       const s = STATUS[status] || STATUS["Headwinds"];
       const b = BUCKETS[status] || BUCKETS["Headwinds"];
 
-      // Update center image
       const centerImage = document.getElementById("centerImage");
-      if (centerImage && s.image) {
-        centerImage.setAttribute("href", s.image);
-      }
+      if (centerImage && s.image) centerImage.setAttribute("href", s.image);
 
-      // Needle target rotation:
-      // Our needleGroup starts at 270° (0% - Blocked position).
-      // We map pct -> rotation from 270° to 90° (180° sweep).
-      const startAngle = 270;
-      const target = startAngle + (sweepDeg * b.pct);
-
-      // Animate needle using Web Animations API (respects reduced motion via CSS)
-      try{
+      const target = 270 + (sweepDeg * b.pct);
+      try {
         needle.animate(
           [
             { transform: "rotate(270deg)", transformOrigin: "200px 200px" },
@@ -720,129 +514,52 @@
           ],
           { duration: 800, easing: "cubic-bezier(0.2, 0.9, 0.2, 1)", fill: "forwards" }
         );
-      } catch(e){
+      } catch(e) {
         needle.setAttribute("transform", `rotate(${target} 200 200)`);
       }
     }
 
-    // --------------------------
-    // Render Promise Cards
-    // --------------------------
-    function makeCard(p){
-      const s = STATUS[p.status] || STATUS["Oof"];
-
-      const a = document.createElement("a");
-      a.className = `card plausible-event-name=Promise+Click plausible-event-title=${encodeURIComponent(p.title)} plausible-event-category=${encodeURIComponent(p.category)} plausible-event-status=${encodeURIComponent(p.status)}`;
-      a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
-      a.setAttribute("aria-label", `Promise: ${p.title}. Category: ${p.category}. Status: ${p.status}. ${p.statusLabel}.`);
-
-      // Tint background
-      a.style.background = s.tint;
-
-      // Hover border color shifts to status color
-      a.addEventListener("mouseenter", () => { a.style.borderColor = s.color; });
-      a.addEventListener("mouseleave", () => { a.style.borderColor = "#000"; });
-
-      const badgeTextColor = p.status === "Gaining Ground" ? "#000" : "#fff";
-      a.innerHTML = `
-        <div class="badge" style="background:${s.color};color:${badgeTextColor}">${p.status.toUpperCase()}</div>
-        <div class="card-title">${escapeHTML(p.title)}</div>
-        <div class="card-cat label">${escapeHTML(p.category)}</div>
-      `;
-      return a;
-    }
-
-    function makePromiseRow(p, movedThisWeek) {
-      const s = STATUS[p.status] || STATUS["Early Days"];
-
-      const a = document.createElement("a");
-      a.className = 'promise-row' + (movedThisWeek ? ' promise-row--moved' : '');
-      a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
-      a.setAttribute("aria-label", `${p.title}. ${p.category}. ${p.status}.`);
-
-      a.innerHTML = `
-        <div class="promise-row-left">
-          <div class="promise-title">${escapeHTML(p.title)}</div>
-          ${movedThisWeek ? '<div class="promise-moved-bar"></div>' : ''}
-        </div>
-        <div class="promise-row-right">
-          <span class="promise-category">${escapeHTML(p.category)}</span>
-          <span class="promise-status-badge" style="border-color:${s.color};background:${s.tint} !important">${escapeHTML(p.status).toUpperCase()}</span>
-        </div>
-        <svg class="promise-row-arrow" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M9 6l6 6-6 6"/>
-        </svg>
-      `;
-      return a;
-    }
-
-    function escapeHTML(str){
+    function escapeHTML(str) {
       return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#39;");
+        .replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
     }
 
     // --------------------------
-    // Copy link function
+    // Init
     // --------------------------
-    function copyLink(button) {
-      const url = 'https://www.themamdanimeter.com';
-      navigator.clipboard.writeText(url).then(() => {
-        const tooltip = button.querySelector('.copy-tooltip');
-        tooltip.classList.add('show');
-        setTimeout(() => {
-          tooltip.classList.remove('show');
-        }, 2000);
-      });
-    }
+    renderHeroSection();
+    loadData();
 
     // --------------------------
-    // Initialize the page
-    // --------------------------
-    renderHeroSection(); // Render hero immediately with hardcoded fallback data
-    loadData();          // Then fetch sheets and re-render everything
-
-    // --------------------------
-    // Mobile menu interactions + focus management
+    // Mobile menu
     // --------------------------
     const hamburger = document.querySelector(".hamburger");
-    const overlay = document.getElementById("mobileMenu");
-    const closeBtn = document.querySelector(".mobile-close");
-    let lastFocus = null;
+    const overlay   = document.getElementById("mobileMenu");
+    const closeBtn  = document.querySelector(".mobile-close");
+    let lastFocus   = null;
 
-    function openMenu(){
+    function openMenu() {
       lastFocus = document.activeElement;
       overlay.hidden = false;
       requestAnimationFrame(() => overlay.classList.add("open"));
-      hamburger.setAttribute("aria-expanded","true");
+      hamburger.setAttribute("aria-expanded", "true");
       closeBtn.focus();
       document.body.style.overflow = "hidden";
     }
-    function closeMenu(){
+    function closeMenu() {
       overlay.classList.remove("open");
-      hamburger.setAttribute("aria-expanded","false");
+      hamburger.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
-      setTimeout(() => {
-        overlay.hidden = true;
-        if(lastFocus) lastFocus.focus();
-      }, 260);
+      setTimeout(() => { overlay.hidden = true; if (lastFocus) lastFocus.focus(); }, 260);
     }
 
     hamburger.addEventListener("click", () => {
-      const expanded = hamburger.getAttribute("aria-expanded") === "true";
-      expanded ? closeMenu() : openMenu();
+      hamburger.getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu();
     });
     closeBtn.addEventListener("click", closeMenu);
-
-    overlay.addEventListener("click", (e) => {
-      if(e.target === overlay) closeMenu();
-    });
-    document.addEventListener("keydown", (e) => {
-      if(!overlay.hidden && e.key === "Escape") closeMenu();
-    });
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeMenu(); });
+    document.addEventListener("keydown", (e) => { if (!overlay.hidden && e.key === "Escape") closeMenu(); });
   </script>
   <script>
     (function() {
@@ -877,4 +594,3 @@
   </script>
 </body>
 </html>
-
