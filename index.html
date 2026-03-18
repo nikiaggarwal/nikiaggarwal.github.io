@@ -420,16 +420,61 @@
       setMeterStatus(overallStatus.status);
     }
 
+    // Slot machine: two-phase — cycle immediately, land when data arrives
+    const scoreSlots = {};
+    const SCORE_IDS = ['scoreTotal','scoreDelivered','scoreGaining','scoreEarly','scoreHeadwinds','scoreBlocked'];
+
+    function startScoreCycling() {
+      SCORE_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const slot = { active: true, timer: null };
+        scoreSlots[id] = slot;
+
+        function cycle() {
+          if (!slot.active) return;
+          el.textContent = Math.floor(Math.random() * 31);
+          slot.timer = setTimeout(cycle, 70);
+        }
+        cycle();
+      });
+    }
+
+    function landScoreCell(id, finalValue, delay) {
+      setTimeout(() => {
+        const slot = scoreSlots[id];
+        if (slot) { slot.active = false; clearTimeout(slot.timer); }
+
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const duration = 700;
+        const start = Date.now();
+
+        function tick() {
+          const progress = Math.min((Date.now() - start) / duration, 1);
+          if (progress >= 1) { el.textContent = finalValue; return; }
+          el.textContent = Math.floor(Math.random() * 31);
+          setTimeout(tick, 35 + Math.pow(progress, 2) * 130);
+        }
+        tick();
+      }, delay);
+    }
+
     function renderScoreboard() {
       const counts = {};
       promises.forEach(p => { if (p.status) counts[p.status] = (counts[p.status] || 0) + 1; });
-      const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      set('scoreTotal',     promises.length || '—');
-      set('scoreDelivered', counts['Delivered']      || 0);
-      set('scoreGaining',   counts['Gaining Ground'] || 0);
-      set('scoreEarly',     counts['Early Days']     || 0);
-      set('scoreHeadwinds', counts['Headwinds']      || 0);
-      set('scoreBlocked',   counts['Blocked']        || 0);
+
+      const cells = [
+        ['scoreTotal',     promises.length || 0],
+        ['scoreDelivered', counts['Delivered']      || 0],
+        ['scoreGaining',   counts['Gaining Ground'] || 0],
+        ['scoreEarly',     counts['Early Days']     || 0],
+        ['scoreHeadwinds', counts['Headwinds']      || 0],
+        ['scoreBlocked',   counts['Blocked']        || 0],
+      ];
+
+      cells.forEach(([id, val], i) => landScoreCell(id, val, i * 90));
     }
 
     function renderUpdatesSection() {
@@ -540,6 +585,7 @@
     // Init
     // --------------------------
     renderHeroSection();
+    startScoreCycling();
     loadData();
 
     // --------------------------
