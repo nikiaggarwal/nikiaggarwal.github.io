@@ -423,17 +423,35 @@
     // --------------------------
     // Make Promise Row
     // --------------------------
+    function isRecentlyUpdated(p) {
+      const raw = p.lastUpdated || p.updatedAt || p.updated || '';
+      if (!raw) return false;
+      const d = new Date(raw);
+      if (isNaN(d)) return false;
+      return (Date.now() - d.getTime()) < 10 * 24 * 60 * 60 * 1000;
+    }
+
     function makePromiseRow(p) {
       const s = STATUS[p.status] || STATUS["Early Days"];
+      const recent = isRecentlyUpdated(p);
 
       const a = document.createElement("a");
       a.className = `promise-row plausible-event-name=Promise+Click plausible-event-title=${encodeURIComponent(p.title)} plausible-event-category=${encodeURIComponent(p.category)} plausible-event-status=${encodeURIComponent(p.status)}`;
       a.href = `/promise/?id=${encodeURIComponent(p.id)}`;
-      a.setAttribute("aria-label", `${p.title}. ${p.category}. ${p.status}.`);
+      a.setAttribute("aria-label", `${p.title}. ${p.category}. ${p.status}.${recent ? ' Recently updated.' : ''}`);
+
+      const starburst = recent
+        ? `<span class="promise-starburst" aria-label="Recently updated">NEW</span>`
+        : '';
 
       a.innerHTML = `
+        <div class="promise-row-accent" style="background:${s.color}"></div>
         <div class="promise-row-left">
-          <div class="promise-title">${escapeHTML(p.title)}</div>
+          <div class="promise-title-line">
+            ${starburst}
+            <span class="promise-title">${escapeHTML(p.title)}</span>
+          </div>
+          <div class="promise-summary">${escapeHTML(p.oneLineSummary || '')}</div>
         </div>
         <div class="promise-row-right">
           <span class="promise-category">${escapeHTML(p.category)}</span>

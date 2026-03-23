@@ -863,32 +863,40 @@ h1,h2,h3,h4{ margin:0; }
   border-top:1px solid #e0e0e0;
 }
 .promise-row{
-  display:flex;
+  display:grid;
+  grid-template-columns:4px 1fr auto auto;
   align-items:center;
-  justify-content:space-between;
-  padding:20px 0 20px 12px;
+  gap:20px;
+  padding:20px 12px 20px 0;
   border-bottom:1px solid #e0e0e0;
-  border-left:3px solid transparent;
   text-decoration:none;
   color:inherit;
-  transition: border-color 200ms ease, padding-left 200ms ease;
-  gap: 24px;
+  transition: background 200ms ease;
   position:relative;
 }
 .promise-row:hover{
-  border-left-color: #222;
-  padding-left:18px;
+  background:rgba(0,0,0,0.012);
 }
 .promise-row:focus-visible{
   outline: var(--focus);
   outline-offset: var(--focus-offset);
 }
+.promise-row-accent{
+  width:4px;
+  align-self:stretch;
+  min-height:20px;
+  border-radius:2px;
+  flex-shrink:0;
+}
 .promise-row-left{
   display:flex;
   flex-direction:column;
-  gap:6px;
   min-width:0;
-  flex:1;
+}
+.promise-title-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 .promise-title{
   font-size:18px;
@@ -897,7 +905,22 @@ h1,h2,h3,h4{ margin:0; }
   transition: color 200ms ease;
 }
 .promise-row:hover .promise-title{
-  color:#444;
+  color: var(--blue);
+}
+.promise-summary{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  font-size:15px;
+  line-height:1.4;
+  color:#888;
+  transition: max-height 250ms ease, opacity 200ms ease, margin-top 200ms ease;
+  margin-top:0;
+}
+.promise-row:hover .promise-summary{
+  max-height:80px;
+  opacity:1;
+  margin-top:6px;
 }
 /* Arrow that reveals on hover */
 .promise-row-arrow{
@@ -906,21 +929,12 @@ h1,h2,h3,h4{ margin:0; }
   flex-shrink:0;
   color:#bbb;
   opacity:0;
-  transform:translateX(-6px);
+  transform:translateX(-4px);
   transition: opacity 200ms ease, transform 200ms ease;
 }
 .promise-row:hover .promise-row-arrow{
   opacity:1;
   transform:translateX(0);
-}
-.promise-row--moved{
-  background: rgba(212, 160, 23, 0.06);
-}
-.promise-moved-bar{
-  width:120px;
-  height:4px;
-  border-radius:2px;
-  background: linear-gradient(to right, #d4a017, #e67e22);
 }
 .promise-row-right{
   display:flex;
@@ -946,13 +960,46 @@ h1,h2,h3,h4{ margin:0; }
   text-transform:uppercase;
   letter-spacing:0.5px;
   padding:5px 14px;
-  border-radius:4px;
+  border-radius:0;
   white-space:nowrap;
   color:#888;
   border:1.5px solid;
   min-width:150px;
   text-align:center;
   box-sizing:border-box;
+}
+/* Starburst update indicator */
+.promise-starburst{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  font-family:'IBM Plex Sans', sans-serif;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#000;
+  flex-shrink:0;
+  position:relative;
+  z-index:1;
+}
+.promise-starburst::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--orange);
+  clip-path:polygon(50% 0%,61% 11%,75% 3%,80% 18%,97% 18%,90% 32%,100% 45%,88% 52%,93% 68%,78% 67%,73% 82%,61% 74%,50% 88%,39% 74%,27% 82%,22% 67%,7% 68%,12% 52%,0% 45%,10% 32%,3% 18%,20% 18%,25% 3%,39% 11%);
+  z-index:-1;
+  animation:starburst-pulse 2s ease-in-out infinite;
+}
+@keyframes starburst-pulse{
+  0%,100%{ transform:scale(1) rotate(0deg); }
+  50%{ transform:scale(1.06) rotate(3deg); }
+}
+@media (prefers-reduced-motion:reduce){
+  .promise-starburst::before{ animation:none; }
 }
 
 .cta-row{
@@ -1223,10 +1270,13 @@ footer{
   /* Promises page */
   .grid{ grid-template-columns: 1fr; gap:16px; }
   .card{ min-height: 200px; padding: 20px; }
-  .promise-row{ flex-direction:column; align-items:flex-start; gap:12px; }
+  .promise-row{ grid-template-columns:4px 1fr auto; gap:12px; padding:16px 0; }
   .promise-row-right{ gap:12px; }
   .promise-title{ font-size:16px; }
+  .promise-summary{ display:none; }
   .promise-category{ display:none; }
+  .promise-status-badge{ min-width:auto; font-size:11px; padding:4px 10px; }
+  .promise-starburst{ width:32px; height:32px; font-size:6px; }
   .promises-header{ padding: 32px 0; }
   .summary-stats{ grid-template-columns:repeat(3,1fr); }
   .summary-stat{ padding:20px 16px; }
