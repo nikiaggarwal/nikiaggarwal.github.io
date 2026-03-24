@@ -93,31 +93,15 @@
       </div>
     </section>
 
-    <!-- COMBINED STATUS + CATEGORY FILTERS -->
-    <section class="promises-filters" id="filtersSection">
+    <!-- SUMMARY BAR (clickable status filter) -->
+    <section class="promises-summary">
       <div class="promises-container">
-        <div id="summaryStats" class="status-filter-row" role="group" aria-label="Filter by status">
+        <div class="summary-stats" id="summaryStats" role="group" aria-label="Filter by status">
           <!-- populated by JS -->
         </div>
-        <div class="category-filter-row">
-          <div class="filter-chips" role="group" aria-label="Filter by category">
-            <button class="filter-chip active" data-filter-type="category" data-filter-value="All">All</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Housing">Housing</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Small Business">Small Business</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Education">Education</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Labor">Labor</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Affordability">Affordability</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Climate">Climate</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="LGBTQ+">LGBTQ+</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Community">Community</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Reform & Funding">Reform &amp; Funding</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Trump-Proofing">Trump-Proofing</button>
-          </div>
-        </div>
+        <p class="summary-key"><span class="summary-key-badge">NEW</span> = progress made in the last 10 days</p>
       </div>
     </section>
-
-    <div class="promises-divider"></div>
 
     <!-- PROMISES GRID -->
     <section class="promises-grid-section">
@@ -483,11 +467,10 @@
       filters.status = 'All';
       filters.category = 'All';
 
+      document.querySelectorAll('#summaryStats .summary-stat').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.filter-chip').forEach(chip => {
         chip.classList.remove('active');
-        if (chip.dataset.filterValue === 'All') {
-          chip.classList.add('active');
-        }
+        if (chip.dataset.filterValue === 'All') chip.classList.add('active');
       });
 
       filterPromises();
@@ -497,7 +480,7 @@
     // Render Summary Bar
     // --------------------------
     function renderSummary() {
-      const order = ["Delivered", "Gaining Ground", "Early Days", "Headwinds", "Blocked"];
+      const order = ["Gaining Ground", "Early Days", "Headwinds", "Blocked"];
       const counts = {};
       order.forEach(s => counts[s] = 0);
       allPromises.forEach(p => {
@@ -505,18 +488,28 @@
       });
 
       const container = document.getElementById('summaryStats');
-      const allBtn = `<button class="filter-chip status-filter-btn active" data-filter-type="status" data-filter-value="All">
-        <span class="status-count">${allPromises.length}</span><span class="status-name">ALL</span>
-      </button>`;
-
-      const statusBtns = order.map(status => {
+      container.innerHTML = order.map(status => {
         const s = STATUS[status];
-        return `<button class="filter-chip status-filter-btn" data-filter-type="status" data-filter-value="${status}">
-          <span class="status-count" style="color:${s.color}">${counts[status]}</span><span class="status-name">${status.toUpperCase()}</span>
+        return `<button class="summary-stat" data-status="${status}" aria-label="Filter by ${status}">
+          <div class="summary-stat-number" style="color:${s.color}">${counts[status]}</div>
+          <div class="summary-stat-label">${status.toUpperCase()}</div>
         </button>`;
       }).join('');
 
-      container.innerHTML = allBtn + statusBtns;
+      container.querySelectorAll('.summary-stat').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const status = btn.dataset.status;
+          if (filters.status === status) {
+            btn.classList.remove('active');
+            filters.status = 'All';
+          } else {
+            container.querySelectorAll('.summary-stat').forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            filters.status = status;
+          }
+          filterPromises();
+        });
+      });
     }
 
     // --------------------------

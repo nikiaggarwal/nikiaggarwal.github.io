@@ -627,33 +627,74 @@ h1,h2,h3,h4{ margin:0; }
   margin-top:16px;
 }
 
-/* Combined Filters */
-.promises-filters{
+/* Summary Bar */
+.promises-summary{
   background:#fff;
-  padding:28px 0 20px;
-  border-top:1px solid #e0e0e0;
 }
-.status-filter-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:16px;
+.summary-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
 }
-.status-filter-btn{
-  display:inline-flex;
-  align-items:baseline;
-  gap:6px;
-  padding:10px 18px;
+.summary-key{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:#aaa;
+  text-align:right;
+  margin:0;
+  padding:6px 0 14px;
 }
-.status-count{
+.summary-key-badge{
+  background:#ffaa0f;
+  color:#000;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:1px;
+  padding:2px 6px;
+  vertical-align:middle;
+}
+.summary-stat{
+  appearance:none;
+  background:#fff;
+  border:none;
+  border-left:1px solid #e8e8e8;
+  padding:28px 20px;
+  text-align:left;
+  cursor:pointer;
+  transition:background 150ms ease;
+  font-family:inherit;
+}
+.summary-stat:first-child{
+  border-left:none;
+}
+.summary-stat:hover{
+  background:#f7f7f7;
+}
+.summary-stat.active{
+  background:#f5f5f5;
+  box-shadow:inset 0 -3px 0 #000;
+}
+.summary-stat-number{
   font-family:'Archivo Black',sans-serif;
-  font-size:20px;
+  font-size:52px;
   line-height:1;
+  margin-bottom:8px;
 }
-.status-name{
-  font-size:12px;
+.summary-stat-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:#999;
 }
-.category-filter-row{}
+
+/* Category Filters */
+.promises-filters{
+  background:#f5f5f5;
+  padding:28px 0;
+  border-top:4px solid #000;
+  border-bottom:4px solid #000;
+}
 .filter-chips{
   display:flex;
   flex-wrap:wrap;
@@ -1262,9 +1303,10 @@ footer{
   .promise-status-badge{ min-width:auto; font-size:11px; padding:4px 10px; }
   .promise-starburst{ width:32px; height:32px; font-size:6px; }
   .promises-header{ padding:32px 0 24px; }
-  .promises-filters{ padding:20px 0 16px; }
-  .status-count{ font-size:16px; }
-  .status-filter-btn{ padding:8px 12px; }
+  .summary-stats{ grid-template-columns:repeat(2,1fr); }
+  .summary-stat{ padding:20px 16px; }
+  .summary-stat-number{ font-size:40px; }
+  .promises-filters{ padding:20px 0; }
   .promises-grid-section{ padding: 32px 0; }
   .subscribe-btn{ padding: 16px 32px; font-size: 14px; }
   .faq-section{ padding: 32px 0; }
