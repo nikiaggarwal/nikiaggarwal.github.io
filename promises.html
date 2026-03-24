@@ -88,37 +88,18 @@
     <!-- PAGE HEADER -->
     <section class="promises-header">
       <div class="promises-container">
-        <h1 class="h1">THE FULL LIST</h1>
-        <p class="promises-subtitle">The receipts, organized</p>
+        <h1 class="h1">25 PROMISES. HERE'S WHERE THEY STAND.</h1>
+        <p class="promises-subtitle">Click on a promise to get all of the sexy administrative details</p>
       </div>
     </section>
 
-    <!-- SUMMARY BAR -->
-    <section class="promises-summary">
+    <!-- COMBINED STATUS + CATEGORY FILTERS -->
+    <section class="promises-filters" id="filtersSection">
       <div class="promises-container">
-        <div class="summary-stats" id="summaryStats">
+        <div id="summaryStats" class="status-filter-row" role="group" aria-label="Filter by status">
           <!-- populated by JS -->
         </div>
-      </div>
-    </section>
-
-    <!-- FILTER SECTION -->
-    <section class="filters-section" id="filtersSection">
-      <div class="promises-container">
-        <div class="filter-group">
-          <div class="filter-label">Status</div>
-          <div class="filter-chips" role="group" aria-label="Filter by status">
-            <button class="filter-chip active" data-filter-type="status" data-filter-value="All">All</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Delivered">Delivered</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Gaining Ground">Gaining Ground</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Early Days">Early Days</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Headwinds">Headwinds</button>
-            <button class="filter-chip" data-filter-type="status" data-filter-value="Blocked">Blocked</button>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <div class="filter-label">Category</div>
+        <div class="category-filter-row">
           <div class="filter-chips" role="group" aria-label="Filter by category">
             <button class="filter-chip active" data-filter-type="category" data-filter-value="All">All</button>
             <button class="filter-chip" data-filter-type="category" data-filter-value="Housing">Housing</button>
@@ -128,14 +109,15 @@
             <button class="filter-chip" data-filter-type="category" data-filter-value="Affordability">Affordability</button>
             <button class="filter-chip" data-filter-type="category" data-filter-value="Climate">Climate</button>
             <button class="filter-chip" data-filter-type="category" data-filter-value="LGBTQ+">LGBTQ+</button>
-          
             <button class="filter-chip" data-filter-type="category" data-filter-value="Community">Community</button>
-            <button class="filter-chip" data-filter-type="category" data-filter-value="Reform & Funding">Reform & Funding</button>
+            <button class="filter-chip" data-filter-type="category" data-filter-value="Reform & Funding">Reform &amp; Funding</button>
             <button class="filter-chip" data-filter-type="category" data-filter-value="Trump-Proofing">Trump-Proofing</button>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="promises-divider"></div>
 
     <!-- PROMISES GRID -->
     <section class="promises-grid-section">
@@ -523,14 +505,18 @@
       });
 
       const container = document.getElementById('summaryStats');
-      container.innerHTML = order.map(status => {
+      const allBtn = `<button class="filter-chip status-filter-btn active" data-filter-type="status" data-filter-value="All">
+        <span class="status-count">${allPromises.length}</span><span class="status-name">ALL</span>
+      </button>`;
+
+      const statusBtns = order.map(status => {
         const s = STATUS[status];
-        return `
-          <div class="summary-stat">
-            <div class="summary-stat-number" style="color:${s.color}">${counts[status]}</div>
-            <div class="summary-stat-label">${status.toUpperCase()}</div>
-          </div>`;
+        return `<button class="filter-chip status-filter-btn" data-filter-type="status" data-filter-value="${status}">
+          <span class="status-count" style="color:${s.color}">${counts[status]}</span><span class="status-name">${status.toUpperCase()}</span>
+        </button>`;
       }).join('');
+
+      container.innerHTML = allBtn + statusBtns;
     }
 
     // --------------------------
