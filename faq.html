@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FAQ | The Mamdani Meter</title>
-  <meta name="description" content="Frequently asked questions about The Mamdani Meter — how we track NYC Mayor Mamdani's promises" />
+  <title>About | The Mamdani Meter</title>
+  <meta name="description" content="The backstory on a project that tracks whether your mayor is doing the thing." />
   <link rel="canonical" href="https://themamdanimeter.com/faq.html" />
-  <meta property="og:title" content="FAQ | The Mamdani Meter" />
-  <meta property="og:description" content="Frequently asked questions about The Mamdani Meter — how we track NYC Mayor Mamdani's promises" />
+  <meta property="og:title" content="About | The Mamdani Meter" />
+  <meta property="og:description" content="The backstory on a project that tracks whether your mayor is doing the thing." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://themamdanimeter.com/faq.html" />
   <meta property="og:image" content="https://themamdanimeter.com/images/MM%20Logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="FAQ | The Mamdani Meter" />
-  <meta name="twitter:description" content="Frequently asked questions about The Mamdani Meter — how we track NYC Mayor Mamdani's promises" />
+  <meta name="twitter:title" content="About | The Mamdani Meter" />
+  <meta name="twitter:description" content="The backstory on a project that tracks whether your mayor is doing the thing." />
   <meta name="twitter:image" content="https://themamdanimeter.com/images/MM%20Logo.png" />
 
   <!-- Favicon -->
@@ -23,13 +23,56 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- Global Styles -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- About page styles -->
+  <style>
+    .about-section{ padding: clamp(48px,7vw,80px) 0; }
+    .about-section-inner{ max-width: 820px; margin: 0 auto; }
+    .about-eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; margin-bottom:32px; }
+    .about-body{ font-size:18px; line-height:1.8; color:var(--text-2); }
+    .about-body p{ margin:0 0 1.2em; }
+    .about-body p:last-child{ margin-bottom:0; }
+    .about-body a{ color:var(--blue); text-decoration:underline; font-weight:600; }
+    .about-body a:hover{ color:var(--red); }
+    .about-body ul{ margin:16px 0 16px 20px; font-size:18px; line-height:1.8; color:var(--text-2); }
+    .about-body ul li{ margin-bottom:12px; }
+    .section-rule{ width:80px; height:4px; background:var(--blue); border:none; margin:0 auto; }
+    .about-why{ background:#fff; border-bottom:3px solid #000; }
+    .about-why .about-eyebrow{ color:var(--blue); }
+    .pull-quote{ font-family:'Archivo Black','IBM Plex Sans',sans-serif; font-size:clamp(28px,4vw,42px); font-weight:900; line-height:1.15; text-transform:uppercase; color:#000; margin:48px 0; padding:32px 0; border-top:4px solid #000; border-bottom:4px solid #000; }
+    .pull-quote span{ color:var(--blue); }
+    .about-how{ background:#f8f8f8; border-bottom:3px solid #000; }
+    .about-how .about-eyebrow{ color:#666; }
+    .about-who{ background:var(--orange); position:relative; overflow:hidden; border-bottom:3px solid #000; }
+    .about-who::before{ content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,0.04) 1px,transparent 1px); background-size:24px 24px; pointer-events:none; }
+    .about-who .about-section-inner{ position:relative; z-index:1; }
+    .about-who .about-eyebrow{ color:var(--blue); }
+    .bio-layout{ display:grid; grid-template-columns:6px 1fr; gap:32px; }
+    .bio-accent{ background:var(--blue); border-radius:3px; }
+    .bio-content{ padding:4px 0; }
+    .bio-name{ font-family:'Archivo Black','IBM Plex Sans',sans-serif; font-size:32px; font-weight:900; text-transform:uppercase; line-height:1.1; margin-bottom:24px; }
+    .bio-text{ font-size:18px; line-height:1.8; color:var(--text-2); }
+    .bio-text p{ margin:0 0 1.2em; }
+    .bio-text p:last-child{ margin-bottom:0; }
+    .bio-links{ margin-top:32px; display:flex; align-items:center; gap:24px; font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:600; }
+    .bio-links a{ color:var(--blue); text-decoration:underline; }
+    .bio-links a:hover{ color:var(--red); }
+    .bio-links .separator{ color:#ccc; user-select:none; }
+    .about-faq{ background:var(--blue); }
+    .about-faq .about-eyebrow{ color:#fff; }
+    .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+    .reveal.visible{ opacity:1; transform:translateY(0); }
+    @media(prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+    @media(max-width:767px){
+      .pull-quote{ font-size:24px; margin:32px 0; padding:24px 0; }
+      .bio-layout{ grid-template-columns:4px 1fr; gap:20px; }
+      .bio-name{ font-size:26px; }
+    }
+  </style>
 
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-jyb0zobCuDsT0C5VAgYRm.js"></script>
@@ -54,7 +97,7 @@
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
           <li><a href="/promises.html">Promises</a></li>
-          <li><a href="/faq.html" aria-current="page">FAQ</a></li>
+          <li><a href="/faq.html" aria-current="page">About</a></li>
           <li><a href="/subscribe.html">Weekly Scorecard</a></li>
         </ul>
       </nav>
@@ -77,111 +120,140 @@
       <li><a href="/">Home</a></li>
       <li><a href="/promises.html">Promises</a></li>
       <li><a href="/subscribe.html">Weekly Scorecard</a></li>
-      <li><a href="/faq.html" aria-current="page">FAQ</a></li>
+      <li><a href="/faq.html" aria-current="page">About</a></li>
     </ul>
   </div>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="faq-hero">
+
+    <section class="about-section about-why">
       <div class="container">
-        <div class="faq-hero-inner">
-          <div class="h1">FREQUENTLY ASKED QUESTIONS</div>
-          <p class="faq-hero-sub">The stuff you should know before trusting a random website to tell you how your mayor is doing.</p>
+        <div class="about-section-inner reveal">
+          <div class="about-eyebrow">WHY THIS EXISTS</div>
+          <div class="about-body">
+            <p>You voted for Mamdani. You really hope he succeeds. You just don't know if he will be able to.</p>
+            <p>Sound familiar? After the election, some version of that story was everywhere &#8212; group chats, dinner tables, the subway platform. And three months in, when you haven't heard a word about free buses, it's easy to assume that change isn't going to happen.</p>
+            <p>But here's the thing &#8212; change <em>is</em> happening. 3,000 more families will have free childcare in the fall. A task force is looking for sites to build 25,000 affordable homes. A new office popped up to address mental health crises.</p>
+            <p>The problem is that this progress rarely makes the news. And unless you're the kind of person who digs through city council databases for fun or subscribes to City Hall's remarkably prolific press room, you'd never know.</p>
+          </div>
+
+          <div class="pull-quote"><span>YOU VOTED FOR CHANGE.</span> HERE'S WHERE YOU CAN SEE IT.</div>
+
+          <div class="about-body">
+            <p>I'm not building the Mamdani Meter for clicks, scrolls, or ad revenue. My goal is for you to get the answer you need and an extra burst of hope in under 60 seconds.</p>
+            <p>Let me be transparent: I'm rooting for this mayor. I started building this site on day 20 of his administration, and there was already so much progress that I had a lot to report. So my optimism isn't a bias &#8212; it's a conclusion I drew from the data. Rest assured, if a promise gets blocked or stalled, that will be recorded here too.</p>
+            <p>Zohran gave us hope of a better city. This site is here to sustain it &#8212; to show you, week by week, that change is actually on its way. And next time someone in your life says "I don't see anything happening," you'll have somewhere to point them.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ ITEMS -->
-    <section class="faq-section">
+    <hr class="section-rule" />
+
+    <section class="about-section about-who">
       <div class="container">
-        <div class="faq-list">
-
-          <details class="faq-item">
-            <summary class="faq-question">Who created this project?</summary>
-            <div class="faq-answer">
-              <p>A Brooklynite who voted for Mamdani in the primary and general, and then couldn't stop thinking about whether and how any of it would actually happen. This site is the result of that particular affliction.</p>
+        <div class="about-section-inner reveal">
+          <div class="about-eyebrow">WHO'S BEHIND THIS</div>
+          <div class="bio-layout">
+            <div class="bio-accent" aria-hidden="true"></div>
+            <div class="bio-content">
+              <div class="bio-name">Niki Aggarwal</div>
+              <div class="bio-text">
+                <p>I started my career in government &#8212; a congressional office, policy advocacy, campaign operations &#8212; and then spent the next decade building programs and systems at tech startups, from cybersecurity to AI.</p>
+                <p>I also founded a media platform called Kahaani that changed how South Asian history is represented in classrooms and media. I hosted and produced a history podcast that hit the Top 100 on Apple Podcasts. Variety Magazine once called me "A Voice to Watch."</p>
+                <p>I built the Mamdani Meter because I voted for Mamdani and then couldn't stop thinking about whether and how any of it would actually happen. Turns out a decade of building dashboards, synthesizing complex information, and tracking progress across competing workstreams is surprisingly useful for following a mayor's to-do list.</p>
+              </div>
+              <div class="bio-links">
+                <a href="https://www.linkedin.com/in/nikiaggarwal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <span class="separator" aria-hidden="true">&middot;</span>
+                <a href="mailto:hello@themamdanimeter.com">hello@themamdanimeter.com</a>
+              </div>
             </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">Is this affiliated with City Hall?</summary>
-            <div class="faq-answer">
-              <p>Nope. The Mamdani Meter is fully independent. No ties to the Mayor's Office, City Hall, or any political organization. Just a civilian with a spreadsheet and strong opinions.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">What promises are included?</summary>
-            <div class="faq-answer">
-              <p>The project tracks commitments that were specific and voiced on <a href="https://www.zohranfornyc.com/platform" target="_blank" rel="noopener noreferrer">Mamdani's campaign platform</a>. Broad aspirational statements without measurable targets are generally not included unless they were tied to specific numerical goals, legislation, or timelines in campaign materials.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">What promises are you not tracking?</summary>
-            <div class="faq-answer">
-              <p>Tactical steps that exist mainly to serve a bigger goal. For example: Mamdani pledged to reopen the Mayor's Office to Protect Tenants on day one (which he did), but that action is really just scaffolding for his broader promise to ban landlords with repeat violations. So it lives as a progress update on that promise, not its own line item. There are limitations to this approach, but it keeps things from getting unwieldy.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">What about new priorities that weren't in the campaign platform?</summary>
-            <div class="faq-answer">
-              <p>Out of scope. The purpose of this project is to measure follow-through on the specific policies that New Yorkers voted for. New priorities are definitely worth tracking (just not here).</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">What counts as "progress"?</summary>
-            <div class="faq-answer">
-              <p>Formal government action that materially moves a promise forward: funding allocated, legislation advancing, rules implemented, programs launching, etc. Speeches, press releases, and stated intentions don't count until something actually happens.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">What do the status categories mean?</summary>
-            <div class="faq-answer">
-              <ul class="faq-status-list">
-                <li><span class="faq-status-dot" style="background:#00CC66"></span><strong>Delivered</strong> — Done. Uncork the champagne.</li>
-                <li><span class="faq-status-dot" style="background:#b3f95b"></span><strong>Gaining Ground</strong> — Meaningful steps taken. Things are moving.</li>
-                <li><span class="faq-status-dot" style="background:#00edf4"></span><strong>Early Days</strong> — Action is still getting off the ground. The clock is running.</li>
-                <li><span class="faq-status-dot" style="background:#ffaa0f"></span><strong>Headwinds</strong> — Stalled or facing real obstacles. Could be Albany. Could be the budget.</li>
-                <li><span class="faq-status-dot" style="background:#ff3333"></span><strong>Blocked</strong> — Broken or abandoned. Oof.</li>
-              </ul>
-              <br>
-              <p>A quick note: these labels are a shorthand, not a verdict. Policy progress is messy and nonlinear, and a "Headwinds" today can become "Gaining Ground" next month. Always worth reading the full context on each promise page before drawing conclusions.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">Can I make a suggestion?</summary>
-            <div class="faq-answer">
-              <p>Please do! If I'm missing something, got something wrong, or you have context I don't, reach out: <a href="mailto:hello@themamdanimeter.com">hello@themamdanimeter.com</a></p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-question">Can you personally tell me when there are progress updates, so I don't have to keep checking the site?</summary>
-            <div class="faq-answer">
-              <p>Sure thing! Sign up for <a href="/subscribe.html">this free newsletter</a>, and I will email you once a week with an update.</p>
-            </div>
-          </details>
-
+          </div>
         </div>
       </div>
     </section>
+
+    <hr class="section-rule" />
+
+    <section class="about-section about-faq" id="faq">
+      <div class="container">
+        <div class="about-section-inner reveal">
+          <div class="about-eyebrow">FREQUENTLY ASKED QUESTIONS</div>
+          <div class="faq-list">
+
+            <details class="faq-item">
+              <summary class="faq-question">What promises are included?</summary>
+              <div class="faq-answer">
+                <p>I track policy and budget-related commitments from candidate Mamdani's official website (<a href="https://www.zohranfornyc.com/platform" target="_blank" rel="noopener noreferrer">zohranfornyc.com/platform</a>), not every idea ever mentioned on the campaign trail.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">What promises are you not tracking?</summary>
+              <div class="faq-answer">
+                <p>Tactical steps that exist mainly to serve a bigger goal. For example: Mamdani pledged to reopen the Mayor's Office to Protect Tenants on day one (which he did), but that action is really just scaffolding for his broader promise to ban landlords with repeat violations. So it lives as a progress update on that promise, not its own line item.<br><br>There are limitations to this approach, but it keeps things from getting unwieldy.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">What about new priorities that weren't in the campaign platform?</summary>
+              <div class="faq-answer">
+                <p>Out of scope. The purpose of this project is to measure follow-through on the specific policies that New Yorkers voted for. New priorities are definitely worth tracking (just not here).</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">What counts as "progress"?</summary>
+              <div class="faq-answer">
+                <p>Formal government action that materially moves a promise forward: funding allocated, legislation advancing, rules implemented, programs launching, etc. Speeches, press releases, and stated intentions don't count until something actually happens.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">What do the status categories mean?</summary>
+              <div class="faq-answer">
+                <ul class="faq-status-list">
+                  <li><span class="faq-status-dot" style="background:#00CC66"></span><strong>Delivered</strong> &#8212; Done. Uncork the champagne!</li>
+                  <li><span class="faq-status-dot" style="background:#b3f95b"></span><strong>Gaining Ground</strong> &#8212; Meaningful steps taken, things are on track.</li>
+                  <li><span class="faq-status-dot" style="background:#00edf4"></span><strong>Early Days</strong> &#8212; Let him cook.</li>
+                  <li><span class="faq-status-dot" style="background:#ffaa0f"></span><strong>Headwinds</strong> &#8212; Facing real obstacles like Albany or a budget gap.</li>
+                  <li><span class="faq-status-dot" style="background:#ff3333"></span><strong>Blocked</strong> &#8212; Promise unable to be fulfilled. Oof.</li>
+                </ul>
+                <br>
+                <p>A quick note: these labels are a shorthand, not a verdict. Policy progress is messy and nonlinear, and a "Headwinds" today can become "Gaining Ground" next month. Always worth reading the full context on each promise page before drawing conclusions.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">Can I make a suggestion?</summary>
+              <div class="faq-answer">
+                <p>Please do! If I'm missing something, got something wrong, or you have context I don't, reach out: <a href="mailto:hello@themamdanimeter.com">hello@themamdanimeter.com</a></p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">Can you personally tell me when there are progress updates, so I don't have to keep checking the site?</summary>
+              <div class="faq-answer">
+                <p>Sure thing! Sign up for <a href="/subscribe.html">this free newsletter</a>, and I will email you once a week with an update.</p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-
     <div class="footer-bg-text">NYC</div>
     <div class="footer-inner container">
       <div class="footer-grid">
         <div>
           <div class="footer-tagline">TRACKING POLICY,<br><span>NOT POLITICS.</span></div>
           <div class="footer-about">
-            <p>The Mamdani Meter tracks every campaign promise made by Zohran Mamdani from introduction to implementation.</p>
+            <p>The Mamdani Meter tracks every campaign promise made by Zohran Mamdani &#8212; from introduction to implementation. Accountability, not spin.</p>
           </div>
         </div>
         <div class="footer-nav">
@@ -189,7 +261,7 @@
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/promises.html">Promises</a></li>
-            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/faq.html">About</a></li>
             <li><a href="/subscribe.html">Weekly Scorecard</a></li>
           </ul>
         </div>
@@ -197,7 +269,7 @@
           <div class="footer-col-label">Stay Updated</div>
           <form class="footer-subscribe-form" id="footerSubscribeForm">
             <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
-            <button type="submit">Subscribe for free →</button>
+            <button type="submit">Subscribe Free &#8594;</button>
           </form>
           <p class="footer-subscribe-msg" id="footerSubscribeMsg"></p>
         </div>
@@ -215,6 +287,26 @@
     </div>
   </footer>
 
+  <script>
+    // Reveal on scroll
+    (function(){
+      var els = document.querySelectorAll('.reveal');
+      if(!els.length) return;
+      if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+        els.forEach(function(e){ e.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+      els.forEach(function(e){ obs.observe(e); });
+    })();
+  </script>
   <script>
     // Mobile menu interactions + focus management
     const hamburger = document.querySelector(".hamburger");
@@ -279,7 +371,7 @@
           msg.className = "footer-subscribe-msg error";
         } finally {
           btn.disabled = false;
-          btn.textContent = "Subscribe for free →";
+          btn.textContent = "Subscribe Free →";
         }
       });
     })();
