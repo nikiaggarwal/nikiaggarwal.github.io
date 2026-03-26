@@ -644,13 +644,26 @@ h1,h2,h3,h4{ margin:0; }
   padding:6px 0 14px;
 }
 .summary-key-badge{
-  background:#ffaa0f;
-  color:#000;
-  font-size:9px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  font-size:6px;
   font-weight:800;
   letter-spacing:1px;
-  padding:2px 6px;
+  color:#000;
   vertical-align:middle;
+  position:relative;
+  z-index:1;
+}
+.summary-key-badge::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--orange);
+  clip-path:polygon(50% 0%,61% 11%,75% 3%,80% 18%,97% 18%,90% 32%,100% 45%,88% 52%,93% 68%,78% 67%,73% 82%,61% 74%,50% 88%,39% 74%,27% 82%,22% 67%,7% 68%,12% 52%,0% 45%,10% 32%,3% 18%,20% 18%,25% 3%,39% 11%);
+  z-index:-1;
 }
 .summary-stat{
   appearance:none;
