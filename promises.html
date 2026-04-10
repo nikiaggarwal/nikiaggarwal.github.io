@@ -170,56 +170,34 @@
       cacheDuration: 5 * 60 * 1000
     };
 
-    // Fallback data
-    const FALLBACK_PROMISES = [
-      {
-        id: "p1",
-        title: "Fund tenant legal support citywide",
-        category: "Housing",
-        status: "Headwinds",
-        statusLabel: "Budget pending",
-        oneLineSummary: "Funding discussions are active, but no final commitment yet."
-      },
-      {
-        id: "p2",
-        title: "Expand bus lanes on key corridors",
-        category: "Transit",
-        status: "Gaining Ground",
-        statusLabel: "In motion",
-        oneLineSummary: "Agencies are coordinating next steps and public input."
-      },
-      {
-        id: "p3",
-        title: "Launch paid youth internships",
-        category: "Education",
-        status: "Delivered",
-        statusLabel: "Pilot live",
-        oneLineSummary: "A pilot program is running with early results expected soon."
-      },
-      {
-        id: "p4",
-        title: "Improve subway accessibility timelines",
-        category: "Transit",
-        status: "Blocked",
-        statusLabel: "Stalled",
-        oneLineSummary: "No clear plan or timeline has been published."
-      },
-      {
-        id: "p5",
-        title: "Strengthen workplace protections",
-        category: "Labor",
-        status: "Gaining Ground",
-        statusLabel: "Drafting",
-        oneLineSummary: "Policy language is taking shape with stakeholder feedback."
-      },
-      {
-        id: "p6",
-        title: "Build more deeply affordable housing",
-        category: "Housing",
-        status: "Headwinds",
-        statusLabel: "Negotiating",
-        oneLineSummary: "Key details depend on land, financing, and approvals."
-      }
+    // Hardcoded promise data (id, title, category) — static for SEO indexability.
+    // Dynamic fields (status, statusLabel, oneLineSummary, lastUpdated) are fetched from the sheet.
+    const HARDCODED_PROMISES = [
+      { id: "42", title: "$30 minimum wage by 2030",                       category: "Affordability"    },
+      { id: "3",  title: "2% tax for top 1%",                              category: "Reform & Funding" },
+      { id: "23", title: "Abolish the tax lien sale",                      category: "Housing"          },
+      { id: "4",  title: "Baby baskets for newborns",                      category: "Affordability"    },
+      { id: "9",  title: "Ban junk fees and hidden fees",                  category: "Affordability"    },
+      { id: "11", title: "Build 200,000 rent-stabilized homes",            category: "Housing"          },
+      { id: "25", title: "City-owned grocery stores",                      category: "Affordability"    },
+      { id: "2",  title: "Commit 0.5% of budget to libraries",             category: "Community"        },
+      { id: "32", title: "Expand gender-affirming care",                   category: "LGBTQ+"           },
+      { id: "8",  title: "Expand Mental-Health Crisis Intervention",       category: "Healthcare"       },
+      { id: "35", title: "Fast & Free Buses",                              category: "Affordability"    },
+      { id: "27", title: "Freeze the rent",                                category: "Housing"          },
+      { id: "1",  title: "Guarantee repairs for tenants",                  category: "Housing"          },
+      { id: "34", title: "Launch \"Community to Classroom\"",              category: "Education"        },
+      { id: "19", title: "Make NYC an LGBTQ Sanctuary City",               category: "LGBTQ+"           },
+      { id: "13", title: "Mental Health Navigators in every neighborhood", category: "Healthcare"       },
+      { id: "6",  title: "Prevent homeowner deed theft",                   category: "Housing"          },
+      { id: "40", title: "Prohibit NYPD coordination with ICE",            category: "Trump-Proofing"   },
+      { id: "39", title: "Protect delivery workers",                       category: "Labor"            },
+      { id: "41", title: "Raise corporate tax rate to 11.5%",              category: "Reform & Funding" },
+      { id: "24", title: "Reduce small business fees and fines",           category: "Small Business"   },
+      { id: "5",  title: "Reform the Property Tax System",                 category: "Reform & Funding" },
+      { id: "10", title: "Shut down \"repeat offender\" landlords",        category: "Housing"          },
+      { id: "7",  title: "Turn 500 public schools green",                  category: "Climate"          },
+      { id: "37", title: "Universal childcare",                            category: "Affordability"    },
     ];
 
     // --------------------------
@@ -314,35 +292,60 @@
 
     // --------------------------
     // Fetch Promises
+    // Hardcoded base (id, title, category) + sheet overlay (status, statusLabel, oneLineSummary, lastUpdated)
     // --------------------------
     async function fetchPromises() {
+      // Always start from hardcoded data so titles/categories are SEO-indexable
+      const promises = HARDCODED_PROMISES.map(p => ({
+        ...p,
+        status: 'Early Days',
+        statusLabel: '',
+        oneLineSummary: '',
+        lastUpdated: ''
+      }));
+
+      let cached = null;
       try {
-        const cached = localStorage.getItem('promises_cache');
+        cached = localStorage.getItem('status_cache');
+        let statusData = null;
+
         if (cached) {
           const { data, timestamp } = JSON.parse(cached);
           if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) {
-            return data;
+            statusData = data;
           }
         }
 
-        const response = await fetch(SHEETS_CONFIG.promises);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const text = await response.text();
-        const data = parseCSV(text);
-
-        localStorage.setItem('promises_cache', JSON.stringify({
-          data,
-          timestamp: Date.now()
-        }));
-
-        return data;
-      } catch (error) {
-        console.warn('Failed to fetch promises:', error);
-        if (cached) {
-          return JSON.parse(cached).data;
+        if (!statusData) {
+          const response = await fetch(SHEETS_CONFIG.promises);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const text = await response.text();
+          statusData = parseCSV(text);
+          localStorage.setItem('status_cache', JSON.stringify({
+            data: statusData,
+            timestamp: Date.now()
+          }));
         }
-        return FALLBACK_PROMISES;
+
+        // Merge sheet data into hardcoded promises by id
+        const statusMap = {};
+        statusData.forEach(row => { statusMap[String(row.id)] = row; });
+
+        promises.forEach(p => {
+          const s = statusMap[String(p.id)];
+          if (s) {
+            if (s.status)         p.status         = s.status;
+            if (s.statusLabel)    p.statusLabel     = s.statusLabel;
+            if (s.oneLineSummary) p.oneLineSummary  = s.oneLineSummary;
+            p.lastUpdated = s.lastUpdated || s.updatedAt || s.updated || '';
+          }
+        });
+      } catch (error) {
+        console.warn('Failed to fetch status updates:', error);
+        // Promises still render with hardcoded titles/categories and default status
       }
+
+      return promises;
     }
 
     // --------------------------
