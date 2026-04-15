@@ -86,10 +86,11 @@
   </div>
 
   <main id="main">
-    <!-- HERO WITH METER -->
-    <section class="promise-hero">
-      <div class="container">
-        <!-- Breadcrumb -->
+    <!-- TWO-COLUMN PAGE LAYOUT: sidebar runs parallel to hero from top -->
+    <div class="promise-page">
+
+      <!-- BREADCRUMB: grid row 1, col 1 — sits above sidebar on mobile -->
+      <div class="promise-breadcrumb-wrap">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span aria-hidden="true">/</span>
@@ -97,71 +98,31 @@
           <span aria-hidden="true">/</span>
           <span id="breadcrumbTitle" aria-current="page">Promise Title</span>
         </nav>
+      </div>
 
-        <!-- Promise Title & Category -->
-        <div class="promise-hero-header">
+      <!-- LEFT: hero + main content stacked -->
+      <div class="promise-page-main">
+        <!-- HERO -->
+        <section class="promise-hero">
           <div id="promiseCategory" class="promise-category label">CATEGORY</div>
           <h1 id="promiseTitle" class="promise-title h1">Promise Title Goes Here</h1>
-        </div>
 
-        <!-- Large Meter -->
-        <div class="promise-meter-wrap">
-          <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Gaining Ground">
-            <svg id="promiseMeter" width="300" height="300" viewBox="0 0 400 400" aria-hidden="true">
-              <!-- Colored segments for all 5 statuses -->
-              <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
-              <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="28" stroke-linecap="butt"/>
-              <path id="segmentEarlyDays" d="" fill="none" stroke="#00edf4" stroke-width="28" stroke-linecap="butt"/>
-              <path id="segmentMakingProgress" d="" fill="none" stroke="#b3f95b" stroke-width="28" stroke-linecap="butt"/>
-              <path id="segmentDelivered" d="" fill="none" stroke="#00CC66" stroke-width="28" stroke-linecap="butt"/>
-
-              <!-- Center photo clip path -->
-              <defs>
-                <clipPath id="photoClip">
-                  <circle cx="200" cy="200" r="70"></circle>
-                </clipPath>
-              </defs>
-
-              <!-- Needle -->
-              <g id="needleGroup" transform="rotate(270 200 200)">
-                <path d="M200 200 L194 204 L200 70 L206 204 Z" fill="#1a1a1a"></path>
-                <path d="M200 64 L191 80 L209 80 Z" fill="#1a1a1a"></path>
-                <circle cx="200" cy="200" r="10" fill="#1a1a1a"></circle>
-                <circle cx="200" cy="200" r="14" fill="none" stroke="#1a1a1a" stroke-width="3"></circle>
-              </g>
-
-              <!-- Center photo -->
-              <circle cx="200" cy="200" r="75" fill="#fff" stroke="#fff" stroke-width="5"></circle>
-              <image id="centerImage" href="" x="130" y="130" width="140" height="140" clip-path="url(#photoClip)" preserveAspectRatio="xMidYMid slice"/>
-              <circle cx="200" cy="200" r="70" fill="none" stroke="#ffffff" stroke-width="5"></circle>
-            </svg>
-          </div>
-          <div class="promise-status-info">
+          <div class="promise-status-bar">
             <div id="promiseStatusBadge" class="badge">STATUS</div>
-            <div id="promiseStatusLabel" class="promise-status-label">Status Label</div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- TWO COLUMN CONTENT -->
-    <section class="promise-content">
-      <div class="container">
-        <div class="promise-layout">
-          <!-- MAIN CONTENT -->
+          <div id="promiseSummary" class="promise-hero-summary">
+            <p>Summary has not been added yet.</p>
+            <p>Check back next week!</p>
+          </div>
+        </section>
+
+        <!-- MAIN CONTENT -->
+        <div class="promise-content">
           <div class="promise-main">
-            <!-- Summary -->
-            <article class="content-block">
-              <h2 class="content-block-title h3">Promise Summary</h2>
-              <div id="promiseSummary" class="content-block-body body-lg">
-                <p>Summary has not been added yet.</p>
-                <p>Check back next week!</p>
-              </div>
-            </article>
-
             <!-- Media Container -->
             <article class="content-block">
-              <h2 class="content-block-title h3">Related Media</h2>
+              <h2 class="content-block-title h3">News & Coverage</h2>
               <div id="promiseMedia" class="media-container">
                 <!-- Image or Video will be injected here -->
                 <div class="media-placeholder">
@@ -172,55 +133,42 @@
                 </div>
               </div>
             </article>
-
-            <!-- Sources -->
-            <article class="content-block">
-              <h2 class="content-block-title h3">Sources</h2>
-              <ul id="promiseSources" class="sources-list">
-                <li>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    <span class="source-title">Example Source Title</span>
-                    <span class="source-domain mono">example.com</span>
-                    <svg class="source-arrow" viewBox="0 0 24 24" aria-hidden="true">
-                      <path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </article>
           </div>
-
-          <!-- SIDEBAR -->
-          <aside class="promise-sidebar">
-            <div class="sidebar-sticky">
-              <!-- Timeline -->
-              <article class="sidebar-block sidebar-timeline">
-                <h3 class="sidebar-title label">Timeline</h3>
-                <div id="promiseTimeline" class="timeline timeline--sidebar">
-                  <!-- Timeline items will be injected here -->
-                  <div class="timeline-item">
-                    <div class="timeline-date mono">Jan 2026</div>
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                      <div class="timeline-headline">Example timeline event</div>
-                      <div class="timeline-desc">Description of what happened at this point in time.</div>
-                    </div>
-                  </div>
-                  <div class="timeline-item">
-                    <div class="timeline-date mono">Dec 2025</div>
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                      <div class="timeline-headline">Earlier event</div>
-                      <div class="timeline-desc">Another milestone or update related to this promise.</div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </aside>
         </div>
       </div>
-    </section>
+
+      <!-- RIGHT: sidebar spanning full height -->
+      <aside class="promise-sidebar">
+        <div class="sidebar-sticky">
+          <!-- Timeline -->
+          <article class="sidebar-block sidebar-timeline">
+            <h3 class="sidebar-title label">Progress Log</h3>
+            <div id="promiseTimeline" class="timeline timeline--sidebar">
+              <!-- Timeline items will be injected here -->
+              <div class="timeline-item">
+                <div class="timeline-date mono">Jan 2026</div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-headline">Example timeline event</div>
+                  <a href="#" class="timeline-source" target="_blank" rel="noopener noreferrer">
+                    nyc.gov
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="10" height="10"><path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date mono">Dec 2025</div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-headline">Earlier event</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </aside>
+
+    </div>
 
     <!-- PREV/NEXT NAVIGATION -->
     <nav class="promise-nav" aria-label="Promise navigation">
@@ -523,11 +471,8 @@
         badge.classList.remove("badge--dark-text");
       }
 
-      const statusLabelEl = document.getElementById("promiseStatusLabel");
-      const labelHTML = escapeHTML(promise.statusLabel || '')
-        .replace(/\\n/g, '<br><br>')
-        .replace(/\*([^*]+)\*/g, `<span style="color:${s.color}">$1</span>`);
-      statusLabelEl.innerHTML = labelHTML;
+      // Set status color CSS variable for sidebar border + timeline accents
+      document.documentElement.style.setProperty('--status-color', s.color);
 
       // Summary
       if (promise.summary) {
@@ -549,9 +494,6 @@
           `;
         }
       }
-
-      // Set meter
-      setMeterStatus(promise.status);
 
       // Prev/Next navigation
       const currentIndex = allPromises.findIndex(p => p.id === promise.id);
@@ -583,58 +525,34 @@
       const container = document.getElementById("promiseTimeline");
 
       if (!events || events.length === 0) {
-        // Hide timeline section if no events
-        container.closest('.sidebar-block').style.display = 'none';
+        container.innerHTML = `<p class="timeline-empty">No updates yet. As soon as action is taken on this promise, it will be logged here.</p>`;
         return;
       }
 
-      container.innerHTML = events.map(event => `
-        <div class="timeline-item">
-          <div class="timeline-date mono">${escapeHTML(event.date || '')}</div>
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-headline">${escapeHTML(event.headline || '')}</div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // --------------------------
-    // Render Sources (from Updates tab)
-    // --------------------------
-    function renderSources(updates, promiseId) {
-      const container = document.getElementById("promiseSources");
-
-      // Filter updates for this promise that have source info
-      const sources = updates.filter(u =>
-        u.promiseID === promiseId &&
-        u['source url'] &&
-        u['source url'].trim() !== ''
-      );
-
-      if (!sources || sources.length === 0) {
-        // Hide sources section if no sources
-        container.closest('.content-block').style.display = 'none';
-        return;
-      }
-
-      container.innerHTML = sources.map(source => {
-        let domain = '';
-        try {
-          domain = new URL(source['source url']).hostname.replace('www.', '');
-        } catch (e) {
-          domain = '';
+      container.innerHTML = events.map(event => {
+        let sourceDomain = '';
+        const sourceUrl = event['source url'] ? event['source url'].trim() : '';
+        if (sourceUrl) {
+          try {
+            sourceDomain = new URL(sourceUrl).hostname.replace('www.', '');
+          } catch (e) {
+            sourceDomain = sourceUrl;
+          }
         }
+
         return `
-          <li>
-            <a href="${escapeHTML(source['source url'])}" target="_blank" rel="noopener noreferrer">
-              <span class="source-title">${escapeHTML(source['source title'] || 'Source')}</span>
-              ${domain ? `<span class="source-domain mono">${escapeHTML(domain)}</span>` : ''}
-              <svg class="source-arrow" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-              </svg>
-            </a>
-          </li>
+          <div class="timeline-item">
+            <div class="timeline-date mono">${escapeHTML(event.date || '')}</div>
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-headline">${escapeHTML(event.headline || '')}</div>
+              ${sourceDomain ? `
+                <a href="${escapeHTML(sourceUrl)}" class="timeline-source" target="_blank" rel="noopener noreferrer">
+                  ${escapeHTML(sourceDomain)}<svg viewBox="0 0 24 24" aria-hidden="true" width="10" height="10"><path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                </a>
+              ` : ''}
+            </div>
+          </div>
         `;
       }).join('');
     }
@@ -643,8 +561,6 @@
     // Initialize
     // --------------------------
     async function init() {
-      setupMeterSegments();
-
       const promiseId = getPromiseId();
       if (!promiseId) {
         window.location.href = '/promises.html';
@@ -666,9 +582,6 @@
         }
 
         renderPromise(promise, promises);
-
-        // Render sources from updates tab
-        renderSources(updates, promiseId);
 
         // Render timeline from updates for this promise
         const promiseUpdates = updates.filter(u => u.promiseID === promiseId);
