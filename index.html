@@ -94,7 +94,7 @@
         <div class="hero-meter">
           <div id="overallStatusLabel" class="overall-label">GAINING GROUND</div>
           <div id="meterA11yWrap" tabindex="0" role="img" aria-label="Status: Gaining Ground">
-            <svg id="largeMeter" viewBox="0 0 400 400" aria-hidden="true">
+            <svg id="largeMeter" viewBox="0 20 400 275" aria-hidden="true">
               <path id="segmentNope" d="" fill="none" stroke="#ff3333" stroke-width="28" stroke-linecap="butt"/>
               <path id="segmentHeadwinds" d="" fill="none" stroke="#ffaa0f" stroke-width="28" stroke-linecap="butt"/>
               <path id="segmentEarlyDays" d="" fill="none" stroke="#00edf4" stroke-width="28" stroke-linecap="butt"/>
@@ -116,7 +116,20 @@
               <circle cx="200" cy="200" r="70" fill="none" stroke="#ffffff" stroke-width="5"></circle>
             </svg>
           </div>
-          <div id="heroTimestamp" class="mono">Last updated: —</div>
+          <a id="heroLatestAction" class="hero-latest-card" href="#">
+            <div class="hero-latest-card-top">
+              <span class="hero-latest-label">
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" fill="currentColor"><path d="M7 1L2 7h4l-1 4 5-6H6l1-4z"/></svg>
+                Latest Action
+              </span>
+              <span id="heroLatestTime" class="hero-latest-time">—</span>
+            </div>
+            <p id="heroLatestHeadline" class="hero-latest-headline">—</p>
+            <div class="hero-latest-footer">
+              <span>Promise: <span id="heroLatestPromiseTitle" class="hero-latest-footer-promise">—</span></span>
+              <span class="hero-latest-footer-arrow">→</span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -254,7 +267,8 @@
       overallStatus: {
         status: "Gaining Ground",
         label: "Tackled five promises in first month from banning hotel junk fees to announcing the pilot of 2-care",
-        lastUpdated: "2026-03-17"
+        lastUpdated: "2026-03-17",
+        LastProgressUpdate: "29 days ago"
       },
       promises: [
         { id: "p1", title: "Fund tenant legal support citywide", category: "Housing", status: "Headwinds", statusLabel: "Budget pending", oneLineSummary: "Funding discussions are active, but no final commitment yet." },
@@ -413,11 +427,30 @@
       renderUpdatesSection();
     }
 
-    function renderHeroSection() {
-      document.getElementById("heroTimestamp").textContent = "Last updated " + formatLastUpdated(overallStatus.lastUpdated);
+function renderHeroSection() {
       document.getElementById("overallStatusLabel").textContent = overallStatus.status.toUpperCase();
       document.getElementById("meterA11yWrap").setAttribute("aria-label", `Status: ${overallStatus.status}`);
       setMeterStatus(overallStatus.status);
+
+      const latestUpdate = updates[0] || null;
+      if (latestUpdate) {
+        const promiseLookup = {};
+        promises.forEach(p => { promiseLookup[p.id] = p; });
+        const promise = promiseLookup[latestUpdate.promiseID] || null;
+        const promiseTitle = promise ? promise.title : (latestUpdate.promiseID || '—');
+
+        const card = document.getElementById('heroLatestAction');
+        if (card) card.href = `/promise/?id=${encodeURIComponent(latestUpdate.promiseID)}`;
+
+        const headlineEl = document.getElementById('heroLatestHeadline');
+        if (headlineEl) headlineEl.textContent = latestUpdate.headline || '—';
+
+        const titleEl = document.getElementById('heroLatestPromiseTitle');
+        if (titleEl) titleEl.textContent = promiseTitle.toUpperCase();
+
+        const timeEl = document.getElementById('heroLatestTime');
+        if (timeEl) timeEl.textContent = overallStatus.LastProgressUpdate || '—';
+      }
     }
 
     // Slot machine: two-phase — cycle immediately, land when data arrives
