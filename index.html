@@ -122,7 +122,7 @@
                 <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" fill="currentColor"><path d="M7 1L2 7h4l-1 4 5-6H6l1-4z"/></svg>
                 Latest Action
               </span>
-              <span id="heroLatestTime" class="hero-latest-time">—</span>
+              <span id="heroLatestTime" class="hero-latest-time loading"></span>
             </div>
             <p id="heroLatestHeadline" class="hero-latest-headline">—</p>
             <div class="hero-latest-footer">
@@ -382,6 +382,9 @@
       } catch (error) {
         console.warn('Using fallback data:', error);
       }
+      clearInterval(lastUpdatedDotTimer);
+      const timeEl = document.getElementById('heroLatestTime');
+      if (timeEl) timeEl.classList.remove('loading');
       renderPage();
     }
 
@@ -449,7 +452,9 @@ function renderHeroSection() {
         if (titleEl) titleEl.textContent = promiseTitle.toUpperCase();
 
         const timeEl = document.getElementById('heroLatestTime');
-        if (timeEl) timeEl.textContent = overallStatus.LastProgressUpdate || '—';
+        if (timeEl && !timeEl.classList.contains('loading')) {
+          timeEl.textContent = overallStatus.LastProgressUpdate || '—';
+        }
       }
     }
 
@@ -617,6 +622,18 @@ function renderHeroSection() {
     // --------------------------
     // Init
     // --------------------------
+    let lastUpdatedDotTimer = null;
+    (function startLastUpdatedDots() {
+      const el = document.getElementById('heroLatestTime');
+      if (!el) return;
+      const frames = ['.  ', '.. ', '...'];
+      let i = 0;
+      el.textContent = frames[0];
+      lastUpdatedDotTimer = setInterval(() => {
+        i = (i + 1) % frames.length;
+        if (el.classList.contains('loading')) el.textContent = frames[i];
+      }, 400);
+    })();
     renderHeroSection();
     startScoreCycling();
     loadData();

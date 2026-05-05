@@ -167,6 +167,7 @@
     // --------------------------
     const SHEETS_CONFIG = {
       promises: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=0&single=true&output=csv",
+      updates:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWWrJFChdFmerrKCrVf1fLiVmXFiTpaXdPxk1xGtLToZRiB3V3FXWoNAsl3cQmmyueJaroRaZrIQZ1/pub?gid=1426316595&single=true&output=csv",
       cacheDuration: 5 * 60 * 1000
     };
 
@@ -291,8 +292,26 @@
     }
 
     // --------------------------
+    // Fetch with caching
+    // --------------------------
+    async function fetchCachedSheet(url, cacheKey) {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) return data;
+      }
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const text = await response.text();
+      const data = parseCSV(text);
+      localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+      return data;
+    }
+
+    // --------------------------
     // Fetch Promises
-    // Hardcoded base (id, title, category) + sheet overlay (status, statusLabel, oneLineSummary, lastUpdated)
+    // Hardcoded base (id, title, category) + sheet overlay (status, statusLabel, oneLineSummary)
+    // lastUpdated is derived from the most recent event in the updates sheet
     // --------------------------
     async function fetchPromises() {
       // Always start from hardcoded data so titles/categories are SEO-indexable
@@ -304,40 +323,37 @@
         lastUpdated: ''
       }));
 
-      let cached = null;
       try {
-        cached = localStorage.getItem('status_cache');
-        let statusData = null;
+        const [statusData, updatesData] = await Promise.all([
+          fetchCachedSheet(SHEETS_CONFIG.promises, 'promises_cache'),
+          fetchCachedSheet(SHEETS_CONFIG.updates,  'updates_cache')
+        ]);
 
-        if (cached) {
-          const { data, timestamp } = JSON.parse(cached);
-          if (Date.now() - timestamp < SHEETS_CONFIG.cacheDuration) {
-            statusData = data;
+        // Compute most recent event date per promise from the updates sheet
+        const latestByPromise = {};
+        updatesData.forEach(row => {
+          const pid = String(row.promiseID || '');
+          if (!pid) return;
+          const d = new Date(row.date || '');
+          if (isNaN(d)) return;
+          if (!latestByPromise[pid] || d > latestByPromise[pid]) {
+            latestByPromise[pid] = d;
           }
-        }
+        });
 
-        if (!statusData) {
-          const response = await fetch(SHEETS_CONFIG.promises);
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const text = await response.text();
-          statusData = parseCSV(text);
-          localStorage.setItem('status_cache', JSON.stringify({
-            data: statusData,
-            timestamp: Date.now()
-          }));
-        }
-
-        // Merge sheet data into hardcoded promises by id
+        // Merge promises-sheet data
         const statusMap = {};
         statusData.forEach(row => { statusMap[String(row.id)] = row; });
 
         promises.forEach(p => {
           const s = statusMap[String(p.id)];
           if (s) {
-            if (s.status)         p.status         = s.status;
-            if (s.statusLabel)    p.statusLabel     = s.statusLabel;
-            if (s.oneLineSummary) p.oneLineSummary  = s.oneLineSummary;
-            p.lastUpdated = s.lastUpdated || s.updatedAt || s.updated || '';
+            if (s.status)         p.status        = s.status;
+            if (s.statusLabel)    p.statusLabel   = s.statusLabel;
+            if (s.oneLineSummary) p.oneLineSummary = s.oneLineSummary;
+          }
+          if (latestByPromise[String(p.id)]) {
+            p.lastUpdated = latestByPromise[String(p.id)].toISOString();
           }
         });
       } catch (error) {
