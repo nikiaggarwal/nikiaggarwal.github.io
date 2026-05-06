@@ -124,7 +124,7 @@
               </span>
               <span id="heroLatestTime" class="hero-latest-time loading"></span>
             </div>
-            <p id="heroLatestHeadline" class="hero-latest-headline">—</p>
+            <p id="heroLatestHeadline" class="hero-latest-headline loading">. </p>
             <div class="hero-latest-footer">
               <span>Promise: <span id="heroLatestPromiseTitle" class="hero-latest-footer-promise">—</span></span>
               <span class="hero-latest-footer-arrow">→</span>
@@ -385,6 +385,8 @@
       clearInterval(lastUpdatedDotTimer);
       const timeEl = document.getElementById('heroLatestTime');
       if (timeEl) timeEl.classList.remove('loading');
+      const headlineEl = document.getElementById('heroLatestHeadline');
+      if (headlineEl) headlineEl.classList.remove('loading');
       renderPage();
     }
 
@@ -624,14 +626,16 @@ function renderHeroSection() {
     // --------------------------
     let lastUpdatedDotTimer = null;
     (function startLastUpdatedDots() {
-      const el = document.getElementById('heroLatestTime');
-      if (!el) return;
+      const timeEl = document.getElementById('heroLatestTime');
+      const headlineEl = document.getElementById('heroLatestHeadline');
       const frames = ['.  ', '.. ', '...'];
       let i = 0;
-      el.textContent = frames[0];
+      if (timeEl) timeEl.textContent = frames[0];
+      if (headlineEl && headlineEl.classList.contains('loading')) headlineEl.textContent = frames[0];
       lastUpdatedDotTimer = setInterval(() => {
         i = (i + 1) % frames.length;
-        if (el.classList.contains('loading')) el.textContent = frames[i];
+        if (timeEl && timeEl.classList.contains('loading')) timeEl.textContent = frames[i];
+        if (headlineEl && headlineEl.classList.contains('loading')) headlineEl.textContent = frames[i];
       }, 400);
     })();
     renderHeroSection();

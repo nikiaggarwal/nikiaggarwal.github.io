@@ -351,10 +351,9 @@
             if (s.status)         p.status        = s.status;
             if (s.statusLabel)    p.statusLabel   = s.statusLabel;
             if (s.oneLineSummary) p.oneLineSummary = s.oneLineSummary;
+            if (s.lastUpdated)    p.lastUpdated   = s.lastUpdated;
           }
-          if (latestByPromise[String(p.id)]) {
-            p.lastUpdated = latestByPromise[String(p.id)].toISOString();
-          }
+
         });
       } catch (error) {
         console.warn('Failed to fetch status updates:', error);
